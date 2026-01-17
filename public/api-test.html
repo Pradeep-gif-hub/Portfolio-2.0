@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>API Test Page</h1>
+    
+    <h2>Test Login</h2>
+    <button onclick="testLogin()">Test Login API</button>
+    <pre id="loginResult"></pre>
+
+    <h2>Test Public Blogs</h2>
+    <button onclick="testBlogs()">Test Blogs API</button>
+    <pre id="blogsResult"></pre>
+
+    <script>
+        async function testLogin() {
+            try {
+                const response = await fetch('/api/admin/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: 'amar' })
+                });
+                const data = await response.json();
+                document.getElementById('loginResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('loginResult').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        async function testBlogs() {
+            try {
+                const response = await fetch('/api/blogs');
+                const data = await response.json();
+                document.getElementById('blogsResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('blogsResult').textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

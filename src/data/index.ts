@@ -1,0 +1,11 @@
+export { profile } from "./profile";
+export { techStack } from "./techStack";
+export { projects } from "./projects";
+export { experience } from "./experience";
+export { certifications } from "./certifications";
+export { hobbies } from "./hobbies";
+export { gallery } from "./gallery";
+export { blogPosts } from "./blog";
+export { socials } from "./socials";
+export { sponsor } from "./sponsor";
+export { siteConfig } from "./siteConfig";
