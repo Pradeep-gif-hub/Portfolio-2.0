@@ -20,7 +20,8 @@ export const fetchToolsForIcons = async (): Promise<Tool[]> => {
 
   try {
     const response = await fetch('/api/public-data?type=tools');
-    const data = await response.json();
+    const result = await response.json();
+    const data = result.data || result;
     toolsCache = data;
     
     // Create a map for quick lookups (case-insensitive)

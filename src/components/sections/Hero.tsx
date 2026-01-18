@@ -510,7 +510,7 @@ export const Hero: React.FC = () => {
                   e.currentTarget.parentElement!.classList.add('bg-gradient-to-br', 'from-accent-primary/20', 'via-accent-primary/10', 'to-transparent', 'flex', 'items-center', 'justify-center');
                   const fallback = document.createElement('div');
                   fallback.className = 'text-6xl font-bold text-accent-primary';
-                  fallback.textContent = 'AS';
+                  fallback.textContent = 'PA';
                   e.currentTarget.parentElement!.appendChild(fallback);
                 }}
               />

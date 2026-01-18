@@ -104,9 +104,18 @@ export const Contact: React.FC = () => {
             <Button
               variant="primary"
               size="lg"
-              onClick={() =>
-                window.open(`mailto:${settings.email}`, "_blank")
-              }
+              onClick={() => {
+                // Detect if user is on mobile device
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                  // On mobile, use mailto: to open native email app
+                  window.location.href = `mailto:${settings.email}`;
+                } else {
+                  // On desktop, open Gmail compose in new tab
+                  window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${settings.email}`, '_blank');
+                }
+              }}
             >
               <Mail size={20} className="mr-2" />
               Send me an email
