@@ -543,13 +543,6 @@ export const Hero: React.FC = () => {
               {settings.tagline}
             </motion.p>
 
-            <motion.p
-              variants={item}
-              className="text-lg text-text-secondary mb-12 leading-relaxed"
-            >
-              {settings.bio}
-            </motion.p>
-
             <motion.div
               variants={item}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center"

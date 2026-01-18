@@ -37,7 +37,8 @@ const BlogDetailPage = () => {
     const fetchBlog = async () => {
       try {
         const response = await fetch(`/api/public-data?type=blogs&id=${slug}`);
-        const data = await response.json();
+        const result = await response.json();
+        const data = result.data || result;
         setBlog(data);
       } catch (error) {
         // Failed to fetch blog
@@ -76,7 +77,8 @@ const BlogDetailPage = () => {
   };
 
   // Simple markdown-to-HTML converter for code blocks
-  const renderContent = (content: string) => {
+ const renderContent = (content: string) => {
+    if (!content) return null;
     const parts = content.split(/(```[\s\S]*?```)/g);
     
     return parts.map((part, index) => {
@@ -326,26 +328,6 @@ const BlogDetailPage = () => {
                 </Button>
               </div>
             </div>
-          </motion.div>
-
-          {/* CTA Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="glass-effect p-8 rounded-xl text-center glow-accent"
-          >
-            <h3 className="text-2xl font-bold mb-4 text-text-primary dark:text-dark-50">
-              {blog.cta.text}
-            </h3>
-            <Button
-              onClick={() => navigate(blog.cta.link)}
-              variant="primary"
-              size="lg"
-              className="btn-neon"
-            >
-              {blog.cta.text}
-            </Button>
           </motion.div>
 
           {/* Navigation */}
