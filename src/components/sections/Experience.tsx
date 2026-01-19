@@ -74,9 +74,27 @@ export const Experience: React.FC = () => {
       </motion.div>
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading experiences...</p>
+        <div className="space-y-8 relative">
+          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary to-transparent" />
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="relative pl-0 md:pl-24 animate-pulse">
+              <div className="glass-effect p-6 rounded-xl border-2 border-dark-700">
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
+                  <div className="flex-1 space-y-4">
+                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                    <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-40"></div>
+                    <div className="space-y-2">
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : experiences.length === 0 ? (
         <div className="text-center py-12">

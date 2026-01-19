@@ -73,6 +73,27 @@ export const Hero: React.FC = () => {
 
   return (
     <SectionWrapper id="hero" className="min-h-screen flex items-center relative overflow-hidden">
+      {loading ? (
+        <div className="container max-w-6xl mx-auto px-4 py-20">
+          <div className="flex flex-col md:flex-row items-center gap-12 animate-pulse">
+            <div className="flex-1 space-y-6">
+              <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+              <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+              <div className="space-y-3">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+              </div>
+              <div className="flex gap-4">
+                <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+                <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+              </div>
+            </div>
+            <div className="w-64 h-64 md:w-80 md:h-80 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+          </div>
+        </div>
+      ) : (
+        <div>
       {/* Animated Background Elements - Desktop Only */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Floating Orbs */}
@@ -146,7 +167,7 @@ export const Hero: React.FC = () => {
           }}
           className="hidden lg:block absolute bottom-1/4 right-1/4 text-5xl text-neon-purple/20 font-mono"
         >
-          &#123;&#125;
+          {'{'}{'}'} 
         </motion.div>
         <motion.div
           animate={{
@@ -481,12 +502,6 @@ export const Hero: React.FC = () => {
         />
       </div>
 
-      {loading ? (
-        <div className="text-center w-full">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading...</p>
-        </div>
-      ) : (
       <motion.div
         variants={container}
         initial="hidden"
@@ -510,7 +525,7 @@ export const Hero: React.FC = () => {
                   e.currentTarget.parentElement!.classList.add('bg-gradient-to-br', 'from-accent-primary/20', 'via-accent-primary/10', 'to-transparent', 'flex', 'items-center', 'justify-center');
                   const fallback = document.createElement('div');
                   fallback.className = 'text-6xl font-bold text-accent-primary';
-                  fallback.textContent = 'PA';
+                  fallback.textContent = 'AS';
                   e.currentTarget.parentElement!.appendChild(fallback);
                 }}
               />
@@ -586,7 +601,9 @@ export const Hero: React.FC = () => {
           </div>
         </motion.div>
       </motion.div>
+        </div>
       )}
     </SectionWrapper>
+
   );
 };

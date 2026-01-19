@@ -46,6 +46,7 @@ export const Contact: React.FC = () => {
     twitter: '',
     buyMeACoffee: '',
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchSettings();
@@ -53,6 +54,7 @@ export const Contact: React.FC = () => {
 
   const fetchSettings = async () => {
     try {
+      setLoading(true);
       const response = await fetch('/api/public-data?type=settings');
       if (!response.ok) {
         return;
@@ -70,10 +72,29 @@ export const Contact: React.FC = () => {
       });
     } catch (error) {
       // Error occurred while fetching settings
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <SectionWrapper id="contact">
+      {loading ? (
+        <div className="grid lg:grid-cols-2 gap-12 animate-pulse">
+          <div className="space-y-6">
+            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            <div className="space-y-3">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+            </div>
+            <div className="space-y-3">
+              <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+            </div>
+          </div>
+          <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
+        </div>
+      ) : (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Side - Content */}
         <motion.div
@@ -262,6 +283,7 @@ export const Contact: React.FC = () => {
           )}
         </motion.div>
       </div>
+      )}
     </SectionWrapper>
   );
 };

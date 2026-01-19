@@ -7,6 +7,7 @@ import { siteConfig } from "../../data/siteConfig";
 
 export const GitHubActivity: React.FC = () => {
   const [showCalendar, setShowCalendar] = useState(true);
+  const [loading, setLoading] = useState(true);
   const username = siteConfig.githubUsername;
   const [calendarSrc] = useState(
     `https://ghchart.rshah.org/10b981/${username}`
@@ -17,6 +18,7 @@ export const GitHubActivity: React.FC = () => {
     // Fetch contribution count
     const fetchContributionCount = async () => {
       try {
+        setLoading(true);
         const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`);
         if (response.ok) {
           const data = await response.json();
@@ -25,6 +27,8 @@ export const GitHubActivity: React.FC = () => {
         }
       } catch (err) {
         // Could not fetch contribution count
+      } finally {
+        setLoading(false);
       }
     };
     
@@ -33,6 +37,26 @@ export const GitHubActivity: React.FC = () => {
 
   return (
     <SectionWrapper id="github-activity">
+      {loading ? (
+        <div className="animate-pulse">
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-7 h-7 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-80"></div>
+            </div>
+            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-64"></div>
+          </div>
+          <div className="bg-dark-900 backdrop-blur-sm border border-dark-700 rounded-lg p-6">
+            <div className="bg-dark-950 p-4 rounded-lg">
+              <div className="h-32 bg-gray-200 dark:bg-gray-700 rounded"></div>
+            </div>
+            <div className="mt-4 flex justify-between">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-48"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+            </div>
+          </div>
+        </div>
+      ) : (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -125,8 +149,7 @@ export const GitHubActivity: React.FC = () => {
           </Card>
         )}
       </motion.div>
-
-      {/* Commits section hidden - keeping only the calendar */}
+      )}
     </SectionWrapper>
   );
 };

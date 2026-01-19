@@ -35,8 +35,23 @@ export const TechStack: React.FC = () => {
   if (loading) {
     return (
       <SectionWrapper id="tech">
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
+        <div className="animate-pulse">
+          <div className="mb-12">
+            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-4"></div>
+            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-64"></div>
+          </div>
+          <div className="space-y-4">
+            <div className="flex gap-4 overflow-hidden">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <div key={i} className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
+              ))}
+            </div>
+            <div className="flex gap-4 overflow-hidden">
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                <div key={i} className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
+              ))}
+            </div>
+          </div>
         </div>
       </SectionWrapper>
     );

@@ -80,9 +80,25 @@ export const Certifications: React.FC = () => {
       </motion.div>
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading certifications...</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 animate-pulse">
+              <div className="mb-4 rounded-lg bg-gray-200 dark:bg-gray-700 h-32"></div>
+              <div className="space-y-3">
+                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                <div className="flex gap-2">
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       ) : certifications.length === 0 ? (
         <div className="text-center py-12">
