@@ -92,9 +92,32 @@ export const ProjectsPage: React.FC = () => {
           className="space-y-6"
         >
           {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-              <p className="mt-4 text-text-secondary">Loading projects...</p>
+            <div className="space-y-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="group bg-gradient-to-b from-dark-800/90 via-dark-800/60 to-black rounded-2xl overflow-hidden border border-accent-primary/30 animate-pulse">
+                  <div className="flex flex-col md:flex-row">
+                    <div className="md:w-2/5 h-64 md:h-[450px] bg-gray-200 dark:bg-gray-700"></div>
+                    <div className="md:w-3/5 p-6 space-y-4">
+                      <div className="flex justify-between">
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                      </div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
+                        <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-4/5"></div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           ) : (
             <>

@@ -46,11 +46,43 @@ const CertificationDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading certification...</p>
-        </div>
+      <div className="min-h-screen">
+        <main className="container max-w-5xl mx-auto px-4 py-8">
+          <div className="animate-pulse">
+            {/* Breadcrumb skeleton */}
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-8"></div>
+            
+            {/* Header skeleton */}
+            <div className="flex items-start gap-4 mb-6">
+              <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="flex-1 space-y-3">
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+              </div>
+            </div>
+            
+            {/* Meta badges skeleton */}
+            <div className="flex gap-4 mb-12">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-24"></div>
+            </div>
+            
+            {/* Certificate image skeleton */}
+            <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-2xl mb-12"></div>
+            
+            {/* Skills skeleton */}
+            <div className="space-y-4">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32 mb-4"></div>
+              <div className="flex gap-2">
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-28"></div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }

@@ -126,17 +126,6 @@ export const LinksPage: React.FC = () => {
     },
   ].filter(Boolean) as LinkCard[];
 
-  if (loading) {
-    return (
-      <SectionWrapper className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading...</p>
-        </div>
-      </SectionWrapper>
-    );
-  }
-
   return (
     <SectionWrapper className="min-h-screen py-20">
       <div className="max-w-2xl mx-auto px-4">
@@ -182,7 +171,16 @@ export const LinksPage: React.FC = () => {
         </motion.div>
 
         {/* Links Grid */}
-        <div className="space-y-4">
+        {loading ? (
+          <div className="space-y-4 animate-pulse">
+            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+          </div>
+        ) : (
+          <div className="space-y-4">
           {links.map((link, index) => (
             <motion.a
               key={link.name}
@@ -212,7 +210,8 @@ export const LinksPage: React.FC = () => {
               <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-white/20 transition-colors"></div>
             </motion.a>
           ))}
-        </div>
+          </div>
+        )}
 
         {/* Special Buy Me a Coffee Effect */}
         {settings.buyMeACoffee && (

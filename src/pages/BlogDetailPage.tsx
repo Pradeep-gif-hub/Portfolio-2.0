@@ -51,8 +51,40 @@ const BlogDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary"></div>
+      <div className="min-h-screen">
+        <main className="container max-w-4xl mx-auto px-4 py-8">
+          <div className="animate-pulse">
+            {/* Breadcrumb skeleton */}
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-8"></div>
+            
+            {/* Title skeleton */}
+            <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+            
+            {/* Meta info skeleton */}
+            <div className="flex gap-6 mb-6">
+              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
+              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-28"></div>
+            </div>
+            
+            {/* Tags skeleton */}
+            <div className="flex gap-2 mb-8">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-24"></div>
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
+            </div>
+            
+            {/* Content skeleton */}
+            <div className="space-y-4 mb-8">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+              <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded mt-6"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mt-6"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -77,7 +109,7 @@ const BlogDetailPage = () => {
   };
 
   // Simple markdown-to-HTML converter for code blocks
- const renderContent = (content: string) => {
+  const renderContent = (content: string) => {
     if (!content) return null;
     const parts = content.split(/(```[\s\S]*?```)/g);
     

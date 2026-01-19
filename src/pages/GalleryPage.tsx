@@ -72,9 +72,16 @@ export const GalleryPage: React.FC = () => {
         </motion.div>
 
         {loading ? (
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Loading gallery...</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="relative aspect-video rounded-lg overflow-hidden animate-pulse">
+                <div className="w-full h-full bg-gray-200 dark:bg-gray-700"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark-950/80 to-transparent">
+                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : gallery.length === 0 ? (
           <div className="text-center py-12 glass-effect rounded-xl">

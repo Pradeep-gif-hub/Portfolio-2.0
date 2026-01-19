@@ -58,11 +58,50 @@ const ProjectDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-          <p className="mt-4 text-text-secondary">Loading project...</p>
-        </div>
+      <div className="min-h-screen">
+        <main className="container max-w-7xl mx-auto px-4 py-8">
+          <div className="animate-pulse">
+            {/* Breadcrumb skeleton */}
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-8"></div>
+            
+            {/* Hero image skeleton */}
+            <div className="relative h-[500px] bg-gray-200 dark:bg-gray-700 rounded-2xl mb-12">
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="h-12 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
+              </div>
+            </div>
+            
+            {/* Tech stack skeleton */}
+            <div className="flex flex-wrap gap-3 justify-center mb-12">
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-24"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-28"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-20"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-32"></div>
+              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-24"></div>
+            </div>
+            
+            {/* Description skeleton */}
+            <div className="bg-gradient-to-b from-dark-800/90 to-black p-8 rounded-2xl border border-accent-primary/30 mb-12">
+              <div className="space-y-4 mb-6">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+              </div>
+              <div className="flex gap-4">
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
+                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-36"></div>
+              </div>
+            </div>
+            
+            {/* Features skeleton */}
+            <div className="space-y-3">
+              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-40 mb-4"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -221,15 +260,15 @@ const ProjectDetailPage = () => {
                     A
                   </div>
                   <div>
-                    <p className="font-medium text-white">Pradeep Awasthi</p>
+                    <p className="font-medium text-white">Amarjeet Singh</p>
                     <p className="text-xs text-gray-400">Lead Developer</p>
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <a href="https://github.com/pradeep-awasthi" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
+                  <a href="https://github.com/amarjeet-singh" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
                     <Github size={18} className="text-gray-400 hover:text-white" />
                   </a>
-                  <a href="https://linkedin.com/in/pradeep-awasthi" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
+                  <a href="https://linkedin.com/in/amarjeet-singh" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
                     <svg className="w-[18px] h-[18px] text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                     </svg>
