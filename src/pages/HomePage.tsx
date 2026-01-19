@@ -6,6 +6,7 @@ import { Projects } from "../components/sections/Projects";
 import { Experience } from "../components/sections/Experience";
 import { Certifications } from "../components/sections/Certifications";
 import { Contact } from "../components/sections/Contact";
+import { ExploringPreview } from "../components/sections/ExploringPreview";
 
 export const HomePage: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const HomePage: React.FC = () => {
       <Projects />
       <Experience />
       <Certifications />
+      <ExploringPreview />
       <Contact />
     </main>
   );

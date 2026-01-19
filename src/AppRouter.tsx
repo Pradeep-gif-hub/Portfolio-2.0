@@ -4,6 +4,8 @@ import { AuthProvider } from "./contexts/AuthContext";
 import App from "./App";
 import { HomePage } from "./pages/HomePage";
 import { ProjectsPage } from "./pages/ProjectsPage";
+import { ExploringPage } from "./pages/ExploringPage.tsx";
+import { AdminExploring } from "./pages/admin/AdminExploring.tsx";
 import { GalleryPage } from "./pages/GalleryPage";
 import { BlogPage } from "./pages/BlogPage";
 import { AboutPage } from "./pages/AboutPage";
@@ -38,6 +40,7 @@ export const AppRouter = () => {
             <Route path="/admin/blogs" element={<AdminBlogs />} />
             <Route path="/admin/experience" element={<AdminExperience />} />
             <Route path="/admin/certifications" element={<AdminCertifications />} />
+            <Route path="/admin/exploring" element={<AdminExploring />} />
             <Route path="/admin/gallery" element={<AdminGallery />} />
             <Route path="/admin/tools" element={<AdminTools />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
@@ -47,6 +50,7 @@ export const AppRouter = () => {
               <Route index element={<HomePage />} />
               <Route path="projects" element={<ProjectsPage />} />
               <Route path="project/:id" element={<ProjectDetailPage />} />
+              <Route path="exploring" element={<ExploringPage />} />
               <Route path="gallery" element={<GalleryPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogDetailPage />} />
