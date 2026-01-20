@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
 import { Badge } from "../components/ui/Badge";
 import { SectionWrapper } from "../components/layout/SectionWrapper";
-import { Code2, Lightbulb, Target, User, Gamepad2, Cpu, Github, PenTool, Camera, Music, Award, ExternalLink, Link2 } from "lucide-react";
+import { Code2, Lightbulb,Code, Target, User, Gamepad2, Cpu, Github, Camera, Music, Award, ExternalLink, Link2 } from "lucide-react";
 import { fetchCertifications } from "../utils/api";
 
 interface Settings {
@@ -110,12 +110,12 @@ export const AboutPage: React.FC = () => {
     : defaultFocusAreas;
 
   const hobbiesAndInterests = [
-    { name: "Gaming", icon: Gamepad2 },
+    { name: "Playing Cricket", icon: Gamepad2 },
     { name: "Experimenting with new tech tools", icon: Cpu },
-    { name: "Open source contribution", icon: Github },
-    { name: "Technical writing", icon: PenTool },
-    { name: "Photography", icon: Camera },
-    { name: "Music", icon: Music },
+    { name: "Always keen for Open source contribution", icon: Github },
+    { name: "Connecting to New People", icon: User},
+    { name: "Watching Documentary", icon: Camera },
+    { name: "Playing Free Fire", icon: Music },
   ];
 
   return (
@@ -210,8 +210,8 @@ export const AboutPage: React.FC = () => {
                   <Link2 size={32} className="text-accent-primary" />
                 </div>
                 <div>
-                  <h2 className="heading-3 mb-2 group-hover:text-accent-primary transition-colors">My Links</h2>
-                  <p className="text-text-secondary">Connect with me on all platforms</p>
+                  <h2 className="heading-3 mb-2 group-hover:text-accent-primary transition-colors">Link-Tree</h2>
+                  <p className="text-text-secondary">Connect with me on all Social platforms</p>
                 </div>
               </div>
               <ExternalLink size={24} className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -304,7 +304,7 @@ export const AboutPage: React.FC = () => {
             className="glass-effect p-8 rounded-xl"
           >
             <div className="flex items-start gap-4">
-              <Lightbulb size={28} className="text-accent-primary flex-shrink-0" />
+              <Code size={28} className="text-accent-primary flex-shrink-0" />
               <div className="flex-1">
                 <h2 className="heading-3 mb-4">Beyond Code</h2>
                 <div className="flex flex-wrap gap-3">
