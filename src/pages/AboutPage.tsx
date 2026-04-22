@@ -149,7 +149,7 @@ export const AboutPage: React.FC = () => {
               </div>
             </div>
           </div>
-
+          
           {/* What I Do */}
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             <motion.div

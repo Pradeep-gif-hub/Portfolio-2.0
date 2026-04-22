@@ -160,14 +160,7 @@ export const LinksPage: React.FC = () => {
           </motion.h1>
 
           {/* Bio */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-text-secondary max-w-md mx-auto"
-          >
-            {settings.bio}
-          </motion.p>
+         <motion.p className="hidden"></motion.p>
         </motion.div>
 
         {/* Links Grid */}
