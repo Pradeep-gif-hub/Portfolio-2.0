@@ -158,9 +158,6 @@ export const LinksPage: React.FC = () => {
           >
             {settings.fullName}
           </motion.h1>
-
-          {/* Bio */}
-         <motion.p className="hidden"></motion.p>
         </motion.div>
 
         {/* Links Grid */}
