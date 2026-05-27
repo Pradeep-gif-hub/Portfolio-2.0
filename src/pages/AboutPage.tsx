@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
 import { Badge } from "../components/ui/Badge";
 import { SectionWrapper } from "../components/layout/SectionWrapper";
-import { Code2, Lightbulb,Code, Target, User, Gamepad2, Cpu, Github, Camera, Music, Award, ExternalLink, Link2 } from "lucide-react";
+import { Code2,Code, Target, User, Gamepad2, Cpu, Github, Camera, Music, Award, ExternalLink, Link2 } from "lucide-react";
 import { fetchCertifications } from "../utils/api";
 
 interface Settings {
