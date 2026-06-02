@@ -7,6 +7,12 @@ import { Button } from "../components/ui/Button";
 import { fetchProjects } from "../utils/api";
 import { fetchToolsForIcons, getTechLogo } from "../utils/techIcons";
 
+interface Contributor {
+  name: string;
+  github?: string;
+  linkedin?: string;
+}
+
 interface Project {
   _id: string;
   title: string;
@@ -18,6 +24,7 @@ interface Project {
   image: string;
   featured: boolean;
   status: 'completed' | 'in-progress' | 'planning';
+  contributors?: Contributor[];
 }
 
 const ProjectDetailPage = () => {
@@ -254,27 +261,46 @@ const ProjectDetailPage = () => {
               Contributors
             </h3>
             <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-dark-900/50 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-primary to-neon-purple flex items-center justify-center text-white font-bold">
-                    A
-                  </div>
-                  <div>
-                    <p className="font-medium text-white">Amarjeet Singh</p>
-                    <p className="text-xs text-gray-400">Lead Developer</p>
-                  </div>
+              {project.contributors && project.contributors.length > 0 ? (
+                project.contributors.map((contributor, index) => {
+                  const initials = contributor.name
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase();
+                  
+                  return (
+                    <div key={index} className="flex items-center justify-between p-3 bg-dark-900/50 rounded-lg">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-primary to-neon-purple flex items-center justify-center text-white font-bold text-sm">
+                          {initials}
+                        </div>
+                        <div>
+                          <p className="font-medium text-white">{contributor.name}</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        {contributor.github && (
+                          <a href={contributor.github} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
+                            <Github size={18} className="text-gray-400 hover:text-white" />
+                          </a>
+                        )}
+                        {contributor.linkedin && (
+                          <a href={contributor.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
+                            <svg className="w-[18px] h-[18px] text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="flex items-center justify-center p-3 bg-dark-900/50 rounded-lg text-gray-400">
+                  <p className="text-sm">No contributors added yet</p>
                 </div>
-                <div className="flex gap-2">
-                  <a href="https://github.com/amarjeet-singh" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
-                    <Github size={18} className="text-gray-400 hover:text-white" />
-                  </a>
-                  <a href="https://linkedin.com/in/amarjeet-singh" target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
-                    <svg className="w-[18px] h-[18px] text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
+              )}
             </div>
           </motion.div>
         </div>
