@@ -18,6 +18,7 @@ export interface IProject extends Document {
   status: 'completed' | 'in-progress' | 'planning';
   timeline?: string;
   contributors: IContributor[];
+  order?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -45,6 +46,7 @@ const ProjectSchema = new Schema<IProject>(
     },
     timeline: { type: String },
     contributors: [ContributorSchema],
+    order: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
