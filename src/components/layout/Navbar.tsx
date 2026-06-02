@@ -37,9 +37,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="font-display font-bold text-2xl bg-gradient-to-r from-accent-primary to-neon-purple bg-clip-text text-transparent cursor-pointer"
+            className="font-display font-bold text-2xl bg-gradient-to-r from-accent-primary to-neon-purple bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity"
           >
-            PA
+            {`< awasthi.tech />`}
           </motion.div>
         </Link>
 
@@ -51,8 +51,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className={`text-text-secondary dark:text-dark-400 hover:text-accent-primary transition-smooth font-mono text-sm italic font-light ${
-                  isActive(link.href) ? "text-accent-primary font-medium" : ""
+                className={`px-3 py-2 rounded-lg text-base font-medium transition-all ${
+                  isActive(link.href) 
+                    ? "text-accent-primary bg-accent-primary/10" 
+                    : "text-text-secondary hover:text-accent-primary hover:bg-accent-primary/5"
                 }`}
               >
                 {link.label}
@@ -95,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
               {/* Header */}
               <div className="p-6 border-b border-accent-primary/20">
                 <div className="font-display font-bold text-2xl bg-gradient-to-r from-accent-primary to-neon-purple bg-clip-text text-transparent">
-                  AS
+                  {`< awasthi.tech />`}
                 </div>
               </div>
               
