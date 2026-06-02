@@ -44,7 +44,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           const project = await Project.findOne({ slug: id });
           return res.status(200).json({ success: true, data: project });
         }
-        const projects = await Project.find({}).sort({ createdAt: -1 });
+        const projects = await Project.find({}).sort({ order: 1, createdAt: -1 });
         return res.status(200).json({ success: true, data: projects });
 
       case 'settings':

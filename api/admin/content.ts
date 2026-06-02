@@ -160,12 +160,16 @@ async function handleGallery(req: VercelRequest, res: VercelResponse) {
 // Projects handler
 async function handleProjects(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
-    const projects = await Project.find({}).sort({ createdAt: -1 });
+    const projects = await Project.find({}).sort({ order: 1, createdAt: -1 });
     return res.status(200).json({ success: true, data: projects });
   }
 
   if (req.method === 'POST') {
-    const project = await Project.create(req.body);
+    // Get the highest order value and add 1
+    const lastProject = await Project.findOne({}).sort({ order: -1 });
+    const newOrder = (lastProject?.order || 0) + 1;
+    
+    const project = await Project.create({ ...req.body, order: newOrder });
     return res.status(201).json({ success: true, data: project });
   }
 
