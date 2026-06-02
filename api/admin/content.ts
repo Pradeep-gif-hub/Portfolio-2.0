@@ -161,6 +161,10 @@ async function handleGallery(req: VercelRequest, res: VercelResponse) {
 async function handleProjects(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
     const projects = await Project.find({}).sort({ order: 1, createdAt: -1 });
+    console.log(`[AdminAPI] Fetched ${projects.length} projects, sorted by order`);
+    projects.forEach((p: any) => {
+      console.log(`  - ${p.title} (order: ${p.order}, id: ${p._id})`);
+    });
     return res.status(200).json({ success: true, data: projects });
   }
 
@@ -170,6 +174,7 @@ async function handleProjects(req: VercelRequest, res: VercelResponse) {
     const newOrder = (lastProject?.order || 0) + 1;
     
     const project = await Project.create({ ...req.body, order: newOrder });
+    console.log(`[AdminAPI] Created project: ${project.title} with order: ${newOrder}`);
     return res.status(201).json({ success: true, data: project });
   }
 
@@ -177,6 +182,7 @@ async function handleProjects(req: VercelRequest, res: VercelResponse) {
     const { id, ...updates } = req.body;
     const project = await Project.findByIdAndUpdate(id, updates, { new: true });
     if (!project) return res.status(404).json({ error: 'Project not found' });
+    console.log(`[AdminAPI] Updated project: ${project.title} with order: ${project.order}`);
     return res.status(200).json({ success: true, data: project });
   }
 
@@ -184,6 +190,7 @@ async function handleProjects(req: VercelRequest, res: VercelResponse) {
     const { id } = req.query;
     const project = await Project.findByIdAndDelete(id);
     if (!project) return res.status(404).json({ error: 'Project not found' });
+    console.log(`[AdminAPI] Deleted project: ${project.title}`);
     return res.status(200).json({ success: true });
   }
 

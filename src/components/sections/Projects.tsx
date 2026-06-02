@@ -60,8 +60,9 @@ export const Projects: React.FC = () => {
         // Filter to only show featured projects
         const featured = Array.isArray(data) ? data.filter((p) => p.featured) : [];
         setProjects(featured);
+        console.log('[HomePage Projects] Featured projects loaded:', featured.map(p => ({ title: p.title, order: (p as any).order || 'undefined' })));
       } catch (error) {
-        // Failed to fetch projects
+        console.error('[HomePage Projects] Failed to fetch projects:', error);
       } finally {
         setLoading(false);
       }

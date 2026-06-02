@@ -160,16 +160,18 @@ export const AdminProjects = () => {
       const currentProject = projects[projectIndex];
       const swapProject = projects[swapIndex];
       
-      const currentOrder = currentProject.order ?? projectIndex;
-      const swapOrder = swapProject.order ?? swapIndex;
+      // Use actual order values, with fallback to incrementing values
+      const currentOrder = currentProject.order ?? (projectIndex + 1);
+      const swapOrder = swapProject.order ?? (swapIndex + 1);
 
+      // Swap order values in database
       await projectApi.update(currentProject._id!, { ...currentProject, order: swapOrder });
       await projectApi.update(swapProject._id!, { ...swapProject, order: currentOrder });
 
-      const newProjects = [...projects];
-      [newProjects[projectIndex], newProjects[swapIndex]] = [newProjects[swapIndex], newProjects[projectIndex]];
-      setProjects(newProjects);
+      // Refresh projects from server to ensure consistent sort
+      await fetchProjects();
     } catch (error) {
+      console.error('Reorder failed:', error);
       alert('Failed to reorder project');
     }
   };
@@ -184,16 +186,18 @@ export const AdminProjects = () => {
       };
       
       if (editingProject?._id) {
-        const updated = await projectApi.update(editingProject._id, projectData);
-        setProjects(projects.map(p => p._id === editingProject._id ? updated : p));
+        await projectApi.update(editingProject._id, projectData);
       } else {
-        const created = await projectApi.create(projectData);
-        setProjects([created, ...projects]);
+        await projectApi.create(projectData);
       }
+      
+      // Refresh projects from server to ensure correct order
+      await fetchProjects();
       setShowModal(false);
+      setEditingProject(null);
     } catch (error) {
-      // Error occurred while saving project
-      alert('Failed to save project');
+      console.error('Save failed:', error);
+      alert('Failed to save project: ' + (error as Error).message);
     }
   };
 

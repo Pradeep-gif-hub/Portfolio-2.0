@@ -45,6 +45,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           return res.status(200).json({ success: true, data: project });
         }
         const projects = await Project.find({}).sort({ order: 1, createdAt: -1 });
+        console.log(`[API] Fetched ${projects.length} projects, sorted by order`);
+        projects.forEach((p: any) => {
+          console.log(`  - ${p.title} (order: ${p.order}, created: ${p.createdAt?.toISOString().split('T')[0]})`);
+        });
         return res.status(200).json({ success: true, data: projects });
 
       case 'settings':

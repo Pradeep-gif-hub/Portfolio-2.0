@@ -58,8 +58,9 @@ export const ProjectsPage: React.FC = () => {
         await fetchToolsForIcons();
         const data = await fetchProjects();
         setProjects(data);
+        console.log('[ProjectsPage] Projects loaded:', data.map((p: any) => ({ title: p.title, order: p.order || 'undefined' })));
       } catch (error) {
-        // Failed to fetch projects
+        console.error('[ProjectsPage] Failed to fetch projects:', error);
       } finally {
         setLoading(false);
       }
