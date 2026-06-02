@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Edit2, Trash2, Search, X, Save, ExternalLink, Github, Linkedin, UserPlus } from 'lucide-react';
+import { Plus, Edit2, Trash2, Search, X, Save, ExternalLink, Github, Linkedin, UserPlus, ChevronUp, ChevronDown } from 'lucide-react';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { ProtectedRoute } from '../../components/admin/ProtectedRoute';
 import { Button } from '../../components/ui/Button';
@@ -25,6 +25,7 @@ interface Project {
   status: 'completed' | 'in-progress' | 'planning';
   timeline?: string;
   contributors: Contributor[];
+  order?: number;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -144,6 +145,33 @@ export const AdminProjects = () => {
       ...formData,
       contributors: formData.contributors.filter((_, i) => i !== index)
     });
+  };
+
+  const reorderProject = async (projectId: string, direction: 'up' | 'down') => {
+    try {
+      const projectIndex = projects.findIndex(p => p._id === projectId);
+      if (projectIndex === -1) return;
+
+      if (direction === 'up' && projectIndex === 0) return;
+      if (direction === 'down' && projectIndex === projects.length - 1) return;
+
+      const swapIndex = direction === 'up' ? projectIndex - 1 : projectIndex + 1;
+      
+      const currentProject = projects[projectIndex];
+      const swapProject = projects[swapIndex];
+      
+      const currentOrder = currentProject.order ?? projectIndex;
+      const swapOrder = swapProject.order ?? swapIndex;
+
+      await projectApi.update(currentProject._id!, { ...currentProject, order: swapOrder });
+      await projectApi.update(swapProject._id!, { ...swapProject, order: currentOrder });
+
+      const newProjects = [...projects];
+      [newProjects[projectIndex], newProjects[swapIndex]] = [newProjects[swapIndex], newProjects[projectIndex]];
+      setProjects(newProjects);
+    } catch (error) {
+      alert('Failed to reorder project');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -273,6 +301,22 @@ export const AdminProjects = () => {
                     </div>
 
                     <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => reorderProject(project._id!, 'up')}
+                        disabled={filteredProjects.indexOf(project) === 0}
+                        className="p-2 hover:bg-dark-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors text-accent-primary flex items-center justify-center"
+                        title="Move up"
+                      >
+                        <ChevronUp size={16} />
+                      </button>
+                      <button
+                        onClick={() => reorderProject(project._id!, 'down')}
+                        disabled={filteredProjects.indexOf(project) === filteredProjects.length - 1}
+                        className="p-2 hover:bg-dark-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors text-accent-primary flex items-center justify-center"
+                        title="Move down"
+                      >
+                        <ChevronDown size={16} />
+                      </button>
                       <button
                         onClick={() => handleEdit(project)}
                         className="flex-1 p-2 hover:bg-dark-700 rounded-lg transition-colors text-accent-primary flex items-center justify-center gap-2"
