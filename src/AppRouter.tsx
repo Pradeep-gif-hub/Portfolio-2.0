@@ -15,6 +15,7 @@ import ProjectDetailPage from "./pages/ProjectDetailPage";
 import ExperienceDetailPage from "./pages/ExperienceDetailPage";
 import CertificationDetailPage from "./pages/CertificationDetailPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
+import InningsPage from "./pages/InningsPage";
 import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { AdminProjects } from "./pages/admin/AdminProjects";
@@ -33,7 +34,7 @@ export const AppRouter = () => {
           <Routes>
             {/* Admin Login - Outside App layout (no navbar/footer) */}
             <Route path="/admin-login" element={<AdminLoginPage />} />
-            
+
             {/* Admin Panel Routes - No navbar/footer */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/projects" element={<AdminProjects />} />
@@ -44,7 +45,7 @@ export const AppRouter = () => {
             <Route path="/admin/gallery" element={<AdminGallery />} />
             <Route path="/admin/tools" element={<AdminTools />} />
             <Route path="/admin/settings" element={<AdminSettings />} />
-            
+
             {/* Main routes with App layout */}
             <Route path="/" element={<App />}>
               <Route index element={<HomePage />} />
@@ -55,6 +56,7 @@ export const AppRouter = () => {
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogDetailPage />} />
               <Route path="certifications" element={<CertificationsPage />} />
+              <Route path="innings" element={<InningsPage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="links" element={<LinksPage />} />
               <Route path="experience/:id" element={<ExperienceDetailPage />} />
