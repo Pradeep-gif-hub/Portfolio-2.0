@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-    GraduationCap, Building2, Rocket, Users, Gamepad2, Cpu, Trophy,
-    X, Zap, Star, Code2, FlaskConical, ChevronLeft, ChevronRight
+    GraduationCap, Building2, Rocket, Users, Gamepad2, Cpu,
+    ChevronLeft, ChevronRight
 } from "lucide-react";
 
 /* ═══════════════════════════════════════════════════════════
@@ -284,7 +284,7 @@ interface PoleProps {
 
 const LightPole: React.FC<PoleProps> = ({ milestone, index, isActive, onClick }) => {
     const [hovered, setHovered] = useState(false);
-    const Icon = milestone.icon;
+
     const [bx, by] = getPoleBase(index);
     const [sx, sy] = getRoadShoulderPt(index);
     const side = POLE_SIDE[index];
@@ -411,9 +411,6 @@ const LightPole: React.FC<PoleProps> = ({ milestone, index, isActive, onClick })
                 height={beaconR * 1.2}
                 style={{ pointerEvents: "none" }}
             >
-                <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    <Icon size={beaconR * 0.68} color={lit ? "#0d1424" : milestone.accentColor} strokeWidth={2} />
-                </div>
             </foreignObject>
 
             {/* Year label */}
@@ -483,7 +480,7 @@ const DetailPanel: React.FC<{ milestone: Milestone | null; onClose: () => void }
     useEffect(() => {
         setCurrentImage(0);
     }, [milestone]);
-    const Icon = milestone?.icon ?? Trophy;
+
     return (
         <AnimatePresence mode="wait">
             {milestone && (
@@ -621,7 +618,7 @@ const DetailPanel: React.FC<{ milestone: Milestone | null; onClose: () => void }
 /* ═══════════════════════════════════════════════════════════
    DESTINATION PANEL
 ═══════════════════════════════════════════════════════════ */
-const DestinationPanel: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => (
+const DestinationPanel: React.FC<{ open: boolean; onClose: () => void }> = ({ open, }) => (
     <AnimatePresence>
         {open && (
             <motion.div
@@ -679,11 +676,6 @@ const InningsPage: React.FC = () => {
     const handlePoleClick = (id: string) => {
         setDestOpen(false);
         setActiveId((prev) => (prev === id ? null : id));
-    };
-
-    const handleDestClick = () => {
-        setActiveId(null);
-        setDestOpen((prev) => !prev);
     };
 
     useEffect(() => {
