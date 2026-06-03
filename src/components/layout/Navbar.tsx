@@ -11,7 +11,8 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Blog", href: "/blog" },
+  { label: "Certifications", href: "/certifications" },
+  { label: "Career Innings", href: "/innings" },
   { label: "About", href: "/about" },
 ];
 
@@ -51,11 +52,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className={`px-3 py-2 rounded-lg text-base font-medium transition-all ${
-                  isActive(link.href) 
-                    ? "text-accent-primary bg-accent-primary/10" 
-                    : "text-text-secondary hover:text-accent-primary hover:bg-accent-primary/5"
-                }`}
+                className={`px-3 py-2 rounded-lg text-base font-medium transition-all ${isActive(link.href)
+                  ? "text-accent-primary bg-accent-primary/10"
+                  : "text-text-secondary hover:text-accent-primary hover:bg-accent-primary/5"
+                  }`}
               >
                 {link.label}
               </motion.span>
@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
                   {`< awasthi.tech />`}
                 </div>
               </div>
-              
+
               {/* Nav Links */}
               <div className="flex flex-col gap-2 p-6">
                 {navLinks.map((link) => (
@@ -108,9 +108,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
                     key={link.href}
                     to={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={`px-4 py-3 rounded-lg text-text-secondary hover:text-accent-primary hover:bg-accent-primary/10 transition-smooth font-mono text-base ${
-                      isActive(link.href) ? "text-accent-primary bg-accent-primary/10 font-medium" : ""
-                    }`}
+                    className={`px-4 py-3 rounded-lg text-text-secondary hover:text-accent-primary hover:bg-accent-primary/10 transition-smooth font-mono text-base ${isActive(link.href) ? "text-accent-primary bg-accent-primary/10 font-medium" : ""
+                      }`}
                   >
                     {link.label}
                   </Link>
