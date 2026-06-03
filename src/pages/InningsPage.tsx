@@ -63,7 +63,7 @@ const MILESTONES: Milestone[] = [
         id: "Kota", year: "2023", chapter: "Drop Lenaa hi pd gyaa",
         title: "Kota' Something that no one would rather wish to recall..", tagline: "Motion hai toh Bharosa Haii..",
         description: "Earlier used to feel that in 12th Apearing bahut saari percentile le aaunga Drop kyu lenaa..(bahut mtlb 86 ig.. ), 17 July i remember the date sicne then Dakniya Talav se Vigyan nagr, City Park se Pariksha Desk sb ghum liya, Mess ki wo aloo sev ki sbji and kchhi roti awww what a memo.., JEC ,Jaipur Centre of JEE Advanced (ghum ke aaya bs IIT toh bs shatter hi huyi thi border cut off marks se, Crack toh nhi huyi thi IIT ig...",
-        achievements: ["V-25 Batch", "Motion Private Limited", "Mess ka Khana waahh", "Kota ke Chambla ka Paani"],
+        achievements: ["V-25 Batch", "Motion Private Limited", "Mess ka Khana waahh", "Kota ke Chambal ka Paani"],
         tech: ["Self-Dependatn", "Goal in Mind", "is This the END ( late night... )"],
         icon: Users, image: ["https://i.postimg.cc/TPq0c3jx/Whats-App-Image-2026-06-03-at-4-48-08-PM.jpg"],
         accentColor: "#f59e0b",
