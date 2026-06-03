@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="bg-bg-secondary border-t border-bg-tertiary">
-      <div className="container py-6">
+      <div className="container py-3">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Visitor Counter - Left Side */}
           <div className="order-2 md:order-1">
