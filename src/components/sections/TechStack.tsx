@@ -24,8 +24,8 @@ export const TechStack: React.FC = () => {
     try {
       const response = await fetch('/api/public-data?type=tools&homepage=true');
       const data = await response.json();
-      setTools(data.data || data);
-    } catch (error) {
+      setTools(Array.isArray(data.data) ? data.data : Array.isArray(data) ? data : []);
+    } catch {
       // Failed to fetch tools
     } finally {
       setLoading(false);

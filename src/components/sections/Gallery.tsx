@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { gallery } from "../../data/gallery";
 import { SectionWrapper } from "../layout/SectionWrapper";
 
@@ -24,12 +25,24 @@ const itemVariants = {
 };
 
 export const Gallery: React.FC = () => {
-  const [selectedImage, setSelectedImage] = useState<{
-    id: number;
-    image: string;
-    alt: string;
-    category: string;
-  } | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedIndex(null);
+      if (event.key === "ArrowLeft") {
+        setSelectedIndex((current) => current === null ? null : (current - 1 + gallery.length) % gallery.length);
+      }
+      if (event.key === "ArrowRight") {
+        setSelectedIndex((current) => current === null ? null : (current + 1) % gallery.length);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex]);
 
   return (
     <SectionWrapper id="gallery">
@@ -53,13 +66,13 @@ export const Gallery: React.FC = () => {
         viewport={{ once: true }}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {gallery.map((item) => (
+        {gallery.map((item, index) => (
           <motion.div
             key={item.id}
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             className="relative overflow-hidden rounded-lg cursor-pointer group h-64"
-            onClick={() => setSelectedImage(item)}
+            onClick={() => setSelectedIndex(index)}
           >
             <img
               src={item.image}
@@ -80,32 +93,51 @@ export const Gallery: React.FC = () => {
       </motion.div>
 
       {/* Modal */}
-      {selectedImage && (
+      {selectedIndex !== null && gallery[selectedIndex] && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedIndex(null)}
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
         >
           <motion.div
             initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.9 }}
-            className="max-w-4xl w-full max-h-96 relative"
+            className="max-w-4xl w-full max-h-[85vh] relative flex items-center justify-center"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
           >
             <img
-              src={selectedImage.image}
-              alt={selectedImage.alt}
-              className="w-full h-full object-cover rounded-lg"
+              src={gallery[selectedIndex].image}
+              alt={gallery[selectedIndex].alt}
+              className="max-w-full max-h-[85vh] object-contain rounded-lg"
             />
             <button
-              onClick={() => setSelectedImage(null)}
+              aria-label="Close image viewer"
+              onClick={() => setSelectedIndex(null)}
               className="absolute top-4 right-4 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
             >
-              ✕
+              <X size={20} />
             </button>
+            {gallery.length > 1 && (
+              <>
+                <button
+                  aria-label="Previous image"
+                  onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
+                  className="absolute left-2 md:-left-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                <button
+                  aria-label="Next image"
+                  onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
+                  className="absolute right-2 md:-right-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </>
+            )}
           </motion.div>
         </motion.div>
       )}

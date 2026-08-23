@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
 import { SectionWrapper } from "../components/layout/SectionWrapper";
 
@@ -35,10 +36,28 @@ const itemVariants = {
 export const GalleryPage: React.FC = () => {
   const [gallery, setGallery] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     fetchGallery();
   }, []);
+
+  useEffect(() => {
+    if (selectedIndex === null) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedIndex(null);
+      if (event.key === "ArrowLeft") {
+        setSelectedIndex((current) => current === null ? null : (current - 1 + gallery.length) % gallery.length);
+      }
+      if (event.key === "ArrowRight") {
+        setSelectedIndex((current) => current === null ? null : (current + 1) % gallery.length);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, gallery.length]);
 
   const fetchGallery = async () => {
     try {
@@ -47,7 +66,7 @@ export const GalleryPage: React.FC = () => {
         const data = await response.json();
         setGallery(data.data);
       }
-    } catch (error) {
+    } catch {
       // Error occurred while fetching gallery
     } finally {
       setLoading(false);
@@ -94,12 +113,13 @@ export const GalleryPage: React.FC = () => {
             animate="visible"
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {gallery.map((item) => (
+            {gallery.map((item, index) => (
               <motion.div
                 key={item._id}
                 variants={itemVariants}
                 whileHover={{ scale: 1.05 }}
                 className="relative aspect-video rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer group"
+                onClick={() => setSelectedIndex(index)}
               >
                 <img
                   src={item.image}
@@ -119,6 +139,55 @@ export const GalleryPage: React.FC = () => {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+        )}
+
+        {selectedIndex !== null && gallery[selectedIndex] && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedIndex(null)}
+            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.9 }}
+              className="max-w-4xl w-full max-h-[85vh] relative flex items-center justify-center"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <img
+                src={gallery[selectedIndex].image}
+                alt={gallery[selectedIndex].title}
+                className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              />
+              <button
+                aria-label="Close image viewer"
+                onClick={() => setSelectedIndex(null)}
+                className="absolute top-4 right-4 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+              >
+                <X size={20} />
+              </button>
+              {gallery.length > 1 && (
+                <>
+                  <button
+                    aria-label="Previous image"
+                    onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
+                    className="absolute left-2 md:-left-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    aria-label="Next image"
+                    onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
+                    className="absolute right-2 md:-right-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </SectionWrapper>
