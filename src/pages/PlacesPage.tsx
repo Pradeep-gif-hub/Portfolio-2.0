@@ -4,7 +4,7 @@ import { type Map as MapLibreMap, type Marker as MapLibreMarker } from "maplibre
 import { LocateFixed, Minus, Plus, X } from "lucide-react";
 import { motion } from "framer-motion";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { places, type Place } from "../data/places";
+import { places, type Place } from "../data/place/places";
 
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
@@ -40,7 +40,32 @@ export const PlacesPage = () => {
   const mapRef = useRef<MapLibreMap | null>(null);
   const markersRef = useRef<Map<string, MapLibreMarker>>(new Map());
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
+  const [imageFailed, setImageFailed] = useState(false);
+  const [onlineImage, setOnlineImage] = useState("");
   const [mapError, setMapError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedPlace) {
+      setOnlineImage("");
+      return;
+    }
+
+    const controller = new AbortController();
+    setOnlineImage("");
+
+    fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(selectedPlace.name)}`, {
+      signal: controller.signal,
+    })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((summary: { thumbnail?: { source?: string } } | null) => {
+        setOnlineImage(summary?.thumbnail?.source ?? "");
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setOnlineImage("");
+      });
+
+    return () => controller.abort();
+  }, [selectedPlace]);
 
   const fitAllPlaces = () => {
     const map = mapRef.current;
@@ -56,6 +81,7 @@ export const PlacesPage = () => {
     const map = mapRef.current;
     if (!map) return;
     setSelectedPlace(place);
+    setImageFailed(false);
     map.flyTo({
       center: place.coordinates,
       zoom: Math.min(Math.max(map.getZoom() + 1.7, 5.5), 8.5),
@@ -152,7 +178,17 @@ export const PlacesPage = () => {
             <button type="button" className="places-card-close" aria-label={`Close ${selectedPlace.name} details`} onClick={() => setSelectedPlace(null)}>
               <X size={16} />
             </button>
-            <img src={selectedPlace.image} alt={`${selectedPlace.name}, ${selectedPlace.city}`} />
+            {onlineImage && !imageFailed ? (
+              <img
+                src={onlineImage}
+                alt={`${selectedPlace.name}, ${selectedPlace.city}`}
+                onError={() => setImageFailed(true)}
+              />
+            ) : (
+              <div className="places-card-image-fallback" aria-label={`${selectedPlace.name} image placeholder`}>
+                {selectedPlace.name}
+              </div>
+            )}
             <div className="places-card-body">
               <p className="places-card-kicker">{selectedPlace.visitedDate ?? "Visited"}</p>
               <h2>{selectedPlace.name}</h2>
