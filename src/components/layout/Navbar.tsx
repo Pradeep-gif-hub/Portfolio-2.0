@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Gallery", href: "/gallery" },
+  { label: "Places", href: "/places" },
   { label: "Certifications", href: "/certifications" },
   { label: "Career Innings", href: "/innings" },
   { label: "About", href: "/about" },

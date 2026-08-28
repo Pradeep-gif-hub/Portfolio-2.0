@@ -7,6 +7,7 @@ import { ProjectsPage } from "./pages/ProjectsPage";
 import { ExploringPage } from "./pages/ExploringPage.tsx";
 import { AdminExploring } from "./pages/admin/AdminExploring.tsx";
 import { GalleryPage } from "./pages/GalleryPage";
+import { PlacesPage } from "./pages/PlacesPage";
 import { BlogPage } from "./pages/BlogPage";
 import { AboutPage } from "./pages/AboutPage";
 import { LinksPage } from "./pages/LinksPage";
@@ -53,6 +54,7 @@ export const AppRouter = () => {
               <Route path="project/:id" element={<ProjectDetailPage />} />
               <Route path="exploring" element={<ExploringPage />} />
               <Route path="gallery" element={<GalleryPage />} />
+              <Route path="places" element={<PlacesPage />} />
               <Route path="blog" element={<BlogPage />} />
               <Route path="blog/:slug" element={<BlogDetailPage />} />
               <Route path="certifications" element={<CertificationsPage />} />

@@ -16,6 +16,7 @@
     "framer-motion": "^11.0.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.263.1",
+    "maplibre-gl": "^6.6.0",
     "mongoose": "^8.0.0",
     "nodemailer": "^7.0.12",
     "react": "^18.3.1",
