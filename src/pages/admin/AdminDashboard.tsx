@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FolderKanban, FileText, Briefcase, Award, TrendingUp, Wrench, Settings, Image } from 'lucide-react';
+import { FolderKanban, FileText, Briefcase, Award, TrendingUp, Wrench, Settings, Image, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { ProtectedRoute } from '../../components/admin/ProtectedRoute';
@@ -12,6 +12,7 @@ interface Stats {
   certifications: number;
   tools: number;
   gallery: number;
+  places: number;
   lastUpdated: string;
 }
 
@@ -41,6 +42,7 @@ export const AdminDashboard = () => {
     certifications: 0,
     tools: 0,
     gallery: 0,
+    places: 0,
     lastUpdated: new Date().toLocaleDateString(),
   });
   const [loading, setLoading] = useState(true);
@@ -55,13 +57,14 @@ export const AdminDashboard = () => {
       const token = sessionStorage.getItem('admin_token');
       const headers = { 'Authorization': `Bearer ${token}` };
 
-      const [projects, blogs, experience, certifications, tools, gallery] = await Promise.all([
-        fetch('/api/admin/content?type=projects', { headers }).then(r => r.json()),
-        fetch('/api/admin/content?type=blogs', { headers }).then(r => r.json()),
-        fetch('/api/admin/content?type=experience', { headers }).then(r => r.json()),
-        fetch('/api/admin/content?type=certifications', { headers }).then(r => r.json()),
-        fetch('/api/admin/content?type=tools', { headers }).then(r => r.json()),
-        fetch('/api/admin/content?type=gallery', { headers }).then(r => r.json()),
+      const [projects, blogs, experience, certifications, tools, gallery, places] = await Promise.all([
+        fetch('/api/admin/content?type=projects', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=blogs', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=experience', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=certifications', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=tools', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=gallery', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
+        fetch('/api/admin/content?type=places', { headers }).then(r => r.json()).catch(() => ({ data: [] })),
       ]);
 
       setStats({
@@ -71,6 +74,7 @@ export const AdminDashboard = () => {
         certifications: Array.isArray(certifications) ? certifications.length : certifications.data?.length || 0,
         tools: Array.isArray(tools) ? tools.length : tools.data?.length || 0,
         gallery: Array.isArray(gallery) ? gallery.length : gallery.data?.length || 0,
+        places: Array.isArray(places) ? places.length : places.data?.length || 0,
         lastUpdated: new Date().toLocaleDateString(),
       });
     } catch (error) {
@@ -111,7 +115,7 @@ export const AdminDashboard = () => {
           ) : (
             <>
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <StatCard
                   icon={FolderKanban}
                   label="Total Projects"
@@ -141,6 +145,13 @@ export const AdminDashboard = () => {
                   link="/admin/certifications"
                 />
                 <StatCard
+                  icon={MapPin}
+                  label="Visited Places"
+                  value={stats.places}
+                  color="emerald-500"
+                  link="/admin/places"
+                />
+                <StatCard
                   icon={Wrench}
                   label="Tech Stack Tools"
                   value={stats.tools}
@@ -164,7 +175,7 @@ export const AdminDashboard = () => {
                 className="glass-effect p-6 rounded-xl"
               >
                 <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
                   <Link
                     to="/admin/projects"
                     className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
@@ -185,6 +196,13 @@ export const AdminDashboard = () => {
                   >
                     <Briefcase className="mx-auto mb-2 text-purple-500" size={24} />
                     <span className="text-sm">Add Experience</span>
+                  </Link>
+                  <Link
+                    to="/admin/places"
+                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                  >
+                    <MapPin className="mx-auto mb-2 text-emerald-500" size={24} />
+                    <span className="text-sm">Manage Places</span>
                   </Link>
                   <Link
                     to="/admin/certifications"

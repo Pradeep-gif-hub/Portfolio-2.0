@@ -14,6 +14,7 @@ import {
   Settings,
   Image,
   Compass,
+  MapPin,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -27,6 +28,7 @@ const menuItems = [
   { path: '/admin/blogs', label: 'Blogs', icon: FileText },
   { path: '/admin/experience', label: 'Experience', icon: Briefcase },
   { path: '/admin/certifications', label: 'Certifications', icon: Award },
+  { path: '/admin/places', label: 'Places', icon: MapPin },
   { path: '/admin/exploring', label: 'Exploring', icon: Compass },
   { path: '/admin/gallery', label: 'Gallery', icon: Image },
   { path: '/admin/tools', label: 'Tools', icon: Wrench },

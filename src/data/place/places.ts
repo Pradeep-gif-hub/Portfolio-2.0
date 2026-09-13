@@ -1,12 +1,16 @@
 export interface Place {
-  id: string;
+  id?: string;
+  _id?: string;
   name: string;
   city: string;
   country: string;
   coordinates: [number, number]; // [longitude, latitude] for MapLibre
+  image?: string;
+  imageUrl?: string;
   description?: string;
   visitedDate?: string;
   category?: string;
+  order?: number;
 }
 
 const place = (

@@ -7,6 +7,7 @@ import Gallery from '../../lib/models/Gallery.js';
 import Project from '../../lib/models/Project.js';
 import Settings from '../../lib/models/Settings.js';
 import Tool from '../../lib/models/Tool.js';
+import Place from '../../lib/models/Place.js';
 import { verifyAuth } from '../../lib/auth.js';
 
 async function handler(req: VercelRequest, res: VercelResponse) {
@@ -36,6 +37,8 @@ async function handler(req: VercelRequest, res: VercelResponse) {
       return handleSettings(req, res);
     case 'tools':
       return handleTools(req, res);
+    case 'places':
+      return handlePlaces(req, res);
     default:
       return res.status(400).json({ error: 'Invalid type parameter' });
   }
@@ -238,6 +241,35 @@ async function handleTools(req: VercelRequest, res: VercelResponse) {
     const { id } = req.query;
     const tool = await Tool.findByIdAndDelete(id);
     if (!tool) return res.status(404).json({ error: 'Tool not found' });
+    return res.status(200).json({ success: true });
+  }
+
+  return res.status(405).json({ error: 'Method not allowed' });
+}
+
+// Places handler
+async function handlePlaces(req: VercelRequest, res: VercelResponse) {
+  if (req.method === 'GET') {
+    const places = await Place.find({}).sort({ order: 1, createdAt: -1 });
+    return res.status(200).json({ success: true, data: places });
+  }
+
+  if (req.method === 'POST') {
+    const place = await Place.create(req.body);
+    return res.status(201).json({ success: true, data: place });
+  }
+
+  if (req.method === 'PUT') {
+    const { id, ...updates } = req.body;
+    const place = await Place.findByIdAndUpdate(id, updates, { new: true });
+    if (!place) return res.status(404).json({ error: 'Place not found' });
+    return res.status(200).json({ success: true, data: place });
+  }
+
+  if (req.method === 'DELETE') {
+    const { id } = req.query;
+    const place = await Place.findByIdAndDelete(id);
+    if (!place) return res.status(404).json({ error: 'Place not found' });
     return res.status(200).json({ success: true });
   }
 

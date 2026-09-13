@@ -7,6 +7,7 @@ import Gallery from '../lib/models/Gallery.js';
 import Project from '../lib/models/Project.js';
 import Settings from '../lib/models/Settings.js';
 import Tool from '../lib/models/Tool.js';
+import Place from '../lib/models/Place.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'GET') {
@@ -63,6 +64,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
         const tools = await Tool.find(toolQuery).sort({ order: 1, name: 1 });
         return res.status(200).json({ success: true, data: tools });
+
+      case 'places':
+        const places = await Place.find({}).sort({ order: 1, createdAt: -1 });
+        return res.status(200).json({ success: true, data: places });
 
       default:
         return res.status(400).json({ error: 'Invalid type parameter' });

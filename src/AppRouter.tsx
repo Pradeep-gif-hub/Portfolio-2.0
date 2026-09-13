@@ -23,6 +23,7 @@ import { AdminProjects } from "./pages/admin/AdminProjects";
 import { AdminBlogs } from "./pages/admin/AdminBlogs";
 import { AdminExperience } from "./pages/admin/AdminExperience";
 import { AdminCertifications } from "./pages/admin/AdminCertifications";
+import { AdminPlaces } from "./pages/admin/AdminPlaces";
 import { AdminGallery } from "./pages/admin/AdminGallery";
 import { AdminTools } from "./pages/admin/AdminTools";
 import { AdminSettings } from "./pages/admin/AdminSettings";
@@ -42,6 +43,7 @@ export const AppRouter = () => {
             <Route path="/admin/blogs" element={<AdminBlogs />} />
             <Route path="/admin/experience" element={<AdminExperience />} />
             <Route path="/admin/certifications" element={<AdminCertifications />} />
+            <Route path="/admin/places" element={<AdminPlaces />} />
             <Route path="/admin/exploring" element={<AdminExploring />} />
             <Route path="/admin/gallery" element={<AdminGallery />} />
             <Route path="/admin/tools" element={<AdminTools />} />
