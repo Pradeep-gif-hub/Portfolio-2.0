@@ -4,7 +4,7 @@ import { type Map as MapLibreMap, type Marker as MapLibreMarker } from "maplibre
 import { LocateFixed, Minus, Navigation, Plus, X } from "lucide-react";
 import { motion } from "framer-motion";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { places as defaultPlaces, type Place } from "../data/place/places";
+import { places as defaultPlaces, mergePlaces, type Place } from "../data/place/places";
 
 const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
 
@@ -28,6 +28,21 @@ const getMarkerElement = (place: Place, selected: boolean, onClick: () => void) 
   element.className = `places-marker${selected ? " places-marker-selected" : ""}`;
   element.setAttribute("aria-label", `${place.name} in ${place.city}, ${place.country}`);
   element.title = `${place.name}, ${place.country}`;
+
+  const imgUrl = place.image || place.imageUrl;
+  if (imgUrl) {
+    const thumb = document.createElement("img");
+    thumb.src = imgUrl;
+    thumb.alt = place.name;
+    thumb.className = "places-marker-thumb";
+    thumb.loading = "lazy";
+    element.appendChild(thumb);
+  } else {
+    const dot = document.createElement("span");
+    dot.className = "places-marker-dot";
+    element.appendChild(dot);
+  }
+
   const label = document.createElement("span");
   label.className = "places-marker-label";
   label.textContent = place.city;
@@ -37,7 +52,7 @@ const getMarkerElement = (place: Place, selected: boolean, onClick: () => void) 
 };
 
 const updateMarkerLabels = (map: MapLibreMap) => {
-  const showLabels = map.getZoom() >= 5.7;
+  const showLabels = map.getZoom() >= 4.5;
   document.querySelectorAll<HTMLElement>(".places-marker-label").forEach((label) => {
     label.style.opacity = showLabels ? "1" : "0";
   });
@@ -49,13 +64,13 @@ export const PlacesPage = () => {
   const markersRef = useRef<Map<string, MapLibreMarker>>(new Map());
   const userMarkerRef = useRef<MapLibreMarker | null>(null);
   const [placeList, setPlaceList] = useState<Place[]>(defaultPlaces);
-  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
+  const [selectedPlace, setSelectedPlace] = useState<Place | null>(defaultPlaces[0] || null);
   const [imageFailed, setImageFailed] = useState(false);
-  const [onlineImage, setOnlineImage] = useState("");
+  const [onlineImage, setOnlineImage] = useState(defaultPlaces[0]?.image || defaultPlaces[0]?.imageUrl || "");
   const [mapError, setMapError] = useState<string | null>(null);
   const [isLocating, setIsLocating] = useState(false);
 
-  // Fetch places from DB API
+  // Fetch places from DB API and merge with defaults
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
@@ -63,7 +78,17 @@ export const PlacesPage = () => {
         if (response.ok) {
           const data = await response.json();
           if (Array.isArray(data.data) && data.data.length > 0) {
-            setPlaceList(data.data);
+            const merged = mergePlaces(defaultPlaces, data.data);
+            setPlaceList(merged);
+            // If the latest place is a new custom place, select it
+            if (data.data[0]) {
+              const currentSelected = merged.find(
+                (p) => getPlaceId(p) === (selectedPlace ? getPlaceId(selectedPlace) : "")
+              );
+              if (!currentSelected) {
+                setSelectedPlace(merged[0]);
+              }
+            }
           }
         }
       } catch {
@@ -74,16 +99,17 @@ export const PlacesPage = () => {
     fetchPlaces();
   }, []);
 
-  // Fetch Wikipedia image if no custom image is available
+  // Update selected place image
   useEffect(() => {
     if (!selectedPlace) {
       setOnlineImage("");
       return;
     }
 
-    const customImage = selectedPlace.image || selectedPlace.imageUrl;
-    if (customImage) {
-      setOnlineImage(customImage);
+    const directImage = selectedPlace.image || selectedPlace.imageUrl;
+    if (directImage) {
+      setOnlineImage(directImage);
+      setImageFailed(false);
       return;
     }
 
@@ -121,7 +147,7 @@ export const PlacesPage = () => {
     setImageFailed(false);
     map.flyTo({
       center: place.coordinates,
-      zoom: Math.min(Math.max(map.getZoom() + 1.7, 5.5), 8.5),
+      zoom: Math.min(Math.max(map.getZoom() + 1.5, 5.5), 8.5),
       duration: 1000,
       essential: true,
     });
@@ -184,8 +210,8 @@ export const PlacesPage = () => {
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
       style: MAP_STYLE,
-      center: [78.8, 32.5],
-      zoom: 2,
+      center: [78.8, 25.5],
+      zoom: 3.5,
       attributionControl: false,
       renderWorldCopies: false,
       cooperativeGestures: false,
@@ -225,7 +251,11 @@ export const PlacesPage = () => {
         if (!place.coordinates || place.coordinates.length !== 2) return;
         const placeId = getPlaceId(place);
         const marker = new maplibregl.Marker({
-          element: getMarkerElement(place, selectedPlace ? getPlaceId(selectedPlace) === placeId : false, () => focusPlace(place)),
+          element: getMarkerElement(
+            place,
+            selectedPlace ? getPlaceId(selectedPlace) === placeId : false,
+            () => focusPlace(place)
+          ),
         })
           .setLngLat(place.coordinates)
           .addTo(map);

@@ -255,21 +255,41 @@ async function handlePlaces(req: VercelRequest, res: VercelResponse) {
   }
 
   if (req.method === 'POST') {
+    const { name } = req.body;
+    if (name) {
+      const existing = await Place.findOne({ name: new RegExp(`^${name}$`, 'i') });
+      if (existing) {
+        const updated = await Place.findByIdAndUpdate(existing._id, req.body, { new: true });
+        return res.status(200).json({ success: true, data: updated });
+      }
+    }
     const place = await Place.create(req.body);
     return res.status(201).json({ success: true, data: place });
   }
 
   if (req.method === 'PUT') {
     const { id, ...updates } = req.body;
-    const place = await Place.findByIdAndUpdate(id, updates, { new: true });
-    if (!place) return res.status(404).json({ error: 'Place not found' });
+    let place = null;
+    if (id && /^[0-9a-fA-F]{24}$/.test(id)) {
+      place = await Place.findByIdAndUpdate(id, updates, { new: true });
+    } else if (updates.name) {
+      place = await Place.findOneAndUpdate(
+        { name: new RegExp(`^${updates.name}$`, 'i') },
+        updates,
+        { new: true, upsert: true }
+      );
+    }
+    if (!place) {
+      place = await Place.create(req.body);
+    }
     return res.status(200).json({ success: true, data: place });
   }
 
   if (req.method === 'DELETE') {
     const { id } = req.query;
-    const place = await Place.findByIdAndDelete(id);
-    if (!place) return res.status(404).json({ error: 'Place not found' });
+    if (id && /^[0-9a-fA-F]{24}$/.test(String(id))) {
+      await Place.findByIdAndDelete(id);
+    }
     return res.status(200).json({ success: true });
   }
 

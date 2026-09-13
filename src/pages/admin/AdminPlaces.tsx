@@ -19,6 +19,7 @@ import {
 import * as maplibregl from 'maplibre-gl';
 import { type Map as MapLibreMap, type Marker as MapLibreMarker } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import { places as defaultPlaces, mergePlaces } from '../../data/place/places';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { ProtectedRoute } from '../../components/admin/ProtectedRoute';
 import { Button } from '../../components/ui/Button';
@@ -148,10 +149,11 @@ export const AdminPlaces = () => {
     try {
       setLoading(true);
       const data = await placesApi.getAll();
-      setPlaces(Array.isArray(data) ? data : []);
+      const dbPlaces = Array.isArray(data) ? data : [];
+      const merged = mergePlaces(defaultPlaces as any, dbPlaces);
+      setPlaces(merged);
     } catch {
-      alert('Failed to load places from server.');
-      setPlaces([]);
+      setPlaces(defaultPlaces as any);
     } finally {
       setLoading(false);
     }
@@ -371,12 +373,16 @@ export const AdminPlaces = () => {
     setShowModal(true);
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this place?')) return;
+  const handleDelete = async (item: PlaceItem) => {
+    if (!confirm(`Are you sure you want to delete "${item.name}"?`)) return;
     try {
-      await placesApi.delete(id);
-      alert('Place deleted successfully!');
-      fetchPlaces();
+      if (item._id) {
+        await placesApi.delete(item._id);
+      }
+      setPlaces((prev) =>
+        prev.filter((p) => (item._id ? p._id !== item._id : p.name !== item.name))
+      );
+      alert('Place removed successfully!');
     } catch {
       alert('Failed to delete place');
     }
@@ -648,7 +654,7 @@ export const AdminPlaces = () => {
                         <Edit2 size={16} />
                       </button>
                       <button
-                        onClick={() => item._id && handleDelete(item._id)}
+                        onClick={() => handleDelete(item)}
                         className="p-2 bg-dark-800 hover:bg-red-500 hover:text-white text-text-secondary rounded-lg transition-colors"
                         title="Delete Place"
                       >
