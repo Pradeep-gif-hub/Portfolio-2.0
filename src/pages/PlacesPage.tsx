@@ -28,21 +28,6 @@ const getMarkerElement = (place: Place, selected: boolean, onClick: () => void) 
   element.className = `places-marker${selected ? " places-marker-selected" : ""}`;
   element.setAttribute("aria-label", `${place.name} in ${place.city}, ${place.country}`);
   element.title = `${place.name}, ${place.country}`;
-
-  const imgUrl = place.image || place.imageUrl;
-  if (imgUrl) {
-    const thumb = document.createElement("img");
-    thumb.src = imgUrl;
-    thumb.alt = place.name;
-    thumb.className = "places-marker-thumb";
-    thumb.loading = "lazy";
-    element.appendChild(thumb);
-  } else {
-    const dot = document.createElement("span");
-    dot.className = "places-marker-dot";
-    element.appendChild(dot);
-  }
-
   const label = document.createElement("span");
   label.className = "places-marker-label";
   label.textContent = place.city;
@@ -52,7 +37,7 @@ const getMarkerElement = (place: Place, selected: boolean, onClick: () => void) 
 };
 
 const updateMarkerLabels = (map: MapLibreMap) => {
-  const showLabels = map.getZoom() >= 4.5;
+  const showLabels = map.getZoom() >= 5.2;
   document.querySelectorAll<HTMLElement>(".places-marker-label").forEach((label) => {
     label.style.opacity = showLabels ? "1" : "0";
   });
@@ -64,11 +49,15 @@ export const PlacesPage = () => {
   const markersRef = useRef<Map<string, MapLibreMarker>>(new Map());
   const userMarkerRef = useRef<MapLibreMarker | null>(null);
   const [placeList, setPlaceList] = useState<Place[]>(defaultPlaces);
-  const [selectedPlace, setSelectedPlace] = useState<Place | null>(defaultPlaces[0] || null);
+  const placeListRef = useRef<Place[]>(defaultPlaces);
+  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [imageFailed, setImageFailed] = useState(false);
-  const [onlineImage, setOnlineImage] = useState(defaultPlaces[0]?.image || defaultPlaces[0]?.imageUrl || "");
+  const [onlineImage, setOnlineImage] = useState("");
   const [mapError, setMapError] = useState<string | null>(null);
   const [isLocating, setIsLocating] = useState(false);
+
+  // Keep placeListRef in sync
+  placeListRef.current = placeList;
 
   // Fetch places from DB API and merge with defaults
   useEffect(() => {
@@ -80,15 +69,6 @@ export const PlacesPage = () => {
           if (Array.isArray(data.data) && data.data.length > 0) {
             const merged = mergePlaces(defaultPlaces, data.data);
             setPlaceList(merged);
-            // If the latest place is a new custom place, select it
-            if (data.data[0]) {
-              const currentSelected = merged.find(
-                (p) => getPlaceId(p) === (selectedPlace ? getPlaceId(selectedPlace) : "")
-              );
-              if (!currentSelected) {
-                setSelectedPlace(merged[0]);
-              }
-            }
           }
         }
       } catch {
@@ -130,7 +110,7 @@ export const PlacesPage = () => {
     return () => controller.abort();
   }, [selectedPlace]);
 
-  const fitAllPlaces = (list: Place[] = placeList) => {
+  const fitAllPlaces = (list: Place[] = placeListRef.current) => {
     const map = mapRef.current;
     if (!map || list.length === 0) return;
     map.fitBounds(getBounds(list), {
@@ -147,10 +127,38 @@ export const PlacesPage = () => {
     setImageFailed(false);
     map.flyTo({
       center: place.coordinates,
-      zoom: Math.min(Math.max(map.getZoom() + 1.5, 5.5), 8.5),
+      zoom: Math.min(Math.max(map.getZoom() + 1.7, 5.5), 8.5),
       duration: 1000,
       essential: true,
     });
+  };
+
+  // Render / Sync MapLibre markers
+  const renderMarkers = () => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Remove existing markers
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current.clear();
+
+    const currentPlaces = placeListRef.current;
+    currentPlaces.forEach((place) => {
+      if (!place.coordinates || place.coordinates.length !== 2) return;
+      const placeId = getPlaceId(place);
+      const marker = new maplibregl.Marker({
+        element: getMarkerElement(
+          place,
+          selectedPlace ? getPlaceId(selectedPlace) === placeId : false,
+          () => focusPlace(place)
+        ),
+      })
+        .setLngLat(place.coordinates)
+        .addTo(map);
+      markersRef.current.set(placeId, marker);
+    });
+
+    updateMarkerLabels(map);
   };
 
   // Locate User GPS position
@@ -210,8 +218,8 @@ export const PlacesPage = () => {
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
       style: MAP_STYLE,
-      center: [78.8, 25.5],
-      zoom: 3.5,
+      center: [78.8, 32.5],
+      zoom: 2,
       attributionControl: false,
       renderWorldCopies: false,
       cooperativeGestures: false,
@@ -219,10 +227,18 @@ export const PlacesPage = () => {
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
 
+    const onMapReady = () => {
+      renderMarkers();
+      fitAllPlaces(placeListRef.current);
+    };
+
     const handleError = (event: maplibregl.ErrorEvent) => {
       if (event.error?.message) setMapError(event.error.message);
     };
 
+    map.on("load", onMapReady);
+    map.on("styledata", renderMarkers);
+    map.on("idle", renderMarkers);
     map.on("zoom", () => updateMarkerLabels(map));
     map.on("error", handleError);
 
@@ -238,38 +254,11 @@ export const PlacesPage = () => {
     };
   }, []);
 
-  // Sync Markers when placeList or map changes
+  // Update markers when placeList changes
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-
-    const syncMarkers = () => {
-      markersRef.current.forEach((marker) => marker.remove());
-      markersRef.current.clear();
-
-      placeList.forEach((place) => {
-        if (!place.coordinates || place.coordinates.length !== 2) return;
-        const placeId = getPlaceId(place);
-        const marker = new maplibregl.Marker({
-          element: getMarkerElement(
-            place,
-            selectedPlace ? getPlaceId(selectedPlace) === placeId : false,
-            () => focusPlace(place)
-          ),
-        })
-          .setLngLat(place.coordinates)
-          .addTo(map);
-        markersRef.current.set(placeId, marker);
-      });
-
+    renderMarkers();
+    if (!selectedPlace) {
       fitAllPlaces(placeList);
-      updateMarkerLabels(map);
-    };
-
-    if (map.isStyleLoaded()) {
-      syncMarkers();
-    } else {
-      map.once("load", syncMarkers);
     }
   }, [placeList]);
 
