@@ -21,7 +21,7 @@ const StatCard = ({ icon: Icon, label, value, link }: any) => (
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ duration: 0.15 }}
-      className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+      className="surface-card p-6 hover:border-theme-accent/70 transition-colors"
     >
       <div className="flex items-center justify-between mb-4">
         <div className="p-2.5 rounded-lg bg-theme-accent-soft">
@@ -161,7 +161,7 @@ export const AdminDashboard = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-6">
                 <h2 className="heading-3 mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
                   <Link

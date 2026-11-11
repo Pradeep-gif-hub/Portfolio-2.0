@@ -59,7 +59,7 @@ export const BlogPreview: React.FC = () => {
             variants={itemVariants}
           >
             <Link to={`/blog/${post.slug}`} className="block h-full">
-              <article className="bg-theme-surface border border-theme-border rounded-[10px] p-6 card-hover shadow-card group cursor-pointer h-full">
+              <article className="surface-card p-6 card-hover card-accent-hover group h-full">
                 <div className="flex items-center justify-between mb-3">
                   <Badge variant="dark">
                     {new Date(post.date).toLocaleDateString("en-US", {

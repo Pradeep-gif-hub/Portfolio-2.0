@@ -233,7 +233,7 @@ export const AdminProjects = () => {
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
@@ -247,7 +247,7 @@ export const AdminProjects = () => {
               {filteredProjects.map((project) => (
                 <div
                   key={project._id}
-                  className="bg-theme-surface rounded-[10px] overflow-hidden hover:border-theme-muted border border-theme-border shadow-card transition-colors"
+                  className="surface-card overflow-hidden hover:border-theme-accent/70 transition-colors"
                 >
                   <div className="relative h-48 bg-theme-subtle border-b border-theme-border">
                     <img 
@@ -354,7 +354,7 @@ export const AdminProjects = () => {
                 initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 12 }}
-                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-card"
+                className="surface-card p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="heading-3">
@@ -375,7 +375,7 @@ export const AdminProjects = () => {
                       type="text"
                       value={formData.title}
                       onChange={(e) => handleInputChange('title', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                   </div>
@@ -385,7 +385,7 @@ export const AdminProjects = () => {
                     <textarea
                       value={formData.description}
                       onChange={(e) => handleInputChange('description', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       rows={3}
                       required
                     />
@@ -397,7 +397,7 @@ export const AdminProjects = () => {
                       value={featuresInput}
                       onChange={(e) => setFeaturesInput(e.target.value)}
                       placeholder="Real-time messaging&#10;User authentication&#10;File sharing"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg font-mono text-sm text-theme-text"
                       rows={5}
                     />
                   </div>
@@ -409,7 +409,7 @@ export const AdminProjects = () => {
                       value={techInput}
                       onChange={(e) => setTechInput(e.target.value)}
                       placeholder="React, Node.js, MongoDB, Socket.io"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -421,7 +421,7 @@ export const AdminProjects = () => {
                         value={formData.github}
                         onChange={(e) => handleInputChange('github', e.target.value)}
                         placeholder="https://github.com/..."
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -432,7 +432,7 @@ export const AdminProjects = () => {
                         value={formData.live}
                         onChange={(e) => handleInputChange('live', e.target.value)}
                         placeholder="https://..."
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -445,7 +445,7 @@ export const AdminProjects = () => {
                       value={formData.image}
                       onChange={(e) => handleInputChange('image', e.target.value)}
                       placeholder="https://i.ibb.co/..."
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                     <p className="text-xs text-theme-muted mt-1">Upload to ImgBB and paste direct link</p>
@@ -458,7 +458,7 @@ export const AdminProjects = () => {
                       value={formData.timeline || ''}
                       onChange={(e) => handleInputChange('timeline', e.target.value)}
                       placeholder="January 2024 - March 2024"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -476,7 +476,7 @@ export const AdminProjects = () => {
                         value={contributorName}
                         onChange={(e) => setContributorName(e.target.value)}
                         placeholder="Contributor Name"
-                        className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-sm text-theme-text"
                       />
                       <div className="grid grid-cols-2 gap-3">
                         <input
@@ -484,14 +484,14 @@ export const AdminProjects = () => {
                           value={contributorGithub}
                           onChange={(e) => setContributorGithub(e.target.value)}
                           placeholder="GitHub URL (optional)"
-                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
+                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-sm text-theme-text"
                         />
                         <input
                           type="url"
                           value={contributorLinkedin}
                           onChange={(e) => setContributorLinkedin(e.target.value)}
                           placeholder="LinkedIn URL (optional)"
-                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
+                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-sm text-theme-text"
                         />
                       </div>
                       <button
@@ -548,7 +548,7 @@ export const AdminProjects = () => {
                       <select
                         value={formData.status}
                         onChange={(e) => handleInputChange('status', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       >
                         <option value="completed">Completed</option>
                         <option value="in-progress">In Progress</option>

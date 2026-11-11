@@ -100,7 +100,7 @@ export const Hero: React.FC = () => {
               variants={item}
               className="flex-shrink-0"
             >
-              <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-2xl overflow-hidden border border-theme-border bg-theme-surface shadow-card">
+              <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-2xl overflow-hidden border border-theme-border-strong bg-theme-surface shadow-card">
                 <img
                   src={settings.profileImage || '/profile.jpg'}
                   alt={settings.fullName}

@@ -151,7 +151,7 @@ export const ExploringPage = () => {
             <div className="h-4 bg-theme-subtle rounded w-2/3 mb-8"></div>
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-20 bg-theme-surface border border-theme-border rounded-[10px]"></div>
+                <div key={i} className="h-20 surface-card"></div>
               ))}
             </div>
           </div>
@@ -180,7 +180,7 @@ export const ExploringPage = () => {
         </motion.div>
 
         {items.length === 0 ? (
-          <div className="bg-theme-surface p-10 rounded-[10px] border border-theme-border shadow-card text-center">
+          <div className="surface-card p-10 text-center">
             <p className="text-theme-muted text-base">
               No areas of exploration at the moment.
             </p>
@@ -190,7 +190,7 @@ export const ExploringPage = () => {
             {items.map((item) => (
               <div
                 key={item._id}
-                className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+                className="surface-card p-6 card-hover"
               >
                 <h2 className="heading-4 mb-2 text-theme-text">
                   {item.title}

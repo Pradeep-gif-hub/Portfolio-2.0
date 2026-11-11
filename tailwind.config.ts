@@ -49,6 +49,7 @@ export default {
           text: "rgb(var(--text-rgb) / <alpha-value>)",
           muted: "rgb(var(--text-muted-rgb) / <alpha-value>)",
           border: "rgb(var(--border-rgb) / <alpha-value>)",
+          "border-strong": "rgb(var(--border-strong-rgb) / <alpha-value>)",
           accent: "rgb(var(--accent-rgb) / <alpha-value>)",
           "accent-hover": "rgb(var(--accent-hover-rgb) / <alpha-value>)",
           "accent-soft": "rgb(var(--accent-soft-rgb) / <alpha-value>)",
@@ -84,8 +85,8 @@ export default {
         container: "1000px",
       },
       boxShadow: {
-        card: "0 1px 2px rgba(0, 0, 0, 0.04)",
-        "card-hover": "0 2px 6px rgba(0, 0, 0, 0.06)",
+        card: "inset 0 1px 0 var(--card-inset), 0 0 0 1px var(--outline-glow-soft)",
+        "card-hover": "0 8px 24px var(--outline-glow)",
       },
       animation: {
         fadeIn: "fadeIn 0.25s ease-out",

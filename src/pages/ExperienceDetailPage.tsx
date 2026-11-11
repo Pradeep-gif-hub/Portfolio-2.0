@@ -63,15 +63,15 @@ const ExperienceDetailPage = () => {
             
             {/* Content grid skeleton */}
             <div className="grid lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 bg-theme-surface border border-theme-border rounded-[10px] p-6 space-y-3">
+              <div className="lg:col-span-2 surface-card p-6 space-y-3">
                 <div className="h-6 bg-theme-subtle rounded w-64 mb-4"></div>
                 <div className="h-4 bg-theme-subtle rounded"></div>
                 <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
                 <div className="h-4 bg-theme-subtle rounded w-10/12"></div>
               </div>
               <div className="space-y-6">
-                <div className="h-28 bg-theme-surface border border-theme-border rounded-[10px]"></div>
-                <div className="h-28 bg-theme-surface border border-theme-border rounded-[10px]"></div>
+                <div className="h-28 surface-card"></div>
+                <div className="h-28 surface-card"></div>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@ const ExperienceDetailPage = () => {
             transition={{ duration: 0.25 }}
             className="lg:col-span-2"
           >
-            <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card">
+            <div className="surface-card p-6 md:p-8">
               <h3 className="heading-3 mb-5">Responsibilities & Achievements</h3>
               <ul className="space-y-3">
                 {job.points.map((point, i) => (
@@ -163,13 +163,13 @@ const ExperienceDetailPage = () => {
             className="space-y-6"
           >
             {/* Company */}
-            <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card">
+            <div className="surface-card p-6">
               <h4 className="heading-4 mb-2">Organization</h4>
               <p className="text-theme-muted text-sm font-medium">{job.company}</p>
             </div>
 
             {/* Duration */}
-            <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card">
+            <div className="surface-card p-6">
               <h4 className="heading-4 mb-2">Duration</h4>
               <p className="text-theme-muted text-sm font-mono">{job.duration}</p>
             </div>
@@ -181,7 +181,7 @@ const ExperienceDetailPage = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card"
+          className="surface-card p-6 md:p-8"
         >
           <h3 className="heading-3 mb-5 flex items-center gap-2">
             <Code2 size={20} className="text-theme-accent" />
@@ -191,7 +191,7 @@ const ExperienceDetailPage = () => {
             {job.techStack.map((tech, idx) => (
               <div
                 key={idx}
-                className="flex items-center gap-2 px-3.5 py-1.5 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
+                className="flex items-center gap-2 px-3.5 py-1.5 bg-theme-accent-soft border border-theme-border-strong rounded-[999px] text-xs font-medium text-theme-accent"
               >
                 <img src={getTechLogo(tech)} alt={tech} className="w-4 h-4 object-contain" />
                 <span>{tech}</span>

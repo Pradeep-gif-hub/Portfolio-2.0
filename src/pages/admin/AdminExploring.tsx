@@ -403,7 +403,7 @@ export const AdminExploring = () => {
         placeholder="Search exploring items..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text placeholder:text-theme-muted"
+        className="w-full pl-10 pr-4 py-2.5 bg-theme-subtle border border-theme-border-strong rounded-lg focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:outline-none text-theme-text placeholder:text-theme-muted"
        />
       </div>
      </div>
@@ -420,7 +420,7 @@ export const AdminExploring = () => {
        {filteredItems.map((item) => (
         <div
          key={item._id}
-         className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+         className="surface-card p-6 hover:border-theme-accent/70 transition-colors"
         >
          <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -508,7 +508,7 @@ export const AdminExploring = () => {
              type="text"
              value={formData.title}
              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
+             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border-strong rounded-lg focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:outline-none text-theme-text"
              placeholder="e.g., Natural Language Processing"
              required
             />
@@ -521,7 +521,7 @@ export const AdminExploring = () => {
             <textarea
              value={formData.description}
              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
+             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border-strong rounded-lg focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:outline-none text-theme-text"
              placeholder="Optional: Brief description of what you're exploring"
              rows={2}
             />
@@ -534,7 +534,7 @@ export const AdminExploring = () => {
               type="number"
               value={formData.order}
               onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-              className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
+              className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border-strong rounded-lg focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:outline-none text-theme-text"
               min="1"
              />
              <p className="text-xs text-theme-muted mt-1">Lower numbers appear first</p>

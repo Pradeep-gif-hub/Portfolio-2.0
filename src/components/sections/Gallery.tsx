@@ -70,7 +70,7 @@ export const Gallery: React.FC = () => {
           <motion.div
             key={item.id}
             variants={itemVariants}
-            className="relative overflow-hidden rounded-[10px] border border-theme-border shadow-card card-hover cursor-pointer group h-64"
+            className="surface-card card-hover card-accent-hover group h-64"
             onClick={() => setSelectedIndex(index)}
           >
             <img
@@ -113,12 +113,12 @@ export const Gallery: React.FC = () => {
             <img
               src={gallery[selectedIndex].image}
               alt={gallery[selectedIndex].alt}
-              className="max-w-full max-h-[85vh] object-contain rounded-[10px]"
+              className="max-w-full max-h-[85vh] object-contain rounded-[12px]"
             />
             <button
               aria-label="Close image viewer"
               onClick={() => setSelectedIndex(null)}
-              className="absolute top-4 right-4 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+              className="absolute top-4 right-4 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
             >
               <X size={20} />
             </button>
@@ -127,14 +127,14 @@ export const Gallery: React.FC = () => {
                 <button
                   aria-label="Previous image"
                   onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
-                  className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+                  className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   aria-label="Next image"
                   onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
-                  className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+                  className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
                 >
                   <ChevronRight size={24} />
                 </button>

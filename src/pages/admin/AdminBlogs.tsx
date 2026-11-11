@@ -173,7 +173,7 @@ export const AdminBlogs = () => {
               placeholder="Search blogs..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
@@ -187,7 +187,7 @@ export const AdminBlogs = () => {
               {filteredBlogs.map((blog) => (
                 <div
                   key={blog._id}
-                  className="bg-theme-surface p-5 sm:p-6 rounded-[10px] hover:border-theme-muted border border-theme-border shadow-card transition-colors"
+                  className="surface-card p-5 sm:p-6 hover:border-theme-accent/70 transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                     <div className="flex-1 min-w-0">
@@ -241,7 +241,7 @@ export const AdminBlogs = () => {
                 initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 12 }}
-                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-card"
+                className="surface-card p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="heading-3">
@@ -263,7 +263,7 @@ export const AdminBlogs = () => {
                         type="text"
                         value={formData.title}
                         onChange={(e) => handleInputChange('title', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -273,7 +273,7 @@ export const AdminBlogs = () => {
                         type="text"
                         value={formData.slug}
                         onChange={(e) => handleInputChange('slug', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -284,7 +284,7 @@ export const AdminBlogs = () => {
                     <textarea
                       value={formData.summary}
                       onChange={(e) => handleInputChange('summary', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       rows={2}
                       required
                     />
@@ -296,7 +296,7 @@ export const AdminBlogs = () => {
                       type="text"
                       value={formData.tldr}
                       onChange={(e) => handleInputChange('tldr', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                   </div>
@@ -306,7 +306,7 @@ export const AdminBlogs = () => {
                     <textarea
                       value={formData.content}
                       onChange={(e) => handleInputChange('content', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg font-mono text-sm text-theme-text"
                       rows={10}
                       required
                     />
@@ -319,7 +319,7 @@ export const AdminBlogs = () => {
                         type="text"
                         value={formData.author}
                         onChange={(e) => handleInputChange('author', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -329,7 +329,7 @@ export const AdminBlogs = () => {
                         type="number"
                         value={formData.readTime}
                         onChange={(e) => handleInputChange('readTime', parseInt(e.target.value))}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         min="1"
                       />
                     </div>
@@ -341,7 +341,7 @@ export const AdminBlogs = () => {
                       type="text"
                       value={tagsInput}
                       onChange={(e) => setTagsInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       placeholder="React, TypeScript, Web Development"
                     />
                   </div>
@@ -352,7 +352,7 @@ export const AdminBlogs = () => {
                       type="text"
                       value={takeawaysInput}
                       onChange={(e) => setTakeawaysInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       placeholder="Learning point 1, Learning point 2"
                     />
                   </div>
@@ -364,7 +364,7 @@ export const AdminBlogs = () => {
                         type="text"
                         value={formData.metaTitle}
                         onChange={(e) => handleInputChange('metaTitle', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -374,7 +374,7 @@ export const AdminBlogs = () => {
                         type="url"
                         value={formData.canonicalUrl}
                         onChange={(e) => handleInputChange('canonicalUrl', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -385,7 +385,7 @@ export const AdminBlogs = () => {
                     <textarea
                       value={formData.metaDescription}
                       onChange={(e) => handleInputChange('metaDescription', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       rows={2}
                       required
                     />

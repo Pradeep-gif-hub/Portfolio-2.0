@@ -153,7 +153,7 @@ export const AdminCertifications = () => {
               placeholder="Search certifications..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
@@ -167,7 +167,7 @@ export const AdminCertifications = () => {
               {filteredCerts.map((cert) => (
                 <div
                   key={cert._id}
-                  className="bg-theme-surface p-6 rounded-[10px] hover:border-theme-muted border border-theme-border shadow-card transition-colors"
+                  className="surface-card p-6 hover:border-theme-accent/70 transition-colors"
                 >
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
@@ -255,7 +255,7 @@ export const AdminCertifications = () => {
                 initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 12 }}
-                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-card"
+                className="surface-card p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="heading-3">
@@ -276,7 +276,7 @@ export const AdminCertifications = () => {
                       type="text"
                       value={formData.title}
                       onChange={(e) => handleInputChange('title', e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                   </div>
@@ -288,7 +288,7 @@ export const AdminCertifications = () => {
                         type="text"
                         value={formData.issuer}
                         onChange={(e) => handleInputChange('issuer', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -298,7 +298,7 @@ export const AdminCertifications = () => {
                         type="number"
                         value={formData.year}
                         onChange={(e) => handleInputChange('year', parseInt(e.target.value))}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         min="1990"
                         max={new Date().getFullYear() + 1}
                         required
@@ -314,7 +314,7 @@ export const AdminCertifications = () => {
                         value={formData.month || ''}
                         onChange={(e) => handleInputChange('month', e.target.value)}
                         placeholder="e.g., January"
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       />
                     </div>
                     <div>
@@ -324,7 +324,7 @@ export const AdminCertifications = () => {
                         value={formData.duration || ''}
                         onChange={(e) => handleInputChange('duration', e.target.value)}
                         placeholder="e.g., 3 months"
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       />
                     </div>
                   </div>
@@ -336,7 +336,7 @@ export const AdminCertifications = () => {
                       value={formData.link || ''}
                       onChange={(e) => handleInputChange('link', e.target.value)}
                       placeholder="https://..."
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -347,7 +347,7 @@ export const AdminCertifications = () => {
                       value={formData.image || ''}
                       onChange={(e) => handleInputChange('image', e.target.value)}
                       placeholder="https://i.ibb.co/..."
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                     <p className="text-xs text-theme-muted mt-1">Upload to ImgBB and paste direct link</p>
                   </div>
@@ -359,7 +359,7 @@ export const AdminCertifications = () => {
                       value={skillsInput}
                       onChange={(e) => setSkillsInput(e.target.value)}
                       placeholder="React, Node.js, MongoDB"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -369,7 +369,7 @@ export const AdminCertifications = () => {
                       <select
                         value={formData.difficulty}
                         onChange={(e) => handleInputChange('difficulty', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       >
                         <option value="Beginner">Beginner</option>
                         <option value="Intermediate">Intermediate</option>

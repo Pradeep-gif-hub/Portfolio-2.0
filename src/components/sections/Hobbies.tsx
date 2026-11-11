@@ -56,7 +56,7 @@ export const Hobbies: React.FC = () => {
             <motion.div
               key={hobby.id}
               variants={itemVariants}
-              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 text-center group cursor-pointer card-hover shadow-card"
+              className="surface-card p-6 text-center group card-hover"
             >
               <div className="flex justify-center mb-4">
                 <div className="w-12 h-12 bg-theme-accent-soft rounded-lg flex items-center justify-center text-theme-accent">

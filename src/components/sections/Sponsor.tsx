@@ -15,7 +15,7 @@ export const Sponsor: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="max-w-2xl mx-auto"
       >
-        <div className="bg-theme-surface border border-theme-border rounded-[10px] p-8 md:p-10 text-center shadow-card">
+        <div className="surface-card p-8 md:p-10 text-center">
           <div className="flex justify-center mb-5">
             <Heart
               size={28}

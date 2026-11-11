@@ -82,7 +82,7 @@ export const Certifications: React.FC = () => {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card animate-pulse">
+            <div key={i} className="surface-card p-6 animate-pulse">
               <div className="mb-4 rounded-lg bg-theme-subtle h-28"></div>
               <div className="space-y-3">
                 <div className="h-5 bg-theme-subtle rounded w-3/4"></div>
@@ -114,7 +114,7 @@ export const Certifications: React.FC = () => {
               className="h-full"
             >
               <Link to={`/certification/${cert._id}`} className="block h-full">
-                <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 group cursor-pointer card-hover shadow-card h-full flex flex-col justify-between">
+                <div className="surface-card p-6 group card-hover card-accent-hover h-full flex flex-col justify-between">
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-2">
                       <h3 className="heading-4 mb-1 group-hover:text-theme-accent transition-colors line-clamp-2">
@@ -128,7 +128,7 @@ export const Certifications: React.FC = () => {
                     <p className="text-theme-muted text-sm mb-3">{cert.issuer}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {cert.skills.slice(0, 2).map((skill, idx) => (
-                        <span key={idx} className="text-xs px-2.5 py-0.5 bg-theme-accent-soft text-theme-accent rounded-full font-medium">
+                        <span key={idx} className="text-xs px-2.5 py-0.5 bg-theme-accent-soft border border-theme-border-strong text-theme-accent rounded-[999px] font-medium">
                           {skill}
                         </span>
                       ))}

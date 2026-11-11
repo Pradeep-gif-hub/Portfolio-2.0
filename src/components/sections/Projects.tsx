@@ -89,7 +89,7 @@ export const Projects: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.25 }}
-        className="mb-10"
+        className="mb-12"
       >
         <h2 className="heading-2 mb-3">Featured Projects</h2>
         <p className="text-theme-muted text-base">
@@ -101,30 +101,30 @@ export const Projects: React.FC = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="space-y-6 mb-10"
+        className="space-y-6 md:space-y-8 mb-12"
       >
         {loading ? (
-          <div className="space-y-6">
+          <div className="space-y-6 md:space-y-8">
             {[1, 2].map((i) => (
-              <div key={i} className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card animate-pulse">
-                <div className="flex flex-col md:flex-row">
-                  <div className="md:w-2/5 h-60 md:h-[400px] bg-theme-subtle"></div>
-                  <div className="md:w-3/5 p-6 space-y-4">
+              <div key={i} className="surface-card overflow-hidden animate-pulse">
+                <div className="flex flex-col md:flex-row gap-5 md:gap-10 p-5 md:p-8">
+                  <div className="md:w-2/5 h-60 md:h-[340px] bg-theme-subtle rounded-lg border border-theme-border-strong"></div>
+                  <div className="md:w-3/5 space-y-4">
                     <div className="flex justify-between">
                       <div className="h-7 bg-theme-subtle rounded w-2/3"></div>
                       <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
                     </div>
                     <div className="h-4 bg-theme-subtle rounded w-full"></div>
                     <div className="h-4 bg-theme-subtle rounded w-5/6"></div>
-                    <div className="space-y-2">
+                    <div className="space-y-2 pt-2">
                       <div className="h-3 bg-theme-subtle rounded w-3/4"></div>
                       <div className="h-3 bg-theme-subtle rounded w-2/3"></div>
                       <div className="h-3 bg-theme-subtle rounded w-4/5"></div>
                     </div>
-                    <div className="flex gap-2">
-                      <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
-                      <div className="h-7 bg-theme-subtle rounded-full w-24"></div>
-                      <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
+                    <div className="flex flex-wrap gap-x-2 gap-y-3 pt-2">
+                      <div className="h-7 bg-theme-subtle rounded-[999px] w-20"></div>
+                      <div className="h-7 bg-theme-subtle rounded-[999px] w-24"></div>
+                      <div className="h-7 bg-theme-subtle rounded-[999px] w-20"></div>
                     </div>
                   </div>
                 </div>
@@ -147,10 +147,10 @@ export const Projects: React.FC = () => {
               return (
                 <motion.div key={project._id} variants={itemVariants}>
                   <Link to={`/project/${project._id}`}>
-                <div className="group bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card card-hover relative">
-                  <div className="flex flex-col md:flex-row">
+                <div className="group surface-card card-hover card-accent-featured relative">
+                  <div className="flex flex-col md:flex-row gap-5 md:gap-10 p-5 md:p-8">
                     {/* Image Section */}
-                    <div className="md:w-2/5 relative overflow-hidden h-60 md:h-auto md:min-h-[380px] flex-shrink-0 border-b md:border-b-0 md:border-r border-theme-border bg-theme-subtle">
+                    <div className="md:w-2/5 relative overflow-hidden h-60 md:h-auto md:min-h-[340px] flex-shrink-0 rounded-lg border border-theme-border-strong bg-theme-subtle">
                       <img
                         src={project.image}
                         alt={project.title}
@@ -159,30 +159,30 @@ export const Projects: React.FC = () => {
                     </div>
 
                     {/* Details Section */}
-                    <div className="md:w-3/5 p-6 flex flex-col justify-between">
+                    <div className="md:w-3/5 flex flex-col justify-between">
                       <div>
                         <div className="flex items-start justify-between gap-3 mb-3">
                           <h3 className="heading-3 group-hover:text-theme-accent transition-colors">
                             {project.title}
                           </h3>
                           <span
-                            className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${status.color} whitespace-nowrap`}
+                            className={`px-2.5 py-0.5 rounded-[999px] text-xs font-medium border ${status.color} whitespace-nowrap`}
                           >
                             {status.label}
                           </span>
                         </div>
 
-                        <p className="text-theme-muted text-sm mb-4 line-clamp-2 leading-relaxed">
+                        <p className="text-theme-muted text-sm mb-6 line-clamp-2 leading-[1.7]">
                           {project.description}
                         </p>
 
                         {/* Key Features - Point wise (max 4) */}
-                        <div className="mb-4">
+                        <div className="mb-6">
                           <h4 className="text-sm font-semibold text-theme-text mb-2.5 flex items-center gap-2">
                             <CheckCircle2 size={15} className="text-theme-accent" />
                             Key Features
                           </h4>
-                          <ul className="space-y-1.5">
+                          <ul className="space-y-2">
                             {displayFeatures.map((feature, idx) => (
                               <li
                                 key={idx}
@@ -206,11 +206,11 @@ export const Projects: React.FC = () => {
                           <h4 className="text-sm font-semibold text-theme-text mb-2.5">
                             Technologies
                           </h4>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-x-2 gap-y-3">
                             {displayTech.map((tech) => (
                               <div
                                 key={tech}
-                                className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
+                                className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft border border-theme-border-strong rounded-[999px] text-xs font-medium text-theme-accent"
                               >
                                 <img src={getTechLogo(tech)} alt={tech} className="w-3.5 h-3.5 object-contain" />
                                 <span>
@@ -219,7 +219,7 @@ export const Projects: React.FC = () => {
                               </div>
                             ))}
                             {remainingTech > 0 && (
-                              <div className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft rounded-full">
+                              <div className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft border border-theme-border-strong rounded-[999px]">
                                 <span className="text-xs text-theme-accent font-medium">
                                   +{remainingTech} more
                                 </span>

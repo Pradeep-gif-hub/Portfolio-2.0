@@ -518,7 +518,7 @@ export const AdminPlaces = () => {
                 placeholder="Search place, city, or country..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+                className="w-full pl-10 pr-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
               />
             </div>
 
@@ -582,7 +582,7 @@ export const AdminPlaces = () => {
                 return (
                   <div
                     key={item._id || item.name}
-                    className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border hover:border-theme-muted shadow-card transition-colors flex flex-col justify-between"
+                    className="surface-card overflow-hidden hover:border-theme-accent/70 transition-colors flex flex-col justify-between"
                   >
                     <div>
                       {/* Image / Fallback */}
@@ -769,7 +769,7 @@ export const AdminPlaces = () => {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="e.g., Eiffel Tower or Manali"
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                             required
                           />
                         </div>
@@ -780,7 +780,7 @@ export const AdminPlaces = () => {
                             value={formData.city}
                             onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                             placeholder="e.g., Paris or Kullu"
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                             required
                           />
                         </div>
@@ -791,7 +791,7 @@ export const AdminPlaces = () => {
                             value={formData.country}
                             onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                             placeholder="e.g., France or India"
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                             required
                           />
                         </div>
@@ -816,7 +816,7 @@ export const AdminPlaces = () => {
                                 updateMapPosition(numLng, numLat);
                               }
                             }}
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                             required
                           />
                         </div>
@@ -837,7 +837,7 @@ export const AdminPlaces = () => {
                                 updateMapPosition(numLng, numLat);
                               }
                             }}
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                             required
                           />
                         </div>
@@ -850,7 +850,7 @@ export const AdminPlaces = () => {
                           <select
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           >
                             {CATEGORIES.map((cat) => (
                               <option key={cat} value={cat}>
@@ -868,7 +868,7 @@ export const AdminPlaces = () => {
                               setFormData({ ...formData, visitedDate: e.target.value })
                             }
                             placeholder="e.g. October 2023 or 2024"
-                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           />
                         </div>
                       </div>
@@ -891,7 +891,7 @@ export const AdminPlaces = () => {
                           value={formData.image}
                           onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                           placeholder="https://example.com/place.jpg (Optional - falls back to Wikipedia automatically)"
-                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         />
                         {formData.image && (
                           <div className="mt-3 relative rounded-[10px] overflow-hidden h-40 border border-theme-border bg-theme-subtle">
@@ -921,7 +921,7 @@ export const AdminPlaces = () => {
                           }
                           rows={2}
                           placeholder="Brief memory or note about this destination..."
-                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         />
                       </div>
 

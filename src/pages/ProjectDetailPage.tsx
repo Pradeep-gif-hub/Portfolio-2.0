@@ -72,7 +72,7 @@ const ProjectDetailPage = () => {
             <div className="h-4 bg-theme-subtle rounded w-64 mb-8"></div>
             
             {/* Hero image skeleton */}
-            <div className="relative h-[420px] bg-theme-subtle rounded-[10px] mb-10 border border-theme-border">
+            <div className="relative h-[420px] bg-theme-subtle rounded-[12px] mb-10 border border-theme-border-strong">
               <div className="absolute bottom-8 left-8 right-8">
                 <div className="h-10 bg-theme-border rounded w-3/4"></div>
               </div>
@@ -80,14 +80,14 @@ const ProjectDetailPage = () => {
             
             {/* Tech stack skeleton */}
             <div className="flex flex-wrap gap-3 justify-center mb-10">
-              <div className="h-9 bg-theme-subtle rounded-full w-24"></div>
-              <div className="h-9 bg-theme-subtle rounded-full w-28"></div>
-              <div className="h-9 bg-theme-subtle rounded-full w-20"></div>
-              <div className="h-9 bg-theme-subtle rounded-full w-32"></div>
+              <div className="h-9 bg-theme-subtle rounded-[999px] w-24"></div>
+              <div className="h-9 bg-theme-subtle rounded-[999px] w-28"></div>
+              <div className="h-9 bg-theme-subtle rounded-[999px] w-20"></div>
+              <div className="h-9 bg-theme-subtle rounded-[999px] w-32"></div>
             </div>
             
             {/* Description skeleton */}
-            <div className="bg-theme-surface p-6 rounded-[10px] border border-theme-border mb-10">
+            <div className="surface-card p-6 mb-10">
               <div className="space-y-4 mb-6">
                 <div className="h-4 bg-theme-subtle rounded"></div>
                 <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
@@ -131,7 +131,7 @@ const ProjectDetailPage = () => {
           transition={{ duration: 0.25 }}
           className="mt-6 mb-10"
         >
-          <div className="relative rounded-[10px] overflow-hidden border border-theme-border bg-theme-surface shadow-card">
+          <div className="surface-card relative overflow-hidden">
             <img
               src={project.image}
               alt={project.title}
@@ -158,7 +158,7 @@ const ProjectDetailPage = () => {
             {project.tech.map((tech) => (
               <div
                 key={tech}
-                className="flex items-center gap-2 px-3.5 py-1.5 bg-theme-accent-soft rounded-full border border-theme-border text-sm font-medium text-theme-accent"
+                className="flex items-center gap-2 px-3.5 py-1.5 bg-theme-accent-soft rounded-[999px] border border-theme-border-strong text-sm font-medium text-theme-accent"
               >
                 <img src={getTechLogo(tech)} alt={tech} className="w-4 h-4 object-contain" />
                 <span>{tech}</span>
@@ -172,7 +172,7 @@ const ProjectDetailPage = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="mb-8 bg-theme-surface p-6 md:p-8 rounded-[10px] border border-theme-border shadow-card"
+          className="mb-8 surface-card p-6 md:p-8"
         >
           <p className="text-base text-theme-text leading-relaxed mb-4">
             {project.description}
@@ -214,7 +214,7 @@ const ProjectDetailPage = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
+            className="surface-card p-6"
           >
             <h3 className="heading-3 mb-4 flex items-center gap-2">
               <Calendar className="text-theme-accent" size={18} />
@@ -223,7 +223,7 @@ const ProjectDetailPage = () => {
             <div className="space-y-3 text-sm">
               <div className="flex justify-between items-center">
                 <span className="text-theme-muted">Status</span>
-                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+                <span className={`px-2.5 py-0.5 rounded-[999px] text-xs font-medium border ${
                   project.status === "completed"
                     ? "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60"
                     : project.status === "in-progress"
@@ -250,7 +250,7 @@ const ProjectDetailPage = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
+            className="surface-card p-6"
           >
             <h3 className="heading-3 mb-4 flex items-center gap-2">
               <Users className="text-theme-accent" size={18} />
@@ -266,9 +266,9 @@ const ProjectDetailPage = () => {
                     .toUpperCase();
                   
                   return (
-                    <div key={index} className="flex items-center justify-between p-3 bg-theme-subtle rounded-lg border border-theme-border">
+                    <div key={index} className="flex items-center justify-between p-3 bg-theme-subtle rounded-lg border border-theme-border-strong/70">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-theme-accent-soft border border-theme-border flex items-center justify-center text-theme-accent font-semibold text-xs">
+                        <div className="w-9 h-9 rounded-full bg-theme-accent-soft border border-theme-border-strong flex items-center justify-center text-theme-accent font-semibold text-xs">
                           {initials}
                         </div>
                         <div>
@@ -306,12 +306,12 @@ const ProjectDetailPage = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="mb-10 bg-theme-surface p-6 md:p-8 rounded-[10px] border border-theme-border shadow-card"
+          className="mb-10 surface-card p-6 md:p-8"
         >
           <h3 className="heading-3 mb-5">Key Features</h3>
           <div className="grid md:grid-cols-2 gap-3">
             {project.keyFeatures.map((feature, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-4 bg-theme-subtle rounded-lg border border-theme-border">
+              <div key={idx} className="flex items-start gap-3 p-4 bg-theme-subtle rounded-lg border border-theme-border-strong/70">
                 <div className="w-5 h-5 rounded-full bg-theme-accent-soft flex items-center justify-center flex-shrink-0 mt-0.5">
                   <span className="text-theme-accent text-xs font-semibold">✓</span>
                 </div>
@@ -357,7 +357,7 @@ const ProjectDetailPage = () => {
             `}</style>
             {moreProjects.map((proj) => (
               <Link key={proj._id} to={`/project/${proj._id}`}>
-                <div className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card card-hover group h-full">
+                <div className="surface-card card-hover card-accent-hover group h-full">
                   <div className="relative h-44 overflow-hidden border-b border-theme-border bg-theme-subtle">
                     <img
                       src={proj.image}
@@ -365,7 +365,7 @@ const ProjectDetailPage = () => {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-3 right-3">
-                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-theme-surface text-theme-text border border-theme-border font-medium">
+                      <span className="text-xs px-2.5 py-0.5 rounded-[999px] bg-theme-surface text-theme-text border border-theme-border-strong font-medium">
                         {proj.status === "completed" ? "✓ Done" : proj.status === "in-progress" ? "🔨 Building" : "📋 Planning"}
                       </span>
                     </div>
@@ -375,13 +375,13 @@ const ProjectDetailPage = () => {
                     <p className="text-sm text-theme-muted line-clamp-2 mb-3">{proj.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {proj.tech.slice(0, 3).map((tech) => (
-                        <span key={tech} className="inline-flex items-center gap-1 text-xs px-2.5 py-0.5 bg-theme-accent-soft text-theme-accent rounded-full font-medium">
+                        <span key={tech} className="inline-flex items-center gap-1 text-xs px-2.5 py-0.5 bg-theme-accent-soft border border-theme-border-strong text-theme-accent rounded-[999px] font-medium">
                           <img src={getTechLogo(tech)} alt={tech} className="w-3 h-3 object-contain" />
                           {tech}
                         </span>
                       ))}
                       {proj.tech.length > 3 && (
-                        <span className="text-xs px-2.5 py-0.5 bg-theme-subtle rounded-full border border-theme-border text-theme-muted">
+                        <span className="text-xs px-2.5 py-0.5 bg-theme-subtle rounded-[999px] border border-theme-border-strong text-theme-muted">
                           +{proj.tech.length - 3}
                         </span>
                       )}

@@ -13,8 +13,8 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <div
-      className={`bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card ${
-        hoverable ? "card-hover cursor-pointer" : ""
+      className={`surface-card p-6 ${
+        hoverable ? "card-hover" : ""
       } ${className}`}
     >
       {children}

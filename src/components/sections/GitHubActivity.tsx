@@ -46,8 +46,8 @@ export const GitHubActivity: React.FC = () => {
             </div>
             <div className="h-5 bg-theme-subtle rounded w-64"></div>
           </div>
-          <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card">
-            <div className="bg-theme-subtle p-4 rounded-lg">
+          <div className="surface-card p-6">
+            <div className="bg-theme-subtle border border-theme-border-strong/65 p-4 rounded-lg">
               <div className="h-32 bg-theme-border/40 rounded"></div>
             </div>
             <div className="mt-4 flex justify-between">
@@ -74,7 +74,7 @@ export const GitHubActivity: React.FC = () => {
 
         {/* Contributions calendar */}
         {showCalendar && (
-          <Card className="mt-8 p-6 bg-theme-surface border-theme-border">
+          <Card className="mt-8 p-6">
             <a 
               href={`https://github.com/${username}`} 
               target="_blank" 
@@ -83,7 +83,7 @@ export const GitHubActivity: React.FC = () => {
             >
               <div className="flex flex-col">
                 {/* Calendar Image - Scrollable on mobile */}
-                <div className="bg-theme-subtle border border-theme-border p-4 rounded-lg overflow-x-auto scrollbar-thin">
+                <div className="bg-theme-subtle border border-theme-border-strong/65 p-4 rounded-lg overflow-x-auto scrollbar-thin">
                   <style>{`
                     .scrollbar-thin::-webkit-scrollbar {
                       height: 6px;

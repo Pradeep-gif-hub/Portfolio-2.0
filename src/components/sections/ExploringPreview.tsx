@@ -46,7 +46,7 @@ export const ExploringPreview = () => {
           </div>
           <div className="space-y-4 mb-10">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-theme-surface p-5 rounded-[10px] border border-theme-border shadow-card">
+              <div key={i} className="surface-card p-5">
                 <div className="flex items-start gap-3">
                   <div className="w-5 h-5 bg-theme-subtle rounded mt-0.5"></div>
                   <div className="h-5 bg-theme-subtle rounded w-3/4"></div>
@@ -97,7 +97,7 @@ export const ExploringPreview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.2, delay: index * 0.05 }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 hover:border-theme-accent/70 transition-colors"
             >
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="text-theme-accent mt-0.5 flex-shrink-0" size={18} />

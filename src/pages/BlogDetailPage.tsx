@@ -133,7 +133,7 @@ const BlogDetailPage = () => {
                   )}
                 </button>
               </div>
-              <div className="bg-theme-subtle border border-theme-border rounded-[10px] p-5 overflow-x-auto">
+              <div className="bg-theme-subtle border border-theme-border-strong rounded-[12px] p-5 overflow-x-auto">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xs text-theme-muted font-mono">
                     {language}
@@ -242,13 +242,13 @@ const BlogDetailPage = () => {
 
           {/* Main Content */}
           <div className="prose prose-neutral dark:prose-invert max-w-none mb-10">
-            <div className="bg-theme-surface border border-theme-border p-6 md:p-10 rounded-[10px] shadow-card">
+            <div className="surface-card p-6 md:p-10">
               {renderContent(blog.content)}
             </div>
           </div>
 
           {/* Key Takeaways */}
-          <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-8">
+          <div className="surface-card p-6 md:p-8 mb-8">
             <h2 className="heading-3 mb-5">
               🎯 Key Takeaways
             </h2>
@@ -266,7 +266,7 @@ const BlogDetailPage = () => {
           </div>
 
           {/* TL;DR Section */}
-          <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card mb-8 border-l-4 border-l-theme-accent">
+          <div className="surface-card p-6 mb-8 border-l-4 border-l-theme-accent">
             <h2 className="text-base font-semibold mb-2 text-theme-accent flex items-center gap-2">
               <span className="text-lg">⚡</span> TL;DR
             </h2>
@@ -277,7 +277,7 @@ const BlogDetailPage = () => {
 
           {/* References */}
           {blog.references.length > 0 && (
-            <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-8">
+            <div className="surface-card p-6 md:p-8 mb-8">
               <h2 className="heading-3 mb-5">
                 📚 References & Further Reading
               </h2>
@@ -300,9 +300,9 @@ const BlogDetailPage = () => {
           )}
 
           {/* Author Section */}
-          <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-10">
+          <div className="surface-card p-6 md:p-8 mb-10">
             <div className="flex items-start gap-5">
-              <div className="w-16 h-16 rounded-full bg-theme-accent-soft border border-theme-border flex items-center justify-center text-lg font-semibold text-theme-accent flex-shrink-0">
+              <div className="w-16 h-16 rounded-full bg-theme-accent-soft border border-theme-border-strong flex items-center justify-center text-lg font-semibold text-theme-accent flex-shrink-0">
                 {blog.author.split(' ').map(n => n[0]).join('')}
               </div>
               <div>

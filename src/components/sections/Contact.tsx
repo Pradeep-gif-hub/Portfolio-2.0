@@ -92,7 +92,7 @@ export const Contact: React.FC = () => {
               <div className="h-11 bg-theme-subtle rounded-lg w-44"></div>
             </div>
           </div>
-          <div className="h-96 bg-theme-subtle border border-theme-border rounded-[10px]"></div>
+          <div className="h-96 surface-card"></div>
         </div>
       ) : (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -187,7 +187,7 @@ export const Contact: React.FC = () => {
                 left: '20%',
                 transform: 'rotate(-8deg)',
               }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 card-hover"
               title="GitHub"
             >
               <Github size={28} className="text-theme-accent" />
@@ -209,7 +209,7 @@ export const Contact: React.FC = () => {
                 left: '70%',
                 transform: 'rotate(8deg)',
               }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 card-hover"
               title="LinkedIn"
             >
               <Linkedin size={28} className="text-theme-accent" />
@@ -231,7 +231,7 @@ export const Contact: React.FC = () => {
                 left: '15%',
                 transform: 'rotate(6deg)',
               }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 card-hover"
               title="Twitter"
             >
               <Twitter size={28} className="text-theme-accent" />
@@ -253,7 +253,7 @@ export const Contact: React.FC = () => {
                 left: '65%',
                 transform: 'rotate(-6deg)',
               }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 card-hover"
               title="Email"
             >
               <Mail size={28} className="text-theme-accent" />
@@ -275,7 +275,7 @@ export const Contact: React.FC = () => {
                 top: '45%',
                 left: '45%',
               }}
-              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              className="surface-card p-5 card-hover"
               title="Buy Me a Coffee"
             >
               <Coffee size={28} className="text-theme-accent" />

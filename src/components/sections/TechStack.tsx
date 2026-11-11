@@ -43,12 +43,12 @@ export const TechStack: React.FC = () => {
           <div className="space-y-4">
             <div className="flex gap-4 overflow-hidden">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border rounded-[10px] flex-shrink-0"></div>
+                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border-strong rounded-[999px] flex-shrink-0"></div>
               ))}
             </div>
             <div className="flex gap-4 overflow-hidden">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border rounded-[10px] flex-shrink-0"></div>
+                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border-strong rounded-[999px] flex-shrink-0"></div>
               ))}
             </div>
           </div>
@@ -120,10 +120,10 @@ export const TechStack: React.FC = () => {
               {duplicatedAllTools.map((tool, index) => (
                 <div
                   key={`desktop-back-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-theme-subtle rounded-[10px] border border-theme-border whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-subtle rounded-[999px] border border-theme-border-strong hover:border-theme-accent transition-colors whitespace-nowrap group"
                 >
                   <img src={tool.logo} alt={tool.name} className="w-5 h-5 object-contain flex-shrink-0" />
-                  <span className="font-medium text-theme-muted text-xs truncate">
+                  <span className="font-medium text-theme-muted group-hover:text-theme-text transition-colors text-xs truncate">
                     {tool.name}
                   </span>
                 </div>
@@ -148,7 +148,7 @@ export const TechStack: React.FC = () => {
               {duplicatedAllTools.map((tool, index) => (
                 <div
                   key={`desktop-main-${tool.name}-${index}`}
-                  className="flex items-center gap-2.5 px-4 py-2.5 bg-theme-surface rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors whitespace-nowrap group cursor-pointer"
+                  className="flex items-center gap-2.5 px-4 py-2.5 bg-theme-surface rounded-[999px] border border-theme-border-strong hover:border-theme-accent shadow-card transition-colors whitespace-nowrap group cursor-pointer"
                   style={{
                     minWidth: "fit-content"
                   }}
@@ -158,7 +158,7 @@ export const TechStack: React.FC = () => {
                     alt={tool.name} 
                     className="w-5 h-5 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-theme-text text-sm truncate max-w-[140px]">
+                  <span className="font-medium text-theme-muted group-hover:text-theme-text transition-colors text-sm truncate max-w-[140px]">
                     {tool.name}
                   </span>
                 </div>
@@ -186,14 +186,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine1.map((tool, index) => (
                 <div
                   key={`mobile-line1-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[999px] border border-theme-border-strong hover:border-theme-accent transition-colors shadow-card whitespace-nowrap group"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
                     className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-theme-text text-xs">
+                  <span className="font-medium text-theme-muted group-hover:text-theme-text transition-colors text-xs">
                     {tool.name}
                   </span>
                 </div>
@@ -218,14 +218,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine2.map((tool, index) => (
                 <div
                   key={`mobile-line2-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[999px] border border-theme-border-strong hover:border-theme-accent transition-colors shadow-card whitespace-nowrap group"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
                     className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-theme-text text-xs">
+                  <span className="font-medium text-theme-muted group-hover:text-theme-text transition-colors text-xs">
                     {tool.name}
                   </span>
                 </div>
@@ -250,14 +250,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine3.map((tool, index) => (
                 <div
                   key={`mobile-line3-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[999px] border border-theme-border-strong hover:border-theme-accent transition-colors shadow-card whitespace-nowrap group"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
                     className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-theme-text text-xs">
+                  <span className="font-medium text-theme-muted group-hover:text-theme-text transition-colors text-xs">
                     {tool.name}
                   </span>
                 </div>

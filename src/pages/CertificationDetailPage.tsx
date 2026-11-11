@@ -69,7 +69,7 @@ const CertificationDetailPage = () => {
             </div>
             
             {/* Certificate image skeleton */}
-            <div className="aspect-video bg-theme-subtle border border-theme-border rounded-[10px] mb-10"></div>
+            <div className="aspect-video bg-theme-subtle border border-theme-border-strong rounded-[12px] mb-10"></div>
             
             {/* Skills skeleton */}
             <div className="space-y-4">
@@ -159,7 +159,7 @@ const CertificationDetailPage = () => {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25 }}
-          className="mb-10 rounded-[10px] overflow-hidden bg-theme-surface border border-theme-border shadow-card"
+          className="mb-10 surface-card overflow-hidden"
         >
           {cert.image ? (
             <div className="relative">
@@ -201,7 +201,7 @@ const CertificationDetailPage = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card"
+            className="surface-card p-6"
           >
             <h3 className="heading-3 mb-4 flex items-center gap-2">
               <Target size={20} className="text-theme-accent" />
@@ -211,7 +211,7 @@ const CertificationDetailPage = () => {
               {cert.skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
+                  className="px-3 py-1 bg-theme-accent-soft border border-theme-border-strong rounded-[999px] text-xs font-medium text-theme-accent"
                 >
                   {skill}
                 </span>
@@ -224,7 +224,7 @@ const CertificationDetailPage = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card space-y-4"
+            className="surface-card p-6 space-y-4"
           >
             <h3 className="heading-3 mb-4">Details</h3>
             <div className="space-y-3 text-sm text-theme-text">

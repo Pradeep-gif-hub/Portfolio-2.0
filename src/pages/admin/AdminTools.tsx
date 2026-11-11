@@ -188,13 +188,13 @@ export const AdminTools = () => {
                 placeholder="Search tools..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+                className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
               />
             </div>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="px-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+              className="px-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
             >
               <option>All</option>
               <option>Frontend</option>
@@ -216,7 +216,7 @@ export const AdminTools = () => {
               {filteredTools.map((tool) => (
                 <div
                   key={tool._id}
-                  className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+                  className="surface-card p-5 hover:border-theme-accent/70 transition-colors"
                 >
                   <div className="flex items-start gap-4 mb-3">
                     <img src={tool.logo} alt={tool.name} className="w-10 h-10 object-contain" onError={(e) => { e.currentTarget.src = `https://ui-avatars.com/api/?name=${tool.name}&background=1F3A34&color=fff`; }} />
@@ -282,7 +282,7 @@ export const AdminTools = () => {
                 initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 12 }}
-                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-card"
+                className="surface-card p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="heading-3">
@@ -304,7 +304,7 @@ export const AdminTools = () => {
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -313,7 +313,7 @@ export const AdminTools = () => {
                       <select
                         value={formData.category}
                         onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       >
                         <option>Frontend</option>
                         <option>Backend</option>
@@ -332,7 +332,7 @@ export const AdminTools = () => {
                       value={formData.logo}
                       onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
                       placeholder="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                     {formData.logo && (
@@ -346,7 +346,7 @@ export const AdminTools = () => {
                       <select
                         value={formData.proficiency}
                         onChange={(e) => setFormData({ ...formData, proficiency: e.target.value as any })}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       >
                         <option>Beginner</option>
                         <option>Intermediate</option>
@@ -361,7 +361,7 @@ export const AdminTools = () => {
                         value={formData.yearsOfExperience || ''}
                         onChange={(e) => setFormData({ ...formData, yearsOfExperience: parseInt(e.target.value) || 0 })}
                         min="0"
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       />
                     </div>
                   </div>
@@ -374,7 +374,7 @@ export const AdminTools = () => {
                         value={formData.order}
                         onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
                         min="0"
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       />
                     </div>
                     <div className="flex items-center pt-8">

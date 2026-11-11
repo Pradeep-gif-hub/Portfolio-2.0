@@ -138,7 +138,7 @@ export const AboutPage: React.FC = () => {
           <h1 className="heading-1 mb-8">{"< About Me />"}</h1>
 
           {/* Professional Summary */}
-          <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6">
+          <div className="surface-card p-6 md:p-8 mb-6">
             <div className="flex items-start gap-4 mb-2">
               <User size={28} className="text-theme-accent flex-shrink-0 mt-1" />
               <div>
@@ -156,7 +156,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
+              className="surface-card p-6 md:p-8"
             >
               <div className="flex items-center gap-3 mb-5">
                 <Code2 size={24} className="text-theme-accent" />
@@ -177,7 +177,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
+              className="surface-card p-6 md:p-8"
             >
               <div className="flex items-center gap-3 mb-5">
                 <Target size={24} className="text-theme-accent" />
@@ -187,7 +187,7 @@ export const AboutPage: React.FC = () => {
                 {focusAreas.map((area, idx) => (
                   <span
                     key={idx}
-                    className="px-3.5 py-1.5 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
+                    className="px-3.5 py-1.5 bg-theme-accent-soft border border-theme-border-strong rounded-[999px] text-xs font-medium text-theme-accent"
                   >
                     {area}
                   </span>
@@ -202,7 +202,7 @@ export const AboutPage: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => navigate('/links')}
-            className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 mb-6 cursor-pointer card-hover shadow-card group"
+            className="surface-card p-6 md:p-8 mb-6 card-hover group"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -224,7 +224,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6"
+              className="surface-card p-6 md:p-8 mb-6"
             >
               <div className="flex items-center gap-3 mb-5">
                 <Award size={24} className="text-theme-accent" />
@@ -234,7 +234,7 @@ export const AboutPage: React.FC = () => {
                 {settings.achievements.map((achievement, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-3 text-theme-muted text-sm p-3 rounded-lg bg-theme-subtle"
+                    className="flex items-start gap-3 text-theme-muted text-sm p-3 rounded-lg bg-theme-subtle border border-theme-border-strong/60"
                   >
                     <span className="text-theme-accent mt-0.5">🏆</span>
                     <span>{achievement}</span>
@@ -250,7 +250,7 @@ export const AboutPage: React.FC = () => {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6"
+              className="surface-card p-6 md:p-8 mb-6"
             >
               <div className="flex items-center gap-3 mb-5">
                 <Award size={24} className="text-theme-accent" />
@@ -263,7 +263,7 @@ export const AboutPage: React.FC = () => {
                     to={`/certification/${cert._id}`}
                     className="block group"
                   >
-                    <div className="bg-theme-subtle border border-theme-border rounded-[10px] p-4 hover:border-theme-muted transition-colors">
+                    <div className="bg-theme-subtle border border-theme-border-strong/80 rounded-[12px] p-4 hover:border-theme-accent/70 transition-colors">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <h3 className="font-semibold text-theme-text group-hover:text-theme-accent transition-colors text-sm">
                           {cert.title}
@@ -298,7 +298,7 @@ export const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.25 }}
-            className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
+            className="surface-card p-6 md:p-8"
           >
             <div className="flex items-start gap-4">
               <Code size={24} className="text-theme-accent flex-shrink-0 mt-0.5" />
@@ -310,7 +310,7 @@ export const AboutPage: React.FC = () => {
                     return (
                       <span
                         key={idx}
-                        className="px-3.5 py-1.5 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent flex items-center gap-2"
+                        className="px-3.5 py-1.5 bg-theme-accent-soft border border-theme-border-strong rounded-[999px] text-xs font-medium text-theme-accent flex items-center gap-2"
                       >
                         <Icon size={14} className="text-theme-accent" />
                         {hobby.name}

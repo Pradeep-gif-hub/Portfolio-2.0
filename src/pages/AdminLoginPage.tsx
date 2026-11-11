@@ -149,10 +149,10 @@ export const AdminLoginPage: React.FC = () => {
         transition={{ duration: 0.25 }}
         className="w-full max-w-md"
       >
-        <div className="bg-theme-surface p-8 rounded-[10px] border border-theme-border shadow-card">
+        <div className="surface-card p-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-14 h-14 bg-theme-accent-soft rounded-full mb-4">
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-theme-accent-soft border border-theme-border-strong rounded-full mb-4">
               {step === 'password' ? (
                 <Lock size={24} className="text-theme-accent" />
               ) : (
@@ -197,7 +197,7 @@ export const AdminLoginPage: React.FC = () => {
                       setPassword(e.target.value);
                       setError("");
                     }}
-                    className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent transition-colors text-theme-text placeholder:text-theme-muted pr-12"
+                    className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:border-theme-accent transition-colors text-theme-text placeholder:text-theme-muted pr-12"
                     placeholder="Enter secret key"
                     required
                     disabled={loading || otpSending}
@@ -254,7 +254,7 @@ export const AdminLoginPage: React.FC = () => {
                         setError("");
                       }
                     }}
-                    className="w-full px-4 py-2.5 pl-12 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent transition-colors text-theme-text placeholder:text-theme-muted tracking-widest font-mono text-center text-lg"
+                    className="w-full px-4 py-2.5 pl-12 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:border-theme-accent transition-colors text-theme-text placeholder:text-theme-muted tracking-widest font-mono text-center text-lg"
                     placeholder="XXXXXX"
                     required
                     disabled={loading}

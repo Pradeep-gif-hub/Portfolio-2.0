@@ -45,7 +45,7 @@ export const SpotifyNowPlaying: React.FC = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
+        className="surface-card p-6"
       >
         <div className="flex items-center gap-3 mb-3">
           <Music className="text-theme-accent" size={20} />
@@ -61,7 +61,7 @@ export const SpotifyNowPlaying: React.FC = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
+        className="surface-card p-6"
       >
         <div className="flex items-center gap-3 mb-3">
           <Music className="text-theme-muted" size={20} />
@@ -76,7 +76,7 @@ export const SpotifyNowPlaying: React.FC = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+      className="surface-card p-6 card-hover"
     >
       <div className="flex items-center gap-3 mb-4">
         <Music className="text-theme-accent" size={20} />

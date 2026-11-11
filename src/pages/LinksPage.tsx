@@ -131,7 +131,7 @@ export const LinksPage: React.FC = () => {
         {loading ? (
           <div className="space-y-3 animate-pulse">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-20 bg-theme-surface border border-theme-border rounded-[10px]"></div>
+              <div key={i} className="h-20 surface-card"></div>
             ))}
           </div>
         ) : (
@@ -142,7 +142,7 @@ export const LinksPage: React.FC = () => {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-5 rounded-[10px] bg-theme-surface border border-theme-border shadow-card card-hover"
+                className="group block p-5 surface-card card-hover"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">

@@ -93,13 +93,13 @@ export const GalleryPage: React.FC = () => {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="relative aspect-video rounded-[10px] border border-theme-border bg-theme-surface overflow-hidden animate-pulse">
+              <div key={i} className="surface-card aspect-video overflow-hidden animate-pulse">
                 <div className="w-full h-full bg-theme-subtle"></div>
               </div>
             ))}
           </div>
         ) : gallery.length === 0 ? (
-          <div className="text-center py-12 bg-theme-surface border border-theme-border rounded-[10px] shadow-card">
+          <div className="text-center py-12 surface-card">
             <p className="text-theme-muted text-base">No gallery items yet</p>
           </div>
         ) : (
@@ -113,7 +113,7 @@ export const GalleryPage: React.FC = () => {
               <motion.div
                 key={item._id}
                 variants={itemVariants}
-                className="relative aspect-video rounded-[10px] border border-theme-border overflow-hidden shadow-card card-hover cursor-pointer group"
+                className="aspect-video surface-card card-hover card-accent-hover group"
                 onClick={() => setSelectedIndex(index)}
               >
                 <img
@@ -158,12 +158,12 @@ export const GalleryPage: React.FC = () => {
               <img
                 src={gallery[selectedIndex].image}
                 alt={gallery[selectedIndex].title}
-                className="max-w-full max-h-[85vh] object-contain rounded-[10px]"
+                className="max-w-full max-h-[85vh] object-contain rounded-[12px]"
               />
               <button
                 aria-label="Close image viewer"
                 onClick={() => setSelectedIndex(null)}
-                className="absolute top-4 right-4 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+                className="absolute top-4 right-4 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
               >
                 <X size={20} />
               </button>
@@ -172,14 +172,14 @@ export const GalleryPage: React.FC = () => {
                   <button
                     aria-label="Previous image"
                     onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
-                    className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+                    className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
                   >
                     <ChevronLeft size={24} />
                   </button>
                   <button
                     aria-label="Next image"
                     onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
-                    className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
+                    className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border-strong p-2 rounded-lg hover:border-theme-accent/70 transition-colors text-theme-text"
                   >
                     <ChevronRight size={24} />
                   </button>

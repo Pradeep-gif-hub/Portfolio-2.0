@@ -78,7 +78,7 @@ export const Experience: React.FC = () => {
           <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-theme-border" />
           {[1, 2, 3].map((i) => (
             <div key={i} className="relative pl-0 md:pl-20 animate-pulse">
-              <div className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card">
+              <div className="surface-card p-6">
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="w-14 h-14 bg-theme-subtle rounded-lg flex-shrink-0"></div>
                   <div className="flex-1 space-y-3">
@@ -122,7 +122,7 @@ export const Experience: React.FC = () => {
             </div>
 
             <Link to={`/experience/${exp._id}`} className="block">
-              <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card card-hover cursor-pointer group">
+              <div className="surface-card p-6 card-hover group">
                 <div className="flex items-start gap-4 mb-4">
                   {/* Company Logo */}
                   <img 

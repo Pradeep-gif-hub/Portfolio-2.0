@@ -183,7 +183,7 @@ export const AdminGallery = () => {
           </div>
 
           {gallery.length === 0 ? (
-            <div className="bg-theme-surface border border-theme-border p-12 rounded-[10px] shadow-card text-center">
+            <div className="surface-card p-12 text-center">
               <ImageIcon size={56} className="mx-auto mb-4 text-theme-muted" />
               <h3 className="heading-3 mb-2">No Gallery Items</h3>
               <p className="text-theme-muted text-sm mb-6">Get started by adding your first gallery image</p>
@@ -196,7 +196,7 @@ export const AdminGallery = () => {
               {gallery.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-theme-surface border border-theme-border rounded-[10px] shadow-card overflow-hidden"
+                  className="surface-card overflow-hidden"
                 >
                   <div className="relative aspect-square bg-theme-subtle">
                     <img
@@ -279,7 +279,7 @@ export const AdminGallery = () => {
                           type="text"
                           value={formData.title}
                           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           required
                         />
                       </div>
@@ -291,7 +291,7 @@ export const AdminGallery = () => {
                           value={formData.image}
                           onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                           placeholder="https://example.com/image.jpg"
-                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           required
                         />
                         <p className="text-xs text-theme-muted mt-1">
@@ -313,7 +313,7 @@ export const AdminGallery = () => {
                           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                           rows={3}
                           placeholder="Brief description of the image..."
-                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         />
                       </div>
 
@@ -325,7 +325,7 @@ export const AdminGallery = () => {
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             placeholder="e.g., Personal, Professional"
-                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           />
                         </div>
 
@@ -335,7 +335,7 @@ export const AdminGallery = () => {
                             type="date"
                             value={formData.date}
                             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                           />
                         </div>
                       </div>

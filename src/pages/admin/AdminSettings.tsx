@@ -276,7 +276,7 @@ export const AdminSettings = () => {
           {/* Personal Info Tab */}
           {activeTab === 'personal' && (
             <div className="space-y-6">
-              <div className="bg-theme-surface border border-theme-border p-5 sm:p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-5 sm:p-6">
                 <h3 className="heading-3 mb-4">Basic Information</h3>
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -286,7 +286,7 @@ export const AdminSettings = () => {
                         type="text"
                         value={settings.fullName}
                         onChange={(e) => setSettings({ ...settings, fullName: e.target.value })}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -296,7 +296,7 @@ export const AdminSettings = () => {
                         type="email"
                         value={settings.email}
                         onChange={(e) => setSettings({ ...settings, email: e.target.value })}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -309,7 +309,7 @@ export const AdminSettings = () => {
                       value={settings.tagline}
                       onChange={(e) => setSettings({ ...settings, tagline: e.target.value })}
                       placeholder="Full-Stack Developer | Tech Enthusiast"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                   </div>
@@ -321,7 +321,7 @@ export const AdminSettings = () => {
                       onChange={(e) => setSettings({ ...settings, bio: e.target.value })}
                       rows={6}
                       placeholder="Write a compelling bio about yourself..."
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                   </div>
@@ -333,7 +333,7 @@ export const AdminSettings = () => {
                       value={settings.phone || ''}
                       onChange={(e) => setSettings({ ...settings, phone: e.target.value })}
                       placeholder="+1 (555) 123-4567"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -344,7 +344,7 @@ export const AdminSettings = () => {
                       value={settings.profileImage}
                       onChange={(e) => setSettings({ ...settings, profileImage: e.target.value })}
                       placeholder="https://example.com/profile.jpg"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       required
                     />
                     {settings.profileImage && (
@@ -363,7 +363,7 @@ export const AdminSettings = () => {
                       value={settings.resumeUrl || ''}
                       onChange={(e) => setSettings({ ...settings, resumeUrl: e.target.value })}
                       placeholder="https://example.com/resume.pdf"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -374,7 +374,7 @@ export const AdminSettings = () => {
                       onChange={(e) => setSettings({ ...settings, whatIDo: e.target.value })}
                       rows={3}
                       placeholder="Brief description of what you do..."
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -385,7 +385,7 @@ export const AdminSettings = () => {
                       value={settings.focusArea || ''}
                       onChange={(e) => setSettings({ ...settings, focusArea: e.target.value })}
                       placeholder="e.g., Web Development, AI/ML, Mobile Apps"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
 
@@ -396,14 +396,14 @@ export const AdminSettings = () => {
                       onChange={(e) => setSettings({ ...settings, achievements: e.target.value.split('\n') })}
                       rows={5}
                       placeholder="One achievement per line&#10;🏆 Won Best Project Award 2024&#10;🎓 Completed 50+ online courses&#10;💼 Led team of 5 developers"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg font-mono text-sm text-theme-text"
                     />
                     <p className="text-xs text-theme-muted mt-1">Enter one achievement per line. These will appear in the About page.</p>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-theme-surface border border-theme-border p-5 sm:p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-5 sm:p-6">
                 <h3 className="heading-3 mb-4">Social Links</h3>
                 <div className="space-y-4">
                   <div>
@@ -413,7 +413,7 @@ export const AdminSettings = () => {
                       value={settings.github || ''}
                       onChange={(e) => setSettings({ ...settings, github: e.target.value })}
                       placeholder="https://github.com/username"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                   <div>
@@ -423,7 +423,7 @@ export const AdminSettings = () => {
                       value={settings.linkedin || ''}
                       onChange={(e) => setSettings({ ...settings, linkedin: e.target.value })}
                       placeholder="https://linkedin.com/in/username"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                   <div>
@@ -433,7 +433,7 @@ export const AdminSettings = () => {
                       value={settings.twitter || ''}
                       onChange={(e) => setSettings({ ...settings, twitter: e.target.value })}
                       placeholder="https://twitter.com/username"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                   <div>
@@ -443,7 +443,7 @@ export const AdminSettings = () => {
                       value={settings.buyMeACoffee || ''}
                       onChange={(e) => setSettings({ ...settings, buyMeACoffee: e.target.value })}
                       placeholder="https://www.buymeacoffee.com/username"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                   <div>
@@ -453,7 +453,7 @@ export const AdminSettings = () => {
                       value={settings.discord || ''}
                       onChange={(e) => setSettings({ ...settings, discord: e.target.value })}
                       placeholder="username#1234"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                   <div>
@@ -463,7 +463,7 @@ export const AdminSettings = () => {
                       value={settings.spotify || ''}
                       onChange={(e) => setSettings({ ...settings, spotify: e.target.value })}
                       placeholder="https://open.spotify.com/user/username"
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                     />
                   </div>
                 </div>
@@ -475,7 +475,7 @@ export const AdminSettings = () => {
           {activeTab === 'featured' && (
             <div className="space-y-6">
               {/* Featured Projects */}
-              <div className="bg-theme-surface border border-theme-border p-5 sm:p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-5 sm:p-6">
                 <h3 className="heading-3 mb-2">Featured Projects</h3>
                 <p className="text-theme-muted text-sm mb-4">
                   Toggle projects to display on the homepage ({(projects || []).filter(p => p.featured).length} featured)
@@ -507,7 +507,7 @@ export const AdminSettings = () => {
               </div>
 
               {/* Featured Experience */}
-              <div className="bg-theme-surface border border-theme-border p-5 sm:p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-5 sm:p-6">
                 <h3 className="heading-3 mb-2">Featured Experience</h3>
                 <p className="text-theme-muted text-sm mb-4">
                   Toggle work experiences to display on the homepage ({(experiences || []).filter(e => e.featured).length} featured)
@@ -542,7 +542,7 @@ export const AdminSettings = () => {
               </div>
 
               {/* Featured Certifications */}
-              <div className="bg-theme-surface border border-theme-border p-5 sm:p-6 rounded-[10px] shadow-card">
+              <div className="surface-card p-5 sm:p-6">
                 <h3 className="heading-3 mb-2">Featured Certifications</h3>
                 <p className="text-theme-muted text-sm mb-4">
                   Toggle certifications to display on the homepage ({(certifications || []).filter(c => c.featured).length} featured)

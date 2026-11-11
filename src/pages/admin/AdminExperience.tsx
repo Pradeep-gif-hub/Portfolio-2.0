@@ -144,7 +144,7 @@ export const AdminExperience = () => {
               placeholder="Search experiences..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
@@ -158,7 +158,7 @@ export const AdminExperience = () => {
               {filteredExperiences.map((exp) => (
                 <div
                   key={exp._id}
-                  className="bg-theme-surface p-6 rounded-[10px] hover:border-theme-muted border border-theme-border shadow-card transition-colors"
+                  className="surface-card p-6 hover:border-theme-accent/70 transition-colors"
                 >
                   <div className="flex items-start gap-4">
                     <img src={exp.logo} alt={exp.company} className="w-14 h-14 rounded-lg border border-theme-border object-cover" />
@@ -212,7 +212,7 @@ export const AdminExperience = () => {
                 initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.96, y: 12 }}
-                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-card"
+                className="surface-card p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
               >
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="heading-3">
@@ -234,7 +234,7 @@ export const AdminExperience = () => {
                         type="text"
                         value={formData.role}
                         onChange={(e) => handleInputChange('role', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -244,7 +244,7 @@ export const AdminExperience = () => {
                         type="text"
                         value={formData.company}
                         onChange={(e) => handleInputChange('company', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         required
                       />
                     </div>
@@ -257,7 +257,7 @@ export const AdminExperience = () => {
                         type="url"
                         value={formData.logo}
                         onChange={(e) => handleInputChange('logo', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         placeholder="https://example.com/logo.png"
                         required
                       />
@@ -268,7 +268,7 @@ export const AdminExperience = () => {
                         type="text"
                         value={formData.duration}
                         onChange={(e) => handleInputChange('duration', e.target.value)}
-                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                         placeholder="Jan 2022 - Present"
                         required
                       />
@@ -280,7 +280,7 @@ export const AdminExperience = () => {
                     <textarea
                       value={pointsInput}
                       onChange={(e) => setPointsInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg font-mono text-sm text-theme-text"
                       rows={6}
                       placeholder="Led development of microservices&#10;Implemented CI/CD pipelines&#10;Mentored team of 5 developers"
                     />
@@ -292,7 +292,7 @@ export const AdminExperience = () => {
                       type="text"
                       value={techStackInput}
                       onChange={(e) => setTechStackInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border-strong rounded-lg focus:outline-none focus:border-theme-accent focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg text-theme-text"
                       placeholder="React, Node.js, TypeScript, AWS"
                     />
                   </div>
