@@ -18,6 +18,14 @@
   --accent-soft: #EEF2EF;
   --accent-contrast: #FFFFFF;
 
+  --gh-cell-0-bg: #EEF0EC;
+  --gh-cell-0-border: #C2C8C1;
+  --gh-cell-1-bg: #C9E4D6;
+  --gh-cell-2-bg: #9ACDB1;
+  --gh-cell-3-bg: #5BAE84;
+  --gh-cell-4-bg: #1F3A34;
+  --gh-cell-active-border: rgba(31, 58, 52, 0.25);
+
   --bg-rgb: 250 250 248;
   --surface-rgb: 255 255 255;
   --surface-soft-rgb: 243 242 238;
@@ -48,6 +56,14 @@
   --accent-soft: #1C2421;
   --accent-contrast: #0F1110;
 
+  --gh-cell-0-bg: #1A1E1C;
+  --gh-cell-0-border: #3D4441;
+  --gh-cell-1-bg: #1F4D3A;
+  --gh-cell-2-bg: #2E7D5B;
+  --gh-cell-3-bg: #3FA876;
+  --gh-cell-4-bg: #8FC1A9;
+  --gh-cell-active-border: rgba(143, 193, 169, 0.25);
+
   --bg-rgb: 15 17 16;
   --surface-rgb: 22 25 24;
   --surface-soft-rgb: 29 33 31;
@@ -69,10 +85,22 @@
     --text: #ECEBE7;
     --text-muted: #9A9C98;
     --border: #2A2D2B;
+    --border-strong: #3D4441;
+    --outline-glow: rgba(143, 193, 169, 0.35);
+    --outline-glow-soft: rgba(143, 193, 169, 0.14);
+    --card-inset: rgba(255, 255, 255, 0.04);
     --accent: #8FC1A9;
     --accent-hover: #A9D4BF;
     --accent-soft: #1C2421;
     --accent-contrast: #0F1110;
+
+    --gh-cell-0-bg: #1A1E1C;
+    --gh-cell-0-border: #3D4441;
+    --gh-cell-1-bg: #1F4D3A;
+    --gh-cell-2-bg: #2E7D5B;
+    --gh-cell-3-bg: #3FA876;
+    --gh-cell-4-bg: #8FC1A9;
+    --gh-cell-active-border: rgba(143, 193, 169, 0.25);
 
     --bg-rgb: 15 17 16;
     --surface-rgb: 22 25 24;
@@ -80,6 +108,7 @@
     --text-rgb: 236 235 231;
     --text-muted-rgb: 154 156 152;
     --border-rgb: 42 45 43;
+    --border-strong-rgb: 61 68 65;
     --accent-rgb: 143 193 169;
     --accent-hover-rgb: 169 212 191;
     --accent-soft-rgb: 28 36 33;
@@ -188,6 +217,94 @@
 :root.dark .github-chart-img,
 [data-theme="dark"] .github-chart-img {
   filter: brightness(0.9) contrast(1.2) invert(0.95) hue-rotate(180deg);
+}
+
+/* GitHub Contribution Heatmap Grid */
+.gh-heatmap-grid {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 2px;
+}
+
+.gh-weekdays {
+  display: grid;
+  grid-template-rows: repeat(7, 12px);
+  row-gap: 3px;
+  padding-top: 20px;
+  width: 24px;
+  flex-shrink: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.gh-months-row {
+  position: relative;
+  height: 16px;
+  margin-bottom: 4px;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.gh-month-label {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.gh-weeks-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 12px);
+  grid-auto-columns: 12px;
+  gap: 3px;
+}
+
+.gh-cell-spacer {
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.gh-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  border: 1px solid var(--gh-cell-active-border);
+  transition: transform 120ms ease, border-color 120ms ease;
+}
+
+.gh-cell-interactive:hover {
+  border-color: var(--accent);
+  transform: scale(1.15);
+  position: relative;
+  z-index: 2;
+}
+
+.gh-level-0 {
+  background-color: var(--gh-cell-0-bg);
+  border-color: var(--gh-cell-0-border);
+}
+
+.gh-level-1 {
+  background-color: var(--gh-cell-1-bg);
+}
+
+.gh-level-2 {
+  background-color: var(--gh-cell-2-bg);
+}
+
+.gh-level-3 {
+  background-color: var(--gh-cell-3-bg);
+}
+
+.gh-level-4 {
+  background-color: var(--gh-cell-4-bg);
 }
 
 .tech-marquee-mask {
