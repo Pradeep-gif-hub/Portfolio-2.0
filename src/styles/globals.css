@@ -2,30 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-soft: #F3F2EE;
+  --text: #1A1A1A;
+  --text-muted: #5C5C5C;
+  --border: #E6E4DF;
+  --accent: #1F3A34;
+  --accent-hover: #2E5249;
+  --accent-soft: #EEF2EF;
+  --accent-contrast: #FFFFFF;
+
+  --bg-rgb: 250 250 248;
+  --surface-rgb: 255 255 255;
+  --surface-soft-rgb: 243 242 238;
+  --text-rgb: 26 26 26;
+  --text-muted-rgb: 92 92 92;
+  --border-rgb: 230 228 223;
+  --accent-rgb: 31 58 52;
+  --accent-hover-rgb: 46 82 73;
+  --accent-soft-rgb: 238 242 239;
+  --accent-contrast-rgb: 255 255 255;
+}
+
+:root.dark,
+[data-theme="dark"] {
+  --bg: #0F1110;
+  --surface: #161918;
+  --surface-soft: #1D211F;
+  --text: #ECEBE7;
+  --text-muted: #9A9C98;
+  --border: #2A2D2B;
+  --accent: #8FC1A9;
+  --accent-hover: #A9D4BF;
+  --accent-soft: #1C2421;
+  --accent-contrast: #0F1110;
+
+  --bg-rgb: 15 17 16;
+  --surface-rgb: 22 25 24;
+  --surface-soft-rgb: 29 33 31;
+  --text-rgb: 236 235 231;
+  --text-muted-rgb: 154 156 152;
+  --border-rgb: 42 45 43;
+  --accent-rgb: 143 193 169;
+  --accent-hover-rgb: 169 212 191;
+  --accent-soft-rgb: 28 36 33;
+  --accent-contrast-rgb: 15 17 16;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme="light"]) {
+    --bg: #0F1110;
+    --surface: #161918;
+    --surface-soft: #1D211F;
+    --text: #ECEBE7;
+    --text-muted: #9A9C98;
+    --border: #2A2D2B;
+    --accent: #8FC1A9;
+    --accent-hover: #A9D4BF;
+    --accent-soft: #1C2421;
+    --accent-contrast: #0F1110;
+
+    --bg-rgb: 15 17 16;
+    --surface-rgb: 22 25 24;
+    --surface-soft-rgb: 29 33 31;
+    --text-rgb: 236 235 231;
+    --text-muted-rgb: 154 156 152;
+    --border-rgb: 42 45 43;
+    --accent-rgb: 143 193 169;
+    --accent-hover-rgb: 169 212 191;
+    --accent-soft-rgb: 28 36 33;
+    --accent-contrast-rgb: 15 17 16;
+  }
+}
+
 @layer base {
   * {
     @apply box-border;
   }
 
-  /* Zigzag underline for headings */
   .zigzag-underline {
     position: relative;
     display: inline-block;
-    padding-bottom: 12px;
+    padding-bottom: 6px;
   }
-  
+
   .zigzag-underline::after {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 6px;
-    background-image: linear-gradient(135deg, #00D4FF 25%, transparent 25%),
-                      linear-gradient(225deg, #00D4FF 25%, transparent 25%);
-    background-size: 12px 6px;
-    background-position: 0 0, 6px 0;
-    background-repeat: repeat-x;
+    height: 1px;
+    background: var(--accent);
   }
 
   html {
@@ -33,11 +103,12 @@
   }
 
   body {
-    @apply bg-dark-950 text-white font-body;
-    font-family: "Inter", sans-serif;
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.08) 0%, transparent 50%);
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
   }
 
   #root {
@@ -50,40 +121,26 @@
     width: 100%;
   }
 
-  body.light {
-    background-color: #fafafa;
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.05) 0%, transparent 50%),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.02) 2px,
-        rgba(0, 0, 0, 0.02) 4px
-      );
-  }
-
-  /* Dark theme texture */
-  body.dark {
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(157, 78, 221, 0.08) 0%, transparent 50%),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(255, 255, 255, 0.02) 2px,
-        rgba(255, 255, 255, 0.02) 4px
-      );
-  }
-
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display font-bold;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 1px solid var(--accent);
+    outline-offset: 2px;
   }
 
   ::selection {
-    @apply bg-accent-primary text-white;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
   }
 }
 
@@ -92,22 +149,35 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(26, 26, 26);
-  background-color: transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(0, 212, 255, 0.8), rgba(157, 78, 221, 0.8));
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(0, 212, 255, 1), rgba(157, 78, 221, 1));
+  background: var(--text-muted);
+}
+
+.github-chart-img {
+  filter: none;
+}
+
+:root.dark .github-chart-img,
+[data-theme="dark"] .github-chart-img {
+  filter: brightness(0.9) contrast(1.2) invert(0.95) hue-rotate(180deg);
+}
+
+.tech-marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 @layer components {
   .container {
-    @apply mx-auto max-w-container px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-container px-4 sm:px-6;
   }
 
   .section {
@@ -115,125 +185,150 @@
   }
 
   .heading-1 {
-    @apply text-5xl font-display font-bold tracking-tight;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text);
   }
 
   .heading-2 {
-    @apply text-4xl font-display font-bold tracking-tight;
+    font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--text);
   }
 
   .heading-3 {
-    @apply text-3xl font-display font-bold;
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
   }
 
   .heading-4 {
-    @apply text-2xl font-display font-bold;
+    font-size: 1.125rem;
+    line-height: 1.35;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
   }
 
   .text-muted {
-    @apply text-text-secondary dark:text-dark-400;
+    color: var(--text-muted);
   }
 
   .transition-smooth {
-    @apply transition-all duration-300 ease-smooth;
+    @apply transition-all duration-200 ease-smooth;
   }
 
   .animate-in {
-    animation: slideUp 0.6s ease-out;
+    animation: slideUp 0.25s ease-out;
   }
 
-  .glass-effect {
-    @apply bg-bg-secondary/50 dark:bg-dark-800/50 backdrop-blur-md border border-accent-primary/20 dark:border-dark-700 rounded-lg;
+  .surface-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
 
   .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-bg-tertiary dark:bg-dark-800 text-text-secondary;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--surface-soft);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
   }
 
   .badge-accent {
-    @apply badge bg-accent-primary/10 text-accent-primary;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: var(--accent-soft);
+    color: var(--accent);
   }
 
-  /* Card hover effects */
   .card-hover {
-    @apply cursor-pointer transition-all duration-300 ease-smooth hover:shadow-lg hover:shadow-accent-primary/20 hover:-translate-y-1;
+    cursor: pointer;
+    transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   }
 
-  .card-glow {
-    @apply border border-accent-primary/20 hover:border-accent-primary/60 hover:shadow-lg hover:shadow-accent-primary/30;
-  }
-
-  /* Text effects */
-  .text-gradient {
-    @apply bg-gradient-to-r from-accent-primary via-neon-purple to-neon-pink bg-clip-text text-transparent;
+  .card-hover:hover {
+    border-color: var(--text-muted);
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   }
 
   .text-mono {
-    @apply font-mono text-sm italic font-light tracking-wider;
+    @apply font-mono text-sm;
   }
 
-  /* Button effects */
   .btn-base {
-    @apply px-6 py-2.5 rounded-lg font-medium transition-all duration-300 ease-smooth relative overflow-hidden;
-  }
-
-  .btn-neon {
-    @apply btn-base bg-accent-primary text-white hover:shadow-lg hover:shadow-accent-primary/50 hover:scale-105 active:scale-95;
-  }
-
-  /* Glow effects */
-  .glow-accent {
-    @apply shadow-lg shadow-accent-primary/20 hover:shadow-xl hover:shadow-accent-primary/40;
+    @apply px-5 py-2.5 rounded-lg font-medium transition-colors duration-200 relative;
   }
 }
 
+/* Places Map Page */
 .places-page {
   height: calc(100vh - 4rem);
   min-height: 620px;
   overflow: hidden;
   padding: 1.5rem 1rem 1rem;
-  background: #080d10;
+  background: var(--bg);
 }
 
 .places-heading {
   position: relative;
   z-index: 2;
-  width: min(1200px, 100%);
+  width: min(1000px, 100%);
   margin: 0 auto 1rem;
 }
 
 .places-heading h1 {
   margin: 0.2rem 0;
-  color: #f5f7f7;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.05;
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .places-heading p {
   margin: 0;
-  color: rgba(203, 213, 225, 0.72);
+  color: var(--text-muted);
   font-size: 0.92rem;
 }
 
 .places-heading .places-eyebrow {
-  color: #69d3d2;
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .places-map-shell {
   position: relative;
-  width: min(1200px, 100%);
+  width: min(1000px, 100%);
   height: calc(100% - 6.5rem);
   min-height: 460px;
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  border-radius: 0.8rem;
-  background: #10171b;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.26);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 .places-map,
@@ -248,17 +343,17 @@
   width: 14px;
   height: 14px;
   padding: 0;
-  border: 2px solid #071013;
+  border: 2px solid var(--surface);
   border-radius: 50%;
-  background: #5ee7e1;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65), 0 0 6px rgba(94, 231, 225, 0.5);
+  background: var(--accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: transform 160ms ease, box-shadow 160ms ease, width 160ms ease, height 160ms ease;
 }
 
 .places-marker:hover {
-  transform: scale(1.4);
-  box-shadow: 0 0 0 4px rgba(94, 231, 225, 0.4), 0 1px 6px rgba(0, 0, 0, 0.7);
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.22), 0 1px 4px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
 
@@ -266,12 +361,15 @@
   position: absolute;
   top: 50%;
   left: calc(100% + 0.45rem);
-  color: rgba(240, 253, 250, 0.84);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
   font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  text-shadow: 0 1px 4px #071013, 0 0 6px #071013;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
   transform: translateY(-50%);
   white-space: nowrap;
   pointer-events: none;
@@ -282,8 +380,8 @@
 .places-marker-selected {
   width: 18px;
   height: 18px;
-  border-color: #d9fffc;
-  box-shadow: 0 0 0 5px rgba(94, 231, 225, 0.45), 0 1px 6px rgba(0, 0, 0, 0.7);
+  border-color: var(--surface);
+  box-shadow: 0 0 0 5px rgba(var(--accent-rgb), 0.28), 0 1px 4px rgba(0, 0, 0, 0.3);
   z-index: 20;
 }
 
@@ -296,6 +394,11 @@
   gap: 0.4rem;
 }
 
+/* Custom .places-actions toolbar already provides zoom +/- buttons */
+.places-map .maplibregl-ctrl-top-right {
+  display: none;
+}
+
 .places-actions button {
   display: inline-flex;
   min-width: 2.35rem;
@@ -304,19 +407,21 @@
   justify-content: center;
   gap: 0.35rem;
   padding: 0.45rem 0.65rem;
-  border: 1px solid rgba(203, 213, 225, 0.24);
-  border-radius: 0.35rem;
-  background: rgba(9, 15, 18, 0.88);
-  color: #e2e8f0;
-  font-size: 0.68rem;
-  letter-spacing: 0.09em;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: border-color 150ms ease, color 150ms ease;
 }
 
 .places-actions button:hover {
-  border-color: rgba(94, 231, 225, 0.7);
-  color: #5ee7e1;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .places-view-all {
@@ -331,10 +436,10 @@
   width: 300px;
   max-width: calc(100vw - 2rem);
   overflow: hidden;
-  border: 1px solid rgba(203, 213, 225, 0.2);
-  border-radius: 0.6rem;
-  background: rgba(10, 17, 20, 0.95);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.42);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .places-card > img {
@@ -351,45 +456,45 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background:
-    linear-gradient(135deg, rgba(94, 231, 225, 0.18), transparent 55%),
-    #152126;
-  color: rgba(240, 253, 250, 0.82);
+  background: var(--surface-soft);
+  color: var(--text-muted);
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
 }
 
 .places-card-body {
-  padding: 0.9rem;
+  padding: 1rem;
 }
 
 .places-card-kicker {
   margin: 0 0 0.25rem;
-  color: #5ee7e1;
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .places-card h2 {
   margin: 0;
-  color: #f8fafc;
-  font-size: 1.35rem;
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 600;
 }
 
 .places-card-location,
 .places-card-description {
   margin: 0.25rem 0 0;
-  color: rgba(203, 213, 225, 0.7);
-  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
   line-height: 1.5;
 }
 
 .places-card-description {
-  margin-top: 0.7rem;
+  margin-top: 0.65rem;
 }
 
 .places-card-close {
@@ -401,10 +506,10 @@
   height: 1.8rem;
   padding: 0;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  border: 1px solid var(--border);
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: var(--surface);
+  color: var(--text);
 }
 
 .places-map-error {
@@ -412,29 +517,29 @@
   inset: 50% auto auto 50%;
   width: min(430px, calc(100% - 2rem));
   padding: 1.5rem;
-  border: 1px solid rgba(94, 231, 225, 0.28);
-  border-radius: 0.6rem;
-  background: rgba(8, 13, 16, 0.94);
-  color: #dbeafe;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
   text-align: center;
   transform: translate(-50%, -50%);
 }
 
 .places-map-error p {
   margin: 0 0 0.4rem;
-  color: #5ee7e1;
+  color: var(--accent);
   font-weight: 600;
 }
 
 .places-map-error span {
-  color: rgba(203, 213, 225, 0.72);
+  color: var(--text-muted);
   font-size: 0.85rem;
 }
 
 @media (max-width: 640px) {
   .places-page {
     min-height: 560px;
-    padding: 1rem 0.7rem 0.7rem;
+    padding: 1rem 0.75rem 0.75rem;
   }
 
   .places-map-shell {

@@ -70,20 +70,22 @@ export const Gallery: React.FC = () => {
           <motion.div
             key={item.id}
             variants={itemVariants}
-            whileHover={{ scale: 1.05 }}
-            className="relative overflow-hidden rounded-lg cursor-pointer group h-64"
+            className="relative overflow-hidden rounded-[10px] border border-theme-border shadow-card card-hover cursor-pointer group h-64"
             onClick={() => setSelectedIndex(index)}
           >
             <img
               src={item.image}
               alt={item.alt}
               loading="lazy"
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end p-4"
+              style={{ background: "linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent)" }}
+            >
               <div>
                 <p className="text-white font-medium">{item.alt}</p>
-                <p className="text-text-secondary text-sm capitalize">
+                <p className="text-neutral-300 text-sm capitalize">
                   {item.category}
                 </p>
               </div>
@@ -102,21 +104,21 @@ export const Gallery: React.FC = () => {
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
         >
           <motion.div
-            initial={{ scale: 0.9 }}
+            initial={{ scale: 0.96 }}
             animate={{ scale: 1 }}
-            exit={{ scale: 0.9 }}
+            exit={{ scale: 0.96 }}
             className="max-w-4xl w-full max-h-[85vh] relative flex items-center justify-center"
             onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
           >
             <img
               src={gallery[selectedIndex].image}
               alt={gallery[selectedIndex].alt}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg"
+              className="max-w-full max-h-[85vh] object-contain rounded-[10px]"
             />
             <button
               aria-label="Close image viewer"
               onClick={() => setSelectedIndex(null)}
-              className="absolute top-4 right-4 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+              className="absolute top-4 right-4 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
             >
               <X size={20} />
             </button>
@@ -125,14 +127,14 @@ export const Gallery: React.FC = () => {
                 <button
                   aria-label="Previous image"
                   onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
-                  className="absolute left-2 md:-left-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                  className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
                 >
                   <ChevronLeft size={24} />
                 </button>
                 <button
                   aria-label="Next image"
                   onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
-                  className="absolute right-2 md:-right-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                  className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
                 >
                   <ChevronRight size={24} />
                 </button>

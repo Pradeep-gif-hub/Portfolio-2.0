@@ -25,25 +25,36 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: { duration: 0.25 },
   },
 };
 
 const statusConfig = {
-  completed: { label: "Completed", color: "bg-green-500/20 text-green-400 border-green-500/30" },
-  "in-progress": { label: "In Progress", color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30" },
-  planning: { label: "Planning", color: "bg-blue-500/20 text-blue-400 border-blue-500/30" },
+  completed: {
+    label: "Completed",
+    color:
+      "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60",
+  },
+  "in-progress": {
+    label: "In Progress",
+    color:
+      "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/60",
+  },
+  planning: {
+    label: "Planning",
+    color:
+      "bg-neutral-100 text-neutral-700 border-neutral-300 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700",
+  },
 };
 
 export const Projects: React.FC = () => {
@@ -74,14 +85,14 @@ export const Projects: React.FC = () => {
   return (
     <SectionWrapper id="projects">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
+        transition={{ duration: 0.25 }}
+        className="mb-10"
       >
-        <h2 className="heading-2 mb-4">Featured Projects</h2>
-        <p className="text-text-secondary text-lg">
+        <h2 className="heading-2 mb-3">Featured Projects</h2>
+        <p className="text-theme-muted text-base">
           A selection of projects I&apos;m proud of
         </p>
       </motion.div>
@@ -90,30 +101,30 @@ export const Projects: React.FC = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="space-y-6 mb-12"
+        className="space-y-6 mb-10"
       >
         {loading ? (
           <div className="space-y-6">
             {[1, 2].map((i) => (
-              <div key={i} className="group bg-gradient-to-b from-dark-800/90 via-dark-800/60 to-black rounded-2xl overflow-hidden border border-accent-primary/30 animate-pulse">
+              <div key={i} className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card animate-pulse">
                 <div className="flex flex-col md:flex-row">
-                  <div className="md:w-2/5 h-64 md:h-[450px] bg-gray-200 dark:bg-gray-700"></div>
+                  <div className="md:w-2/5 h-60 md:h-[400px] bg-theme-subtle"></div>
                   <div className="md:w-3/5 p-6 space-y-4">
                     <div className="flex justify-between">
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
-                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                      <div className="h-7 bg-theme-subtle rounded w-2/3"></div>
+                      <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
                     </div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                    <div className="h-4 bg-theme-subtle rounded w-full"></div>
+                    <div className="h-4 bg-theme-subtle rounded w-5/6"></div>
                     <div className="space-y-2">
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
-                      <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-4/5"></div>
+                      <div className="h-3 bg-theme-subtle rounded w-3/4"></div>
+                      <div className="h-3 bg-theme-subtle rounded w-2/3"></div>
+                      <div className="h-3 bg-theme-subtle rounded w-4/5"></div>
                     </div>
                     <div className="flex gap-2">
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+                      <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
+                      <div className="h-7 bg-theme-subtle rounded-full w-24"></div>
+                      <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
                     </div>
                   </div>
                 </div>
@@ -122,7 +133,7 @@ export const Projects: React.FC = () => {
           </div>
         ) : projects.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-text-secondary">No featured projects yet. Mark some projects as featured in the admin panel.</p>
+            <p className="text-theme-muted">No featured projects yet. Mark some projects as featured in the admin panel.</p>
           </div>
         ) : (
           <>
@@ -136,56 +147,53 @@ export const Projects: React.FC = () => {
               return (
                 <motion.div key={project._id} variants={itemVariants}>
                   <Link to={`/project/${project._id}`}>
-                <div className="group bg-gradient-to-b from-dark-800/90 via-dark-800/60 to-black rounded-2xl overflow-hidden border border-accent-primary/30 hover:border-accent-primary/60 transition-all hover:shadow-xl hover:shadow-accent-primary/20 relative">
+                <div className="group bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card card-hover relative">
                   <div className="flex flex-col md:flex-row">
                     {/* Image Section */}
-                    <div className="md:w-2/5 relative overflow-hidden h-64 md:h-[450px] flex-shrink-0">
+                    <div className="md:w-2/5 relative overflow-hidden h-60 md:h-auto md:min-h-[380px] flex-shrink-0 border-b md:border-b-0 md:border-r border-theme-border bg-theme-subtle">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/50" />
-                      {/* Bottom blackish gradient overlay on image */}
-                      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/70 to-transparent" />
                     </div>
 
                     {/* Details Section */}
                     <div className="md:w-3/5 p-6 flex flex-col justify-between">
                       <div>
-                        <div className="flex items-start justify-between mb-3">
-                          <h3 className="heading-3 group-hover:text-accent-primary transition-colors">
+                        <div className="flex items-start justify-between gap-3 mb-3">
+                          <h3 className="heading-3 group-hover:text-theme-accent transition-colors">
                             {project.title}
                           </h3>
                           <span
-                            className={`px-3 py-1 rounded-full text-xs font-medium border ${status.color} whitespace-nowrap`}
+                            className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${status.color} whitespace-nowrap`}
                           >
                             {status.label}
                           </span>
                         </div>
 
-                        <p className="text-text-secondary mb-4 line-clamp-2">
+                        <p className="text-theme-muted text-sm mb-4 line-clamp-2 leading-relaxed">
                           {project.description}
                         </p>
 
                         {/* Key Features - Point wise (max 4) */}
                         <div className="mb-4">
-                          <h4 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
-                            <CheckCircle2 size={16} className="text-accent-primary" />
+                          <h4 className="text-sm font-semibold text-theme-text mb-2.5 flex items-center gap-2">
+                            <CheckCircle2 size={15} className="text-theme-accent" />
                             Key Features
                           </h4>
-                          <ul className="space-y-2">
+                          <ul className="space-y-1.5">
                             {displayFeatures.map((feature, idx) => (
                               <li
                                 key={idx}
-                                className="flex items-start gap-2 text-sm text-gray-300"
+                                className="flex items-start gap-2 text-sm text-theme-muted"
                               >
-                                <span className="text-accent-primary mt-0.5">•</span>
+                                <span className="text-theme-accent mt-0.5">•</span>
                                 <span>{feature}</span>
                               </li>
                             ))}
                             {remainingFeatures > 0 && (
-                              <li className="flex items-start gap-2 text-sm text-accent-primary/70">
+                              <li className="flex items-start gap-2 text-sm text-theme-accent">
                                 <span className="mt-0.5">•</span>
                                 <span>+{remainingFeatures} more</span>
                               </li>
@@ -195,24 +203,24 @@ export const Projects: React.FC = () => {
 
                         {/* Tech Stack with Icons (max 6) */}
                         <div>
-                          <h4 className="text-sm font-semibold text-white mb-3">
+                          <h4 className="text-sm font-semibold text-theme-text mb-2.5">
                             Technologies
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {displayTech.map((tech) => (
                               <div
                                 key={tech}
-                                className="flex items-center gap-2 px-3 py-1.5 bg-dark-900/80 backdrop-blur-sm rounded-xl border border-accent-primary/20 hover:border-accent-primary/40 transition-all group/tech"
+                                className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
                               >
-                                <img src={getTechLogo(tech)} alt={tech} className="w-4 h-4 object-contain group-hover/tech:scale-110 transition-transform" />
-                                <span className="text-xs text-gray-300">
+                                <img src={getTechLogo(tech)} alt={tech} className="w-3.5 h-3.5 object-contain" />
+                                <span>
                                   {tech}
                                 </span>
                               </div>
                             ))}
                             {remainingTech > 0 && (
-                              <div className="flex items-center gap-2 px-3 py-1.5 bg-accent-primary/10 backdrop-blur-sm rounded-xl border border-accent-primary/30">
-                                <span className="text-xs text-accent-primary font-medium">
+                              <div className="flex items-center gap-1.5 px-3 py-1 bg-theme-accent-soft rounded-full">
+                                <span className="text-xs text-theme-accent font-medium">
                                   +{remainingTech} more
                                 </span>
                               </div>

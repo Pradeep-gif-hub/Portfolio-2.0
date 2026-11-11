@@ -81,18 +81,18 @@ export const Contact: React.FC = () => {
       {loading ? (
         <div className="grid lg:grid-cols-2 gap-12 animate-pulse">
           <div className="space-y-6">
-            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+            <div className="h-9 bg-theme-subtle rounded w-3/4"></div>
+            <div className="h-5 bg-theme-subtle rounded w-1/2"></div>
             <div className="space-y-3">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+              <div className="h-4 bg-theme-subtle rounded"></div>
+              <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
             </div>
-            <div className="space-y-3">
-              <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
-              <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+            <div className="flex gap-3">
+              <div className="h-11 bg-theme-subtle rounded-lg w-40"></div>
+              <div className="h-11 bg-theme-subtle rounded-lg w-44"></div>
             </div>
           </div>
-          <div className="h-96 bg-gray-200 dark:bg-gray-700 rounded-2xl"></div>
+          <div className="h-96 bg-theme-subtle border border-theme-border rounded-[10px]"></div>
         </div>
       ) : (
       <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -103,16 +103,16 @@ export const Contact: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <motion.div variants={itemVariants} className="mb-8">
-            <h2 className="heading-2 mb-4">Let&apos;s Work Together</h2>
-            <p className="text-text-secondary text-lg">
+          <motion.div variants={itemVariants} className="mb-6">
+            <h2 className="heading-2 mb-3">Let&apos;s Work Together</h2>
+            <p className="text-theme-muted text-base">
               Have a project in mind? Let&apos;s talk about it.
             </p>
           </motion.div>
 
           <motion.p
             variants={itemVariants}
-            className="text-text-secondary mb-8 leading-relaxed"
+            className="text-theme-muted mb-8 leading-relaxed"
           >
             I&apos;m always interested in hearing about new projects and opportunities.
             Feel free to reach out if you want to collaborate or just say hi!
@@ -120,7 +120,7 @@ export const Contact: React.FC = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3"
           >
             <Button
               variant="primary"
@@ -138,7 +138,7 @@ export const Contact: React.FC = () => {
                 }
               }}
             >
-              <Mail size={20} className="mr-2" />
+              <Mail size={18} className="mr-2" />
               Send me an email
             </Button>
             <Button 
@@ -146,14 +146,14 @@ export const Contact: React.FC = () => {
               size="lg"
               onClick={() => window.open(`https://wa.me/${settings.phone ? settings.phone.replace(/\D/g, '') : ''}`, '_blank')}
             >
-              <MessageCircle size={20} className="mr-2" />
+              <MessageCircle size={18} className="mr-2" />
               Contact on WhatsApp
             </Button>
           </motion.div>
 
           <motion.p
             variants={itemVariants}
-            className="text-text-tertiary text-sm mt-8"
+            className="text-theme-muted text-sm mt-6"
           >
             Usually respond within 24 hours
           </motion.p>
@@ -164,7 +164,7 @@ export const Contact: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Side - Random Social Icons */}
+        {/* Right Side - Social Icons */}
         <motion.div 
           className="relative h-96 hidden lg:block"
           initial="hidden"
@@ -177,20 +177,20 @@ export const Contact: React.FC = () => {
               href={settings.github}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.2, rotate: -5 }}
-              transition={{ delay: 0.1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: 'absolute',
                 top: '10%',
                 left: '20%',
-                transform: 'rotate(-15deg)',
+                transform: 'rotate(-8deg)',
               }}
-              className="glass-effect p-6 rounded-2xl hover:bg-accent-primary/10 transition-all duration-300 border-2 border-accent-primary/20 hover:border-accent-primary/60"
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
               title="GitHub"
             >
-              <Github size={32} className="text-accent-primary" />
+              <Github size={28} className="text-theme-accent" />
             </motion.a>
           )}
           
@@ -199,20 +199,20 @@ export const Contact: React.FC = () => {
               href={settings.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.2, rotate: 30 }}
-              transition={{ delay: 0.2 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: 'absolute',
                 top: '30%',
                 left: '70%',
-                transform: 'rotate(20deg)',
+                transform: 'rotate(8deg)',
               }}
-              className="glass-effect p-6 rounded-2xl hover:bg-accent-primary/10 transition-all duration-300 border-2 border-accent-primary/20 hover:border-accent-primary/60"
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
               title="LinkedIn"
             >
-              <Linkedin size={32} className="text-accent-primary" />
+              <Linkedin size={28} className="text-theme-accent" />
             </motion.a>
           )}
           
@@ -221,20 +221,20 @@ export const Contact: React.FC = () => {
               href={settings.twitter}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.2, rotate: 20 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: 'absolute',
                 top: '60%',
                 left: '15%',
-                transform: 'rotate(10deg)',
+                transform: 'rotate(6deg)',
               }}
-              className="glass-effect p-6 rounded-2xl hover:bg-accent-primary/10 transition-all duration-300 border-2 border-accent-primary/20 hover:border-accent-primary/60"
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
               title="Twitter"
             >
-              <Twitter size={32} className="text-accent-primary" />
+              <Twitter size={28} className="text-theme-accent" />
             </motion.a>
           )}
           
@@ -243,20 +243,20 @@ export const Contact: React.FC = () => {
               href={`mailto:${settings.email}`}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.2, rotate: 0 }}
-              transition={{ delay: 0.4 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: 'absolute',
                 top: '75%',
                 left: '65%',
-                transform: 'rotate(-10deg)',
+                transform: 'rotate(-6deg)',
               }}
-              className="glass-effect p-6 rounded-2xl hover:bg-accent-primary/10 transition-all duration-300 border-2 border-accent-primary/20 hover:border-accent-primary/60"
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
               title="Email"
             >
-              <Mail size={32} className="text-accent-primary" />
+              <Mail size={28} className="text-theme-accent" />
             </motion.a>
           )}
           
@@ -266,19 +266,19 @@ export const Contact: React.FC = () => {
               href={settings.buyMeACoffee}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              transition={{ delay: 0.5 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.2 }}
               style={{
                 position: 'absolute',
                 top: '45%',
                 left: '45%',
               }}
-              className="glass-effect p-6 rounded-2xl hover:bg-accent-primary/10 transition-all duration-300 border-2 border-accent-primary/20 hover:border-accent-primary/60"
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
               title="Buy Me a Coffee"
             >
-              <Coffee size={32} className="text-accent-primary" />
+              <Coffee size={28} className="text-theme-accent" />
             </motion.a>
           )}
         </motion.div>

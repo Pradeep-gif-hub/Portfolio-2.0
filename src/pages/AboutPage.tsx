@@ -125,25 +125,25 @@ export const AboutPage: React.FC = () => {
         
         {loading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Loading...</p>
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+            <p className="mt-4 text-theme-muted">Loading...</p>
           </div>
         ) : (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.25 }}
           className="mb-12"
         >
           <h1 className="heading-1 mb-8">{"< About Me />"}</h1>
 
           {/* Professional Summary */}
-          <div className="glass-effect p-8 rounded-xl mb-8">
-            <div className="flex items-start gap-4 mb-4">
-              <User size={32} className="text-accent-primary flex-shrink-0 mt-1" />
+          <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6">
+            <div className="flex items-start gap-4 mb-2">
+              <User size={28} className="text-theme-accent flex-shrink-0 mt-1" />
               <div>
-                <h2 className="heading-3 mb-4">Professional Summary</h2>
-                <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
+                <h2 className="heading-3 mb-3">Professional Summary</h2>
+                <div className="space-y-4 text-theme-muted text-base leading-relaxed">
                   <p>{settings.bio}</p>
                 </div>
               </div>
@@ -151,21 +151,21 @@ export const AboutPage: React.FC = () => {
           </div>
           
           {/* What I Do */}
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="glass-effect p-8 rounded-xl"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <Code2 size={28} className="text-accent-primary" />
+              <div className="flex items-center gap-3 mb-5">
+                <Code2 size={24} className="text-theme-accent" />
                 <h2 className="heading-3">What I Do</h2>
               </div>
               <ul className="space-y-3">
                 {whatIDo.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-gray-300">
-                    <span className="w-1.5 h-1.5 bg-accent-primary rounded-full mt-2 flex-shrink-0" />
+                  <li key={idx} className="flex items-start gap-3 text-theme-muted text-sm">
+                    <span className="w-1.5 h-1.5 bg-theme-accent rounded-full mt-2 flex-shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -174,20 +174,20 @@ export const AboutPage: React.FC = () => {
 
             {/* Focus Areas */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="glass-effect p-8 rounded-xl"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <Target size={28} className="text-accent-primary" />
+              <div className="flex items-center gap-3 mb-5">
+                <Target size={24} className="text-theme-accent" />
                 <h2 className="heading-3">Focus Areas</h2>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2">
                 {focusAreas.map((area, idx) => (
                   <span
                     key={idx}
-                    className="px-4 py-2 bg-dark-900/80 backdrop-blur-sm rounded-xl border border-accent-primary/20 text-sm text-gray-300"
+                    className="px-3.5 py-1.5 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
                   >
                     {area}
                   </span>
@@ -198,50 +198,47 @@ export const AboutPage: React.FC = () => {
 
           {/* My Links Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
+            transition={{ duration: 0.25 }}
             onClick={() => navigate('/links')}
-            className="glass-effect p-8 rounded-xl mb-8 cursor-pointer hover:border-accent-primary/50 border border-accent-primary/20 transition-all group"
+            className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 mb-6 cursor-pointer card-hover shadow-card group"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="p-4 bg-gradient-to-r from-accent-primary/20 to-neon-purple/20 rounded-xl group-hover:scale-110 transition-transform">
-                  <Link2 size={32} className="text-accent-primary" />
+                <div className="p-3.5 bg-theme-accent-soft rounded-lg">
+                  <Link2 size={26} className="text-theme-accent" />
                 </div>
                 <div>
-                  <h2 className="heading-3 mb-2 group-hover:text-accent-primary transition-colors">Link-Tree</h2>
-                  <p className="text-text-secondary">Connect with me on all Social platforms</p>
+                  <h2 className="heading-3 mb-1 group-hover:text-theme-accent transition-colors">Link-Tree</h2>
+                  <p className="text-theme-muted text-sm">Connect with me on all Social platforms</p>
                 </div>
               </div>
-              <ExternalLink size={24} className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+              <ExternalLink size={20} className="text-theme-accent opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
           </motion.div>
 
           {/* Achievements Section */}
           {settings.achievements && settings.achievements.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="glass-effect p-8 rounded-xl mb-8"
+              transition={{ duration: 0.25 }}
+              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <Award size={28} className="text-accent-primary" />
+              <div className="flex items-center gap-3 mb-5">
+                <Award size={24} className="text-theme-accent" />
                 <h2 className="heading-3">Achievements & Highlights</h2>
               </div>
-              <ul className="grid md:grid-cols-2 gap-4">
+              <ul className="grid md:grid-cols-2 gap-3">
                 {settings.achievements.map((achievement, idx) => (
-                  <motion.li
+                  <li
                     key={idx}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
-                    className="flex items-start gap-3 text-gray-300 p-3 rounded-lg hover:bg-dark-900/50 transition-colors"
+                    className="flex items-start gap-3 text-theme-muted text-sm p-3 rounded-lg bg-theme-subtle"
                   >
-                    <span className="text-accent-primary mt-1">🏆</span>
+                    <span className="text-theme-accent mt-0.5">🏆</span>
                     <span>{achievement}</span>
-                  </motion.li>
+                  </li>
                 ))}
               </ul>
             </motion.div>
@@ -250,13 +247,13 @@ export const AboutPage: React.FC = () => {
           {/* Certifications Section */}
           {certifications.length > 0 && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="glass-effect p-8 rounded-xl mb-8"
+              transition={{ duration: 0.25 }}
+              className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card mb-6"
             >
-              <div className="flex items-center gap-3 mb-6">
-                <Award size={28} className="text-accent-primary" />
+              <div className="flex items-center gap-3 mb-5">
+                <Award size={24} className="text-theme-accent" />
                 <h2 className="heading-3">Certifications</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -266,17 +263,17 @@ export const AboutPage: React.FC = () => {
                     to={`/certification/${cert._id}`}
                     className="block group"
                   >
-                    <div className="bg-dark-900/50 border border-accent-primary/20 rounded-lg p-4 hover:border-accent-primary/50 transition-all">
+                    <div className="bg-theme-subtle border border-theme-border rounded-[10px] p-4 hover:border-theme-muted transition-colors">
                       <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="font-semibold text-white group-hover:text-accent-primary transition-colors">
+                        <h3 className="font-semibold text-theme-text group-hover:text-theme-accent transition-colors text-sm">
                           {cert.title}
                         </h3>
                         <ExternalLink
-                          size={16}
-                          className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                          size={15}
+                          className="text-theme-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
                         />
                       </div>
-                      <p className="text-text-secondary text-sm mb-2">{cert.issuer}</p>
+                      <p className="text-theme-muted text-xs mb-2">{cert.issuer}</p>
                       <Badge variant="accent" className="text-xs">
                         {cert.month ? `${cert.month} ${cert.year}` : cert.year}
                       </Badge>
@@ -287,10 +284,10 @@ export const AboutPage: React.FC = () => {
               <div className="mt-6 text-center">
                 <Link
                   to="/certifications"
-                  className="text-accent-primary hover:underline inline-flex items-center gap-2"
+                  className="text-theme-accent hover:underline inline-flex items-center gap-2 text-sm font-medium"
                 >
                   View All Certifications
-                  <ExternalLink size={16} />
+                  <ExternalLink size={15} />
                 </Link>
               </div>
             </motion.div>
@@ -298,24 +295,24 @@ export const AboutPage: React.FC = () => {
 
           {/* Beyond Code - Hobbies & Interests */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="glass-effect p-8 rounded-xl"
+            transition={{ duration: 0.25 }}
+            className="bg-theme-surface border border-theme-border rounded-[10px] p-6 md:p-8 shadow-card"
           >
             <div className="flex items-start gap-4">
-              <Code size={28} className="text-accent-primary flex-shrink-0" />
+              <Code size={24} className="text-theme-accent flex-shrink-0 mt-0.5" />
               <div className="flex-1">
                 <h2 className="heading-3 mb-4">Beyond Code</h2>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2.5">
                   {hobbiesAndInterests.map((hobby, idx) => {
                     const Icon = hobby.icon;
                     return (
                       <span
                         key={idx}
-                        className="px-4 py-2 bg-dark-900/80 backdrop-blur-sm rounded-xl border border-accent-primary/20 text-sm text-gray-300 flex items-center gap-2"
+                        className="px-3.5 py-1.5 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent flex items-center gap-2"
                       >
-                        <Icon size={16} className="text-accent-primary" />
+                        <Icon size={14} className="text-theme-accent" />
                         {hobby.name}
                       </span>
                     );

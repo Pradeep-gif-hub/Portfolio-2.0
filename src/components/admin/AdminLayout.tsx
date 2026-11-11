@@ -47,7 +47,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-dark-950 text-white">
+    <div className="min-h-screen bg-theme-bg text-theme-text">
       {/* Sidebar */}
       <AnimatePresence>
         {sidebarOpen && (
@@ -55,20 +55,20 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
-            className="fixed left-0 top-0 h-full w-64 bg-dark-900 border-r border-dark-700 z-50"
+            className="fixed left-0 top-0 h-full w-64 bg-theme-surface border-r border-theme-border z-50"
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
-                <h1 className="text-xl font-bold text-accent-primary">Admin Panel</h1>
+                <h1 className="text-lg font-semibold text-theme-text">Admin Panel</h1>
                 <button
                   onClick={() => setSidebarOpen(false)}
-                  className="lg:hidden text-text-secondary hover:text-accent-primary"
+                  className="lg:hidden text-theme-muted hover:text-theme-accent"
                 >
                   <X size={20} />
                 </button>
               </div>
 
-              <nav className="space-y-2">
+              <nav className="space-y-1">
                 {menuItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = location.pathname === item.path;
@@ -77,13 +77,13 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                      className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                         isActive
-                          ? 'bg-accent-primary/20 text-accent-primary'
-                          : 'text-text-secondary hover:bg-dark-800 hover:text-white'
+                          ? 'bg-theme-accent-soft text-theme-accent'
+                          : 'text-theme-muted hover:bg-theme-subtle hover:text-theme-text'
                       }`}
                     >
-                      <Icon size={20} />
+                      <Icon size={18} />
                       <span>{item.label}</span>
                     </Link>
                   );
@@ -92,9 +92,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-500/10 transition-colors w-full mt-8"
+                className="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors w-full mt-8"
               >
-                <LogOut size={20} />
+                <LogOut size={18} />
                 <span>Logout</span>
               </button>
             </div>
@@ -103,19 +103,19 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className={`transition-all duration-300 ${sidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
+      <div className={`transition-all duration-200 ${sidebarOpen ? 'lg:ml-64' : 'ml-0'}`}>
         {/* Top Bar */}
-        <header className="bg-dark-900 border-b border-dark-700 px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+        <header className="bg-theme-surface border-b border-theme-border px-6 py-4 flex items-center justify-between sticky top-0 z-40">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="text-text-secondary hover:text-accent-primary"
+            className="text-theme-muted hover:text-theme-accent"
           >
-            <Menu size={24} />
+            <Menu size={22} />
           </button>
 
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-text-secondary">Admin</span>
-            <div className="w-8 h-8 rounded-full bg-accent-primary/20 flex items-center justify-center text-accent-primary font-bold">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-theme-muted">Admin</span>
+            <div className="w-8 h-8 rounded-full bg-theme-accent-soft border border-theme-border flex items-center justify-center text-theme-accent font-semibold text-sm">
               A
             </div>
           </div>

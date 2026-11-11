@@ -25,21 +25,21 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
     ref
   ) => {
     const baseClasses =
-      "font-medium transition-smooth rounded-lg font-body font-semibold";
+      "font-medium transition-colors duration-200 rounded-lg font-body inline-flex items-center justify-center";
 
     const variantClasses: Record<string, string> = {
       primary:
-        "bg-accent-primary text-dark-950 hover:bg-accent-dark active:scale-95 shadow-lg shadow-accent-primary/20",
+        "bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-hover",
       secondary:
-        "bg-dark-800 text-gray-300 hover:bg-dark-700 border border-dark-600",
+        "bg-theme-subtle text-theme-text hover:border-theme-muted border border-theme-border",
       outline:
-        "border-2 border-accent-primary/60 text-accent-primary hover:bg-accent-primary/10 hover:border-accent-primary",
+        "border border-theme-border bg-transparent text-theme-text hover:border-theme-muted hover:bg-theme-subtle",
     };
 
     const sizeClasses: Record<string, string> = {
-      sm: "px-3 py-2 text-sm",
-      md: "px-4 py-2.5 text-base",
-      lg: "px-6 py-3 text-lg",
+      sm: "px-3 py-1.5 text-sm",
+      md: "px-4 py-2 text-sm",
+      lg: "px-5 py-2.5 text-base",
     };
 
     const variantClass = variantClasses[variant] || variantClasses.primary;

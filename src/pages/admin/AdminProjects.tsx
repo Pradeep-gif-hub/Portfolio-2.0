@@ -206,9 +206,9 @@ export const AdminProjects = () => {
   };
 
   const statusColors = {
-    completed: 'bg-green-500/20 text-green-400',
-    'in-progress': 'bg-yellow-500/20 text-yellow-400',
-    planning: 'bg-blue-500/20 text-blue-400'
+    completed: 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300',
+    'in-progress': 'bg-amber-50 text-amber-800 dark:bg-amber-950/50 dark:text-amber-300',
+    planning: 'bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300'
   };
 
   return (
@@ -217,98 +217,96 @@ export const AdminProjects = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">Projects</h1>
-              <p className="text-text-secondary">Manage your portfolio projects</p>
+              <h1 className="heading-2 mb-1">Projects</h1>
+              <p className="text-theme-muted text-sm">Manage your portfolio projects</p>
             </div>
-            <Button onClick={handleCreate} className="btn-neon flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
-              <Plus size={20} />
+            <Button onClick={handleCreate} variant="primary" className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+              <Plus size={18} />
               Add Project
             </Button>
           </div>
 
           <div className="mb-6 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-theme-muted" size={18} />
             <input
               type="text"
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-white"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-              <p className="mt-4 text-text-secondary">Loading projects...</p>
+              <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+              <p className="mt-4 text-theme-muted text-sm">Loading projects...</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredProjects.map((project) => (
-                <motion.div
+                <div
                   key={project._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="glass-effect rounded-xl overflow-hidden hover:border-accent-primary/30 border-2 border-transparent transition-all"
+                  className="bg-theme-surface rounded-[10px] overflow-hidden hover:border-theme-muted border border-theme-border shadow-card transition-colors"
                 >
-                  <div className="relative h-48">
+                  <div className="relative h-48 bg-theme-subtle border-b border-theme-border">
                     <img 
                       src={project.image} 
                       alt={project.title}
                       onError={(e) => {
-                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(project.title)}&size=400&background=0891b2&color=fff&bold=true`;
+                        e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(project.title)}&size=400&background=1F3A34&color=fff&bold=true`;
                       }}
                       className="w-full h-full object-cover"
                     />
                     {project.featured && (
-                      <div className="absolute top-3 right-3 px-3 py-1 bg-accent-primary text-white text-xs font-bold rounded-full">
+                      <div className="absolute top-3 right-3 px-2.5 py-0.5 bg-theme-accent text-theme-accent-contrast text-xs font-semibold rounded-full">
                         FEATURED
                       </div>
                     )}
                   </div>
                   
-                  <div className="p-4 sm:p-6">
+                  <div className="p-5 sm:p-6">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-3">
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg sm:text-xl font-bold mb-1 break-words">{project.title}</h3>
-                        <p className="text-text-secondary text-sm line-clamp-2">{project.description}</p>
+                        <h3 className="heading-4 mb-1 break-words">{project.title}</h3>
+                        <p className="text-theme-muted text-sm line-clamp-2">{project.description}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2 mb-4">
-                      <span className={`px-2 py-1 rounded text-xs ${statusColors[project.status]}`}>
+                      <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${statusColors[project.status]}`}>
                         {project.status.replace('-', ' ').toUpperCase()}
                       </span>
-                      <div className="flex gap-2">
+                      <div className="flex gap-1">
                         <a href={project.github} target="_blank" rel="noopener noreferrer" 
-                           className="p-1.5 hover:bg-dark-700 rounded transition-colors text-text-secondary hover:text-white">
+                           className="p-1.5 hover:bg-theme-subtle rounded transition-colors text-theme-muted hover:text-theme-text">
                           <Github size={14} />
                         </a>
                         <a href={project.live} target="_blank" rel="noopener noreferrer"
-                           className="p-1.5 hover:bg-dark-700 rounded transition-colors text-text-secondary hover:text-white">
+                           className="p-1.5 hover:bg-theme-subtle rounded transition-colors text-theme-muted hover:text-theme-text">
                           <ExternalLink size={14} />
                         </a>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-1.5 mb-4">
                       {project.tech.slice(0, 4).map((tech, idx) => (
-                        <span key={idx} className="px-2 py-1 bg-dark-800 rounded text-xs">
+                        <span key={idx} className="px-2.5 py-0.5 bg-theme-accent-soft text-theme-accent rounded-full text-xs font-medium">
                           {tech}
                         </span>
                       ))}
                       {project.tech.length > 4 && (
-                        <span className="px-2 py-1 text-text-secondary text-xs">
+                        <span className="px-2 py-0.5 text-theme-muted text-xs">
                           +{project.tech.length - 4} more
                         </span>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 pt-2 border-t border-theme-border">
                       <button
                         onClick={() => reorderProject(project._id!, 'up')}
                         disabled={filteredProjects.indexOf(project) === 0}
-                        className="p-2 hover:bg-dark-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors text-accent-primary flex items-center justify-center"
+                        className="p-2 hover:bg-theme-subtle disabled:opacity-40 disabled:cursor-not-allowed rounded-lg transition-colors text-theme-accent flex items-center justify-center"
                         title="Move up"
                       >
                         <ChevronUp size={16} />
@@ -316,28 +314,28 @@ export const AdminProjects = () => {
                       <button
                         onClick={() => reorderProject(project._id!, 'down')}
                         disabled={filteredProjects.indexOf(project) === filteredProjects.length - 1}
-                        className="p-2 hover:bg-dark-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors text-accent-primary flex items-center justify-center"
+                        className="p-2 hover:bg-theme-subtle disabled:opacity-40 disabled:cursor-not-allowed rounded-lg transition-colors text-theme-accent flex items-center justify-center"
                         title="Move down"
                       >
                         <ChevronDown size={16} />
                       </button>
                       <button
                         onClick={() => handleEdit(project)}
-                        className="flex-1 p-2 hover:bg-dark-700 rounded-lg transition-colors text-accent-primary flex items-center justify-center gap-2"
+                        className="flex-1 p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-accent text-sm font-medium flex items-center justify-center gap-2"
                       >
-                        <Edit2 size={16} />
+                        <Edit2 size={15} />
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(project._id!)}
-                        className="flex-1 p-2 hover:bg-dark-700 rounded-lg transition-colors text-red-400 flex items-center justify-center gap-2"
+                        className="flex-1 p-2 hover:bg-theme-subtle rounded-lg transition-colors text-rose-600 dark:text-rose-400 text-sm font-medium flex items-center justify-center gap-2"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={15} />
                         Delete
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
@@ -350,21 +348,21 @@ export const AdminProjects = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 overflow-y-auto"
+              className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto"
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-dark-900 rounded-xl p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+                exit={{ scale: 0.96, y: 12 }}
+                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-card"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="heading-3">
                     {editingProject ? 'Edit Project' : 'Create New Project'}
                   </h2>
                   <button
                     onClick={() => setShowModal(false)}
-                    className="p-2 hover:bg-dark-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+                    className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
                   >
                     <X size={20} />
                   </button>
@@ -372,102 +370,102 @@ export const AdminProjects = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Title *</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Title *</label>
                     <input
                       type="text"
                       value={formData.title}
                       onChange={(e) => handleInputChange('title', e.target.value)}
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Description *</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Description *</label>
                     <textarea
                       value={formData.description}
                       onChange={(e) => handleInputChange('description', e.target.value)}
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       rows={3}
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Key Features (one per line)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Key Features (one per line)</label>
                     <textarea
                       value={featuresInput}
                       onChange={(e) => setFeaturesInput(e.target.value)}
                       placeholder="Real-time messaging&#10;User authentication&#10;File sharing"
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary font-mono text-sm"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
                       rows={5}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Tech Stack (comma-separated)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Tech Stack (comma-separated)</label>
                     <input
                       type="text"
                       value={techInput}
                       onChange={(e) => setTechInput(e.target.value)}
                       placeholder="React, Node.js, MongoDB, Socket.io"
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">GitHub URL *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">GitHub URL *</label>
                       <input
                         type="url"
                         value={formData.github}
                         onChange={(e) => handleInputChange('github', e.target.value)}
                         placeholder="https://github.com/..."
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Live Demo URL *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Live Demo URL *</label>
                       <input
                         type="url"
                         value={formData.live}
                         onChange={(e) => handleInputChange('live', e.target.value)}
                         placeholder="https://..."
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         required
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Project Image URL *</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Project Image URL *</label>
                     <input
                       type="url"
                       value={formData.image}
                       onChange={(e) => handleInputChange('image', e.target.value)}
                       placeholder="https://i.ibb.co/..."
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       required
                     />
-                    <p className="text-xs text-text-tertiary mt-1">Upload to ImgBB and paste direct link</p>
+                    <p className="text-xs text-theme-muted mt-1">Upload to ImgBB and paste direct link</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Timeline (e.g., January 2024 - March 2024)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Timeline (e.g., January 2024 - March 2024)</label>
                     <input
                       type="text"
                       value={formData.timeline || ''}
                       onChange={(e) => handleInputChange('timeline', e.target.value)}
                       placeholder="January 2024 - March 2024"
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                     />
                   </div>
 
                   {/* Contributors Section */}
-                  <div className="border border-dark-700 rounded-lg p-4 bg-dark-800/50">
-                    <label className="text-sm font-medium mb-3 flex items-center gap-2">
-                      <UserPlus size={16} className="text-accent-primary" />
+                  <div className="border border-theme-border rounded-lg p-4 bg-theme-subtle">
+                    <label className="text-sm font-medium mb-3 flex items-center gap-2 text-theme-text">
+                      <UserPlus size={16} className="text-theme-accent" />
                       Contributors
                     </label>
                     
@@ -478,7 +476,7 @@ export const AdminProjects = () => {
                         value={contributorName}
                         onChange={(e) => setContributorName(e.target.value)}
                         placeholder="Contributor Name"
-                        className="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-sm"
+                        className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
                       />
                       <div className="grid grid-cols-2 gap-3">
                         <input
@@ -486,20 +484,20 @@ export const AdminProjects = () => {
                           value={contributorGithub}
                           onChange={(e) => setContributorGithub(e.target.value)}
                           placeholder="GitHub URL (optional)"
-                          className="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-sm"
+                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
                         />
                         <input
                           type="url"
                           value={contributorLinkedin}
                           onChange={(e) => setContributorLinkedin(e.target.value)}
                           placeholder="LinkedIn URL (optional)"
-                          className="w-full px-4 py-2 bg-dark-900 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-sm"
+                          className="w-full px-4 py-2 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-sm text-theme-text"
                         />
                       </div>
                       <button
                         type="button"
                         onClick={addContributor}
-                        className="px-4 py-2 bg-accent-primary/20 text-accent-primary rounded-lg hover:bg-accent-primary/30 transition-colors text-sm font-medium flex items-center gap-2"
+                        className="px-4 py-2 bg-theme-accent-soft text-theme-accent rounded-lg hover:border-theme-muted border border-theme-border transition-colors text-sm font-medium flex items-center gap-2"
                       >
                         <UserPlus size={14} />
                         Add Contributor
@@ -509,22 +507,22 @@ export const AdminProjects = () => {
                     {/* Contributors List */}
                     {formData.contributors.length > 0 && (
                       <div className="space-y-2">
-                        <p className="text-xs text-text-tertiary mb-2">Added Contributors:</p>
+                        <p className="text-xs text-theme-muted mb-2">Added Contributors:</p>
                         {formData.contributors.map((contributor, index) => (
-                          <div key={index} className="flex items-center justify-between bg-dark-900 p-3 rounded-lg">
+                          <div key={index} className="flex items-center justify-between bg-theme-surface border border-theme-border p-3 rounded-lg">
                             <div>
-                              <p className="font-medium text-sm">{contributor.name}</p>
+                              <p className="font-medium text-sm text-theme-text">{contributor.name}</p>
                               <div className="flex gap-2 mt-1">
                                 {contributor.github && (
                                   <a href={contributor.github} target="_blank" rel="noopener noreferrer" 
-                                     className="text-xs text-text-secondary hover:text-accent-primary flex items-center gap-1">
+                                     className="text-xs text-theme-muted hover:text-theme-accent flex items-center gap-1">
                                     <Github size={12} />
                                     GitHub
                                   </a>
                                 )}
                                 {contributor.linkedin && (
                                   <a href={contributor.linkedin} target="_blank" rel="noopener noreferrer"
-                                     className="text-xs text-text-secondary hover:text-accent-primary flex items-center gap-1">
+                                     className="text-xs text-theme-muted hover:text-theme-accent flex items-center gap-1">
                                     <Linkedin size={12} />
                                     LinkedIn
                                   </a>
@@ -534,7 +532,7 @@ export const AdminProjects = () => {
                             <button
                               type="button"
                               onClick={() => removeContributor(index)}
-                              className="p-2 hover:bg-red-500/20 text-red-400 rounded-lg transition-colors"
+                              className="p-2 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-rose-600 dark:text-rose-400 rounded-lg transition-colors"
                             >
                               <X size={16} />
                             </button>
@@ -546,11 +544,11 @@ export const AdminProjects = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Status</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Status</label>
                       <select
                         value={formData.status}
                         onChange={(e) => handleInputChange('status', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       >
                         <option value="completed">Completed</option>
                         <option value="in-progress">In Progress</option>
@@ -563,14 +561,14 @@ export const AdminProjects = () => {
                           type="checkbox"
                           checked={formData.featured}
                           onChange={(e) => handleInputChange('featured', e.target.checked)}
-                          className="w-4 h-4 rounded border-dark-700 bg-dark-800 text-accent-primary focus:ring-accent-primary"
+                          className="w-4 h-4 rounded border-theme-border bg-theme-subtle text-theme-accent focus:ring-theme-accent"
                         />
-                        <span className="text-sm">Featured Project</span>
+                        <span className="text-sm text-theme-text">Featured Project</span>
                       </label>
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-4 pt-4">
+                  <div className="flex justify-end gap-3 pt-4">
                     <Button
                       type="button"
                       variant="secondary"
@@ -578,7 +576,7 @@ export const AdminProjects = () => {
                     >
                       Cancel
                     </Button>
-                    <Button type="submit" variant="primary" className="btn-neon flex items-center gap-2">
+                    <Button type="submit" variant="primary" className="flex items-center gap-2">
                       <Save size={16} />
                       {editingProject ? 'Update' : 'Create'} Project
                     </Button>

@@ -15,20 +15,16 @@ export const Sponsor: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="max-w-2xl mx-auto"
       >
-        <div className="bg-gradient-to-br from-accent-primary/10 to-accent-primary/5 border border-accent-primary/20 rounded-lg p-8 md:p-12 text-center">
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex justify-center mb-6"
-          >
+        <div className="bg-theme-surface border border-theme-border rounded-[10px] p-8 md:p-10 text-center shadow-card">
+          <div className="flex justify-center mb-5">
             <Heart
-              size={32}
-              className="text-accent-primary fill-accent-primary"
+              size={28}
+              className="text-theme-accent"
             />
-          </motion.div>
+          </div>
 
-          <h2 className="heading-2 mb-4">{sponsor.title}</h2>
-          <p className="text-text-secondary text-lg mb-8 max-w-lg mx-auto">
+          <h2 className="heading-2 mb-3">{sponsor.title}</h2>
+          <p className="text-theme-muted text-base mb-8 max-w-lg mx-auto">
             {sponsor.description}
           </p>
 
@@ -40,7 +36,7 @@ export const Sponsor: React.FC = () => {
             {sponsor.cta}
           </Button>
 
-          <p className="text-text-tertiary text-sm mt-6">
+          <p className="text-theme-muted text-sm mt-6">
             Your support helps me create more quality content & projects
           </p>
         </div>

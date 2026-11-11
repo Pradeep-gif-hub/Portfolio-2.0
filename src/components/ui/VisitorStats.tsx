@@ -29,9 +29,9 @@ export const VisitorStats: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center gap-2 text-text-tertiary text-sm"
     >
-      <Eye size={16} className="text-accent-primary" />
+      <Eye size={16} className="text-theme-accent" />
       <span>
-        <span className="text-accent-primary font-semibold">{data.totalCount.toLocaleString()}</span>
+        <span className="text-theme-accent font-semibold">{data.totalCount.toLocaleString()}</span>
         {' '}
         {data.totalCount === 1 ? 'visit' : 'visits'}
       </span>

@@ -43,15 +43,15 @@ export const SpotifyNowPlaying: React.FC = () => {
   if (loading) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="glass-effect p-6 rounded-xl border border-accent-primary/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <Music className="text-accent-primary animate-pulse" size={24} />
-          <h3 className="text-lg font-semibold">Currently Vibing To</h3>
+        <div className="flex items-center gap-3 mb-3">
+          <Music className="text-theme-accent" size={20} />
+          <h3 className="text-base font-semibold text-theme-text">Currently Vibing To</h3>
         </div>
-        <div className="text-text-secondary text-sm">Loading...</div>
+        <div className="text-theme-muted text-sm">Loading...</div>
       </motion.div>
     );
   }
@@ -59,68 +59,54 @@ export const SpotifyNowPlaying: React.FC = () => {
   if (!track.isPlaying) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="glass-effect p-6 rounded-xl border border-accent-primary/20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <Music className="text-text-tertiary" size={24} />
-          <h3 className="text-lg font-semibold">Currently Vibing To</h3>
+        <div className="flex items-center gap-3 mb-3">
+          <Music className="text-theme-muted" size={20} />
+          <h3 className="text-base font-semibold text-theme-text">Currently Vibing To</h3>
         </div>
-        <div className="text-text-secondary text-sm">Not playing anything right now</div>
+        <div className="text-theme-muted text-sm">Not playing anything right now</div>
       </motion.div>
     );
   }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass-effect p-6 rounded-xl border border-accent-primary/20 hover:border-accent-primary/40 transition-all"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
     >
       <div className="flex items-center gap-3 mb-4">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <Music className="text-accent-primary" size={24} />
-        </motion.div>
-        <h3 className="text-lg font-semibold">Currently Vibing To</h3>
+        <Music className="text-theme-accent" size={20} />
+        <h3 className="text-base font-semibold text-theme-text">Currently Vibing To</h3>
       </div>
 
       <div className="flex gap-4 items-start">
         {/* Album Art */}
         {track.albumImageUrl && (
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0"
-          >
+          <div className="flex-shrink-0">
             <img
               src={track.albumImageUrl}
               alt={track.album}
-              className="w-20 h-20 rounded-lg shadow-lg border-2 border-accent-primary/30"
+              className="w-20 h-20 rounded-lg border border-theme-border object-cover"
             />
-          </motion.div>
+          </div>
         )}
 
         {/* Track Info */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1 min-w-0">
-              <h4 className="font-semibold text-white truncate mb-1">
+              <h4 className="font-semibold text-theme-text truncate mb-1">
                 {track.title}
               </h4>
-              <p className="text-text-secondary text-sm truncate">
+              <p className="text-theme-muted text-sm truncate">
                 {track.artist}
               </p>
               {track.album && (
-                <p className="text-text-tertiary text-xs truncate mt-1">
+                <p className="text-theme-muted text-xs truncate mt-1">
                   {track.album}
                 </p>
               )}
@@ -130,7 +116,7 @@ export const SpotifyNowPlaying: React.FC = () => {
                 href={track.songUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 text-accent-primary hover:text-accent-light transition-colors"
+                className="flex-shrink-0 text-theme-accent hover:text-theme-accent-hover transition-colors"
                 title="Listen on Spotify"
               >
                 <ExternalLink size={18} />
@@ -143,9 +129,9 @@ export const SpotifyNowPlaying: React.FC = () => {
             {[...Array(4)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-1 bg-accent-primary rounded-full"
+                className="w-1 bg-theme-accent rounded-full"
                 animate={{
-                  height: ["8px", "20px", "8px"],
+                  height: ["8px", "18px", "8px"],
                 }}
                 transition={{
                   duration: 1,

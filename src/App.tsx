@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
-import SmoothFollower from "./components/ui/SmoothFollower";
 import { useAnalytics } from "./hooks/useAnalytics";
 import "./styles/globals.css";
 
@@ -19,8 +18,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-dark-950 text-white overflow-x-hidden">
-      <SmoothFollower />
+    <div className="min-h-screen bg-theme-bg text-theme-text overflow-x-hidden">
       <ScrollProgress />
       <Navbar />
       <main className="pt-16">

@@ -40,22 +40,22 @@ export const ExploringPreview = () => {
     return (
       <SectionWrapper id="exploring-preview">
         <div className="animate-pulse">
-          <div className="mb-12">
-            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-4"></div>
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-96"></div>
+          <div className="mb-10">
+            <div className="h-8 bg-theme-subtle rounded w-64 mb-3"></div>
+            <div className="h-5 bg-theme-subtle rounded w-96"></div>
           </div>
-          <div className="max-w-6xl space-y-4 mb-12">
+          <div className="space-y-4 mb-10">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="glass-effect p-5 rounded-xl border-2 border-dark-700">
+              <div key={i} className="bg-theme-surface p-5 rounded-[10px] border border-theme-border shadow-card">
                 <div className="flex items-start gap-3">
-                  <div className="w-5 h-5 bg-gray-200 dark:bg-gray-700 rounded mt-1"></div>
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                  <div className="w-5 h-5 bg-theme-subtle rounded mt-0.5"></div>
+                  <div className="h-5 bg-theme-subtle rounded w-3/4"></div>
                 </div>
               </div>
             ))}
           </div>
           <div className="text-center">
-            <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-64 mx-auto"></div>
+            <div className="h-11 bg-theme-subtle rounded-lg w-64 mx-auto"></div>
           </div>
         </div>
       </SectionWrapper>
@@ -69,16 +69,16 @@ export const ExploringPreview = () => {
   return (
     <SectionWrapper id="exploring-preview">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.25 }}
+          className="mb-10"
         >
-          <h2 className="heading-2 mb-4">
+          <h2 className="heading-2 mb-3">
             Currently Exploring
           </h2>
-          <p className="text-text-secondary text-lg">
+          <p className="text-theme-muted text-base">
             What I'm actively learning and thinking about right now.
           </p>
         </motion.div>
@@ -87,22 +87,21 @@ export const ExploringPreview = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-6xl space-y-4 mb-12"
-          
+          transition={{ duration: 0.25 }}
+          className="space-y-4 mb-10"
         >
           {items.map((item, index) => (
             <motion.div
               key={item._id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-effect p-5 rounded-xl border-2 border-dark-700 hover:border-accent-primary/50 transition-all duration-300"
+              transition={{ duration: 0.2, delay: index * 0.05 }}
+              className="bg-theme-surface p-5 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
             >
               <div className="flex items-start gap-3">
-                <CheckCircle2 className="text-accent-primary mt-1 flex-shrink-0" size={20} />
-                <h3 className="text-lg font-semibold text-white">
+                <CheckCircle2 className="text-theme-accent mt-0.5 flex-shrink-0" size={18} />
+                <h3 className="text-base font-medium text-theme-text">
                   {item.title}
                 </h3>
               </div>
@@ -114,13 +113,13 @@ export const ExploringPreview = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.25 }}
           className="text-center"
         >
           <Link to="/exploring">
-            <Button className="btn-neon inline-flex items-center gap-2">
+            <Button variant="primary" className="inline-flex items-center gap-2">
               View all areas I'm exploring
-              <ArrowRight size={18} />
+              <ArrowRight size={17} />
             </Button>
           </Link>
         </motion.div>

@@ -52,36 +52,36 @@ const BlogDetailPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
-        <main className="container max-w-4xl mx-auto px-4 py-8">
+        <main className="container max-w-container mx-auto px-4 py-8">
           <div className="animate-pulse">
             {/* Breadcrumb skeleton */}
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-8"></div>
+            <div className="h-4 bg-theme-subtle rounded w-48 mb-8"></div>
             
             {/* Title skeleton */}
-            <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-4"></div>
+            <div className="h-10 bg-theme-subtle rounded w-3/4 mb-4"></div>
             
             {/* Meta info skeleton */}
             <div className="flex gap-6 mb-6">
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-28"></div>
+              <div className="h-5 bg-theme-subtle rounded w-32"></div>
+              <div className="h-5 bg-theme-subtle rounded w-24"></div>
+              <div className="h-5 bg-theme-subtle rounded w-28"></div>
             </div>
             
             {/* Tags skeleton */}
             <div className="flex gap-2 mb-8">
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-24"></div>
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
+              <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
+              <div className="h-6 bg-theme-subtle rounded-full w-24"></div>
+              <div className="h-6 bg-theme-subtle rounded-full w-16"></div>
             </div>
             
             {/* Content skeleton */}
             <div className="space-y-4 mb-8">
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
-              <div className="h-20 bg-gray-200 dark:bg-gray-700 rounded mt-6"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mt-6"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
+              <div className="h-4 bg-theme-subtle rounded"></div>
+              <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
+              <div className="h-4 bg-theme-subtle rounded w-10/12"></div>
+              <div className="h-20 bg-theme-subtle rounded mt-6"></div>
+              <div className="h-4 bg-theme-subtle rounded mt-6"></div>
+              <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
             </div>
           </div>
         </main>
@@ -93,7 +93,7 @@ const BlogDetailPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Blog post not found</h1>
+          <h1 className="heading-1 mb-4">Blog post not found</h1>
           <Button onClick={() => navigate("/")} variant="primary">
             Back to Home
           </Button>
@@ -123,28 +123,23 @@ const BlogDetailPage = () => {
               <div className="absolute top-3 right-3 z-10">
                 <button
                   onClick={() => copyToClipboard(code, index)}
-                  className="p-2 rounded-lg bg-dark-600/80 hover:bg-dark-500 transition-colors"
+                  className="p-2 rounded-lg bg-theme-surface border border-theme-border hover:border-theme-muted transition-colors"
                   title="Copy code"
                 >
                   {copiedCode === index ? (
-                    <Check size={16} className="text-green-400" />
+                    <Check size={16} className="text-theme-accent" />
                   ) : (
-                    <Copy size={16} className="text-text-secondary" />
+                    <Copy size={16} className="text-theme-muted" />
                   )}
                 </button>
               </div>
-              <div className="bg-dark-700 rounded-xl p-6 overflow-x-auto">
+              <div className="bg-theme-subtle border border-theme-border rounded-[10px] p-5 overflow-x-auto">
                 <div className="flex items-center gap-2 mb-3">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-                  </div>
-                  <span className="text-xs text-text-secondary font-mono ml-2">
+                  <span className="text-xs text-theme-muted font-mono">
                     {language}
                   </span>
                 </div>
-                <pre className="text-sm font-mono text-gray-300">
+                <pre className="text-sm font-mono text-theme-text">
                   <code>{code}</code>
                 </pre>
               </div>
@@ -157,21 +152,21 @@ const BlogDetailPage = () => {
       return part.split("\n").map((line, i) => {
         if (line.startsWith("## ")) {
           return (
-            <h2 key={`${index}-${i}`} className="text-2xl font-bold mt-8 mb-4 text-text-primary dark:text-dark-50">
+            <h2 key={`${index}-${i}`} className="heading-2 mt-8 mb-4">
               {line.replace("## ", "")}
             </h2>
           );
         }
         if (line.startsWith("### ")) {
           return (
-            <h3 key={`${index}-${i}`} className="text-xl font-bold mt-6 mb-3 text-text-primary dark:text-dark-50">
+            <h3 key={`${index}-${i}`} className="heading-3 mt-6 mb-3">
               {line.replace("### ", "")}
             </h3>
           );
         }
         if (line.startsWith("- ")) {
           return (
-            <li key={`${index}-${i}`} className="ml-6 mb-2 text-text-secondary dark:text-dark-400">
+            <li key={`${index}-${i}`} className="ml-6 mb-2 text-theme-muted">
               {line.replace("- ", "")}
             </li>
           );
@@ -181,12 +176,12 @@ const BlogDetailPage = () => {
         }
         
         // Bold text
-        const boldRendered = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-accent-primary font-semibold">$1</strong>');
+        const boldRendered = line.replace(/\*\*(.*?)\*\*/g, '<strong class="text-theme-text font-semibold">$1</strong>');
         
         return (
           <p 
             key={`${index}-${i}`} 
-            className="mb-4 text-text-secondary dark:text-dark-400 leading-relaxed"
+            className="mb-4 text-theme-muted leading-relaxed"
             dangerouslySetInnerHTML={{ __html: boldRendered }}
           />
         );
@@ -196,7 +191,7 @@ const BlogDetailPage = () => {
 
   return (
     <div className="min-h-screen pb-16">
-      <main className="container max-w-5xl mx-auto px-4 py-8">
+      <main className="container max-w-container mx-auto px-4 py-8">
         <Breadcrumb 
           items={[
             { label: "Home", path: "/" },
@@ -206,41 +201,37 @@ const BlogDetailPage = () => {
         />
 
         <motion.article
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.25 }}
         >
           {/* Header */}
-          <header className="mb-12 mt-8">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-4xl md:text-5xl font-bold mb-6 text-text-primary dark:text-dark-50 leading-tight"
-            >
+          <header className="mb-10 mt-6">
+            <h1 className="heading-1 mb-5 leading-tight">
               {blog.title}
-            </motion.h1>
+            </h1>
 
             {/* Meta Information */}
-            <div className="flex flex-wrap gap-6 mb-6 text-sm text-text-secondary dark:text-dark-400">
+            <div className="flex flex-wrap gap-6 mb-5 text-sm text-theme-muted">
               <div className="flex items-center gap-2">
-                <User size={16} />
+                <User size={15} />
                 <span>{blog.author}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Calendar size={16} />
+                <Calendar size={15} />
                 <span>{new Date(blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock size={16} />
+                <Clock size={15} />
                 <span>{blog.readTime} min read</span>
               </div>
             </div>
 
             {/* Tags */}
             {blog.tags && blog.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-2 mb-6">
                 {blog.tags.map((tag, index) => (
-                  <Badge key={index} variant="accent" className="border-accent-primary">
+                  <Badge key={index} variant="accent">
                     <Tag size={12} className="mr-1" />
                     {tag}
                   </Badge>
@@ -250,67 +241,44 @@ const BlogDetailPage = () => {
           </header>
 
           {/* Main Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="prose prose-lg max-w-none mb-12"
-          >
-            <div className="glass-effect p-8 md:p-12 rounded-xl">
+          <div className="prose prose-neutral dark:prose-invert max-w-none mb-10">
+            <div className="bg-theme-surface border border-theme-border p-6 md:p-10 rounded-[10px] shadow-card">
               {renderContent(blog.content)}
             </div>
-          </motion.div>
+          </div>
 
           {/* Key Takeaways */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="glass-effect p-8 rounded-xl mb-12 glow-accent"
-          >
-            <h2 className="text-2xl font-bold mb-6 text-text-primary dark:text-dark-50">
+          <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-8">
+            <h2 className="heading-3 mb-5">
               🎯 Key Takeaways
             </h2>
             <ul className="space-y-3">
               {blog.keyTakeaways.map((takeaway, index) => (
-                <motion.li
+                <li
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
-                  className="flex items-start gap-3 text-text-secondary dark:text-dark-400"
+                  className="flex items-start gap-3 text-theme-muted text-sm"
                 >
-                  <Check size={20} className="text-accent-primary mt-1 flex-shrink-0" />
+                  <Check size={18} className="text-theme-accent mt-0.5 flex-shrink-0" />
                   <span>{takeaway}</span>
-                </motion.li>
+                </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* TL;DR Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="glass-effect p-6 rounded-xl mb-12 border-l-4 border-accent-primary glow-accent"
-          >
-            <h2 className="text-lg font-bold mb-2 text-accent-primary flex items-center gap-2">
-              <span className="text-2xl">⚡</span> TL;DR
+          <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card mb-8 border-l-4 border-l-theme-accent">
+            <h2 className="text-base font-semibold mb-2 text-theme-accent flex items-center gap-2">
+              <span className="text-lg">⚡</span> TL;DR
             </h2>
-            <p className="text-text-secondary dark:text-dark-400 leading-relaxed">
+            <p className="text-theme-muted text-sm leading-relaxed">
               {blog.tldr}
             </p>
-          </motion.div>
+          </div>
 
           {/* References */}
           {blog.references.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="glass-effect p-8 rounded-xl mb-12"
-            >
-              <h2 className="text-2xl font-bold mb-6 text-text-primary dark:text-dark-50">
+            <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-8">
+              <h2 className="heading-3 mb-5">
                 📚 References & Further Reading
               </h2>
               <ul className="space-y-3">
@@ -320,33 +288,28 @@ const BlogDetailPage = () => {
                       href={ref.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 text-accent-primary hover:text-accent-secondary transition-colors"
+                      className="flex items-center gap-2 text-theme-accent hover:text-theme-accent-hover transition-colors text-sm"
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={15} />
                       <span>{ref.title}</span>
                     </a>
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           )}
 
           {/* Author Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="glass-effect p-8 rounded-xl mb-12 glow-accent"
-          >
-            <div className="flex items-start gap-6">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-accent-primary to-neon-purple flex items-center justify-center text-2xl font-bold flex-shrink-0">
+          <div className="bg-theme-surface border border-theme-border p-6 md:p-8 rounded-[10px] shadow-card mb-10">
+            <div className="flex items-start gap-5">
+              <div className="w-16 h-16 rounded-full bg-theme-accent-soft border border-theme-border flex items-center justify-center text-lg font-semibold text-theme-accent flex-shrink-0">
                 {blog.author.split(' ').map(n => n[0]).join('')}
               </div>
               <div>
-                <h3 className="text-xl font-bold mb-2 text-text-primary dark:text-dark-50">
+                <h3 className="heading-4 mb-2">
                   {blog.author}
                 </h3>
-                <p className="text-text-secondary dark:text-dark-400 leading-relaxed mb-4">
+                <p className="text-theme-muted text-sm leading-relaxed mb-4">
                   Passionate developer and technical writer sharing insights on web development, 
                   software architecture, and best practices.
                 </p>
@@ -354,27 +317,20 @@ const BlogDetailPage = () => {
                   variant="outline" 
                   size="sm"
                   onClick={() => navigate('/about')}
-                  className="border-accent-primary text-accent-primary hover:bg-accent-primary/10"
                 >
                   Learn more about me
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Navigation */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="mt-12 flex justify-between items-center"
-          >
+          <div className="mt-10 flex flex-wrap gap-4 justify-between items-center">
             <Button
               onClick={() => navigate('/blog')}
               variant="outline"
-              className="border-accent-primary text-accent-primary hover:bg-accent-primary/10"
             >
-              <ArrowLeft size={18} className="mr-2" />
+              <ArrowLeft size={17} className="mr-2" />
               Back to Blog
             </Button>
 
@@ -400,7 +356,7 @@ const BlogDetailPage = () => {
                 Share on LinkedIn
               </Button>
             </div>
-          </motion.div>
+          </div>
         </motion.article>
       </main>
     </div>

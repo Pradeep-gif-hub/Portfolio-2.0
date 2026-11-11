@@ -128,66 +128,64 @@ export const AdminExperience = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">Experience</h1>
-              <p className="text-text-secondary">Manage your work experience</p>
+              <h1 className="heading-2 mb-1">Experience</h1>
+              <p className="text-theme-muted text-sm">Manage your work experience</p>
             </div>
-            <Button onClick={handleCreate} className="btn-neon flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
-              <Plus size={20} />
+            <Button onClick={handleCreate} variant="primary" className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+              <Plus size={18} />
               New Experience
             </Button>
           </div>
 
           <div className="mb-6 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-theme-muted" size={18} />
             <input
               type="text"
               placeholder="Search experiences..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-white"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-              <p className="mt-4 text-text-secondary">Loading experiences...</p>
+              <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+              <p className="mt-4 text-theme-muted text-sm">Loading experiences...</p>
             </div>
           ) : (
             <div className="space-y-4">
               {filteredExperiences.map((exp) => (
-                <motion.div
+                <div
                   key={exp._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="glass-effect p-6 rounded-xl hover:border-accent-primary/30 border-2 border-transparent transition-all"
+                  className="bg-theme-surface p-6 rounded-[10px] hover:border-theme-muted border border-theme-border shadow-card transition-colors"
                 >
                   <div className="flex items-start gap-4">
-                    <img src={exp.logo} alt={exp.company} className="w-16 h-16 rounded-lg object-cover" />
+                    <img src={exp.logo} alt={exp.company} className="w-14 h-14 rounded-lg border border-theme-border object-cover" />
                     <div className="flex-1">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
-                          <p className="text-accent-primary mb-2">{exp.company}</p>
-                          <p className="text-sm text-text-tertiary mb-3">{exp.duration}</p>
+                          <h3 className="heading-4 mb-1">{exp.role}</h3>
+                          <p className="text-theme-accent text-sm font-medium mb-1">{exp.company}</p>
+                          <p className="text-xs text-theme-muted mb-3">{exp.duration}</p>
                           <div className="flex flex-wrap gap-2">
                             {exp.techStack.slice(0, 5).map((tech, idx) => (
-                              <span key={idx} className="px-2 py-1 bg-accent-primary/10 rounded text-accent-primary text-sm">
+                              <span key={idx} className="px-2.5 py-0.5 bg-theme-accent-soft rounded-full text-theme-accent text-xs font-medium">
                                 {tech}
                               </span>
                             ))}
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <button
                             onClick={() => handleEdit(exp)}
-                            className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-accent-primary"
+                            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-accent"
                           >
                             <Edit2 size={16} />
                           </button>
                           <button
                             onClick={() => handleDelete(exp._id!)}
-                            className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-red-400"
+                            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-rose-600 dark:text-rose-400"
                           >
                             <Trash2 size={16} />
                           </button>
@@ -195,7 +193,7 @@ export const AdminExperience = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
@@ -208,21 +206,21 @@ export const AdminExperience = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 overflow-y-auto"
+              className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto"
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-dark-900 rounded-xl p-4 md:p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                exit={{ scale: 0.96, y: 12 }}
+                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-card"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="heading-3">
                     {editingExp ? 'Edit Experience' : 'Add New Experience'}
                   </h2>
                   <button
                     onClick={() => setShowModal(false)}
-                    className="p-2 hover:bg-dark-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+                    className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
                   >
                     <X size={20} />
                   </button>
@@ -231,22 +229,22 @@ export const AdminExperience = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Role / Position *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Role / Position *</label>
                       <input
                         type="text"
                         value={formData.role}
                         onChange={(e) => handleInputChange('role', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Company *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Company *</label>
                       <input
                         type="text"
                         value={formData.company}
                         onChange={(e) => handleInputChange('company', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         required
                       />
                     </div>
@@ -254,23 +252,23 @@ export const AdminExperience = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Logo URL *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Logo URL *</label>
                       <input
                         type="url"
                         value={formData.logo}
                         onChange={(e) => handleInputChange('logo', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         placeholder="https://example.com/logo.png"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Duration *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Duration *</label>
                       <input
                         type="text"
                         value={formData.duration}
                         onChange={(e) => handleInputChange('duration', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         placeholder="Jan 2022 - Present"
                         required
                       />
@@ -278,23 +276,23 @@ export const AdminExperience = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Key Points (one per line)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Key Points (one per line)</label>
                     <textarea
                       value={pointsInput}
                       onChange={(e) => setPointsInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary font-mono text-sm"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent font-mono text-sm text-theme-text"
                       rows={6}
                       placeholder="Led development of microservices&#10;Implemented CI/CD pipelines&#10;Mentored team of 5 developers"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Tech Stack (comma-separated)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Tech Stack (comma-separated)</label>
                     <input
                       type="text"
                       value={techStackInput}
                       onChange={(e) => setTechStackInput(e.target.value)}
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       placeholder="React, Node.js, TypeScript, AWS"
                     />
                   </div>
@@ -305,13 +303,13 @@ export const AdminExperience = () => {
                         type="checkbox"
                         checked={formData.featured || false}
                         onChange={(e) => handleInputChange('featured', e.target.checked)}
-                        className="w-4 h-4 rounded border-dark-700 bg-dark-800 text-accent-primary focus:ring-accent-primary"
+                        className="w-4 h-4 rounded border-theme-border bg-theme-subtle text-theme-accent focus:ring-theme-accent"
                       />
-                      <span className="text-sm">Featured</span>
+                      <span className="text-sm text-theme-text">Featured</span>
                     </label>
                   </div>
 
-                  <div className="flex justify-end gap-4 pt-4">
+                  <div className="flex justify-end gap-3 pt-4">
                     <Button
                       type="button"
                       variant="secondary"
@@ -319,7 +317,7 @@ export const AdminExperience = () => {
                     >
                       Cancel
                     </Button>
-                    <Button type="submit" variant="primary" className="btn-neon flex items-center gap-2">
+                    <Button type="submit" variant="primary" className="flex items-center gap-2">
                       <Save size={16} />
                       {editingExp ? 'Update' : 'Create'} Experience
                     </Button>

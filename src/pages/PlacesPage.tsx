@@ -182,12 +182,12 @@ export const PlacesPage = () => {
           userMarkerRef.current.setLngLat([lng, lat]);
         } else {
           const userPin = document.createElement("div");
-          userPin.className = "w-4 h-4 rounded-full bg-blue-500 border-2 border-white shadow-lg animate-ping";
+          userPin.className = "w-4 h-4 rounded-full bg-theme-accent border-2 border-white shadow-card animate-ping";
           const wrapper = document.createElement("div");
           wrapper.className = "relative flex items-center justify-center";
           wrapper.appendChild(userPin);
           const core = document.createElement("div");
-          core.className = "absolute w-3 h-3 rounded-full bg-blue-600 border border-white";
+          core.className = "absolute w-3 h-3 rounded-full bg-theme-accent border border-white";
           wrapper.appendChild(core);
 
           userMarkerRef.current = new maplibregl.Marker({ element: wrapper })

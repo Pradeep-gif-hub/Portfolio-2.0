@@ -368,458 +368,226 @@ export const AdminExploring = () => {
 
     <AdminLayout>
 
-     <div className="text-center py-12">
-
-      <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-accent-primary border-t-transparent"></div>
-
-     </div>
-
+      <div className="text-center py-12">
+        <div className="inline-block animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent"></div>
+      </div>
     </AdminLayout>
-
    </ProtectedRoute>
-
   );
-
  }
 
-
-
  return (
-
   <ProtectedRoute>
-
    <AdminLayout>
-
-    <motion.div
-
-     initial={{ opacity: 0, y: 20 }}
-
-     animate={{ opacity: 1, y: 0 }}
-
-     className="max-w-7xl mx-auto"
-
-    >
-
+    <div className="max-w-7xl mx-auto">
      {/* Header */}
-
      <div className="flex items-center justify-between mb-8">
-
       <div>
-
-       <h1 className="text-3xl font-bold mb-2">Exploring</h1>
-
-       <p className="text-text-secondary">
-
+       <h1 className="heading-2 mb-1">Exploring</h1>
+       <p className="text-theme-muted text-sm">
         Manage the "Currently Exploring" section - what you're actively learning
-
        </p>
-
       </div>
-
-      <Button onClick={handleCreate} className="btn-neon flex items-center gap-2">
-
-       <Plus size={20} />
-
+      <Button onClick={handleCreate} variant="primary" className="flex items-center gap-2">
+       <Plus size={18} />
        Add New
-
       </Button>
-
      </div>
-
-
 
      {/* Search Bar */}
-
-     <div className="glass-effect p-4 rounded-xl border-2 border-dark-700 mb-6">
-
+     <div className="bg-theme-surface p-4 rounded-[10px] border border-theme-border shadow-card mb-6">
       <div className="relative">
-
-       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary" size={20} />
-
+       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-theme-muted" size={18} />
        <input
-
         type="text"
-
         placeholder="Search exploring items..."
-
         value={searchTerm}
-
         onChange={(e) => setSearchTerm(e.target.value)}
-
-        className="w-full pl-10 pr-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:border-accent-primary focus:outline-none text-white"
-
+        className="w-full pl-10 pr-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text placeholder:text-theme-muted"
        />
-
       </div>
-
      </div>
 
-
-
      {/* Items Grid */}
-
      {filteredItems.length === 0 ? (
-
-      <div className="glass-effect p-12 rounded-xl border-2 border-dark-700 text-center">
-
-       <p className="text-text-secondary text-lg">
-
+      <div className="bg-theme-surface p-12 rounded-[10px] border border-theme-border shadow-card text-center">
+       <p className="text-theme-muted text-base">
         {searchTerm ? 'No items match your search' : 'No exploring items yet. Create your first one!'}
-
        </p>
-
       </div>
-
      ) : (
-
       <div className="grid gap-4">
-
-       {filteredItems.map((item, index) => (
-
-        <motion.div
-
+       {filteredItems.map((item) => (
+        <div
          key={item._id}
-
-         initial={{ opacity: 0, y: 20 }}
-
-         animate={{ opacity: 1, y: 0 }}
-
-         transition={{ delay: index * 0.05 }}
-
-         className="glass-effect p-6 rounded-xl border-2 border-dark-700 hover:border-accent-primary/50 transition-colors"
-
+         className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
         >
-
          <div className="flex items-start justify-between">
-
           <div className="flex-1">
-
            <div className="flex items-center gap-3 mb-2">
-
-            <span className="text-text-secondary font-mono text-sm">#{item.order}</span>
-
-            <h3 className="text-xl font-semibold">{item.title}</h3>
-
-            <span className={`px-2 py-1 rounded-full text-xs ${
-
+            <span className="text-theme-muted font-mono text-sm">#{item.order}</span>
+            <h3 className="heading-4">{item.title}</h3>
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
              item.isActive
-
-              ? 'bg-green-500/20 text-green-400'
-
-              : 'bg-gray-500/20 text-gray-400'
-
+              ? 'bg-emerald-50 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
+              : 'bg-theme-subtle text-theme-muted'
             }`}>
-
              {item.isActive ? 'Active' : 'Inactive'}
-
             </span>
-
            </div>
-
            {item.description && (
-
-            <p className="text-text-secondary mb-3">{item.description}</p>
-
+            <p className="text-theme-muted text-sm mb-3">{item.description}</p>
            )}
-
-           <p className="text-xs text-text-secondary">
-
+           <p className="text-xs text-theme-muted">
             Updated: {new Date(item.updatedAt).toLocaleDateString()}
-
            </p>
-
           </div>
-
-          <div className="flex gap-2 ml-4">
-
+          <div className="flex gap-1 ml-4">
            <button
-
             onClick={() => handleToggle(item._id)}
-
-            className="p-2 hover:bg-dark-700 rounded-lg transition-colors"
-
+            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
             title={item.isActive ? 'Deactivate' : 'Activate'}
-
            >
-
             {item.isActive ? <Eye size={18} /> : <EyeOff size={18} />}
-
            </button>
-
            <button
-
             onClick={() => handleEditClick(item)}
-
-            className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-blue-400"
-
+            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-accent"
            >
-
             <Edit2 size={18} />
-
            </button>
-
            <button
-
             onClick={() => handleDelete(item._id)}
-
-            className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-red-400"
-
+            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-rose-600 dark:text-rose-400"
            >
-
             <Trash2 size={18} />
-
            </button>
-
           </div>
-
          </div>
-
-        </motion.div>
-
+        </div>
        ))}
-
       </div>
-
      )}
 
-
-
      {/* Modal */}
-
      <AnimatePresence>
-
       {showModal && (
-
        <>
-
         <motion.div
-
          initial={{ opacity: 0 }}
-
          animate={{ opacity: 1 }}
-
          exit={{ opacity: 0 }}
-
-         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
-
+         className="fixed inset-0 bg-black/60 z-40"
          onClick={() => setShowModal(false)}
-
         />
-
         <motion.div
-
-         initial={{ opacity: 0, scale: 0.95 }}
-
+         initial={{ opacity: 0, scale: 0.96 }}
          animate={{ opacity: 1, scale: 1 }}
-
-         exit={{ opacity: 0, scale: 0.95 }}
-
+         exit={{ opacity: 0, scale: 0.96 }}
          className="fixed inset-0 z-50 flex items-center justify-center p-4"
-
         >
-
-         <div className="glass-effect p-8 rounded-2xl border-2 border-dark-700 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-
+         <div className="bg-theme-surface p-6 md:p-8 rounded-[10px] border border-theme-border shadow-card max-w-2xl w-full max-h-[90vh] overflow-y-auto">
           <div className="flex items-center justify-between mb-6">
-
-           <h2 className="text-2xl font-bold">
-
+           <h2 className="heading-3">
             {editingId ? 'Edit Item' : 'Add New Item'}
-
            </h2>
-
            <button
-
             onClick={() => setShowModal(false)}
-
-            className="p-2 hover:bg-dark-700 rounded-lg transition-colors"
-
+            className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
            >
-
-            <X size={24} />
-
+            <X size={20} />
            </button>
-
           </div>
 
-
-
-          <form onSubmit={(e) => { handleSubmit(e); setShowModal(false); }} className="space-y-6">
-
+          <form onSubmit={(e) => { handleSubmit(e); setShowModal(false); }} className="space-y-5">
            <div>
-
-            <label className="block text-sm font-medium mb-2">
-
-             Title <span className="text-red-400">*</span>
-
+            <label className="block text-sm font-medium mb-2 text-theme-text">
+             Title <span className="text-rose-500">*</span>
             </label>
-
             <input
-
              type="text"
-
              value={formData.title}
-
              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-
-             className="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:border-accent-primary focus:outline-none"
-
+             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
              placeholder="e.g., Natural Language Processing"
-
              required
-
             />
-
            </div>
-
-
 
            <div>
-
-            <label className="block text-sm font-medium mb-2">
-
+            <label className="block text-sm font-medium mb-2 text-theme-text">
              Description (1-2 lines max)
-
             </label>
-
             <textarea
-
              value={formData.description}
-
              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-
-             className="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:border-accent-primary focus:outline-none"
-
+             className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
              placeholder="Optional: Brief description of what you're exploring"
-
              rows={2}
-
             />
-
            </div>
-
-
 
            <div className="grid grid-cols-2 gap-4">
-
             <div>
-
-             <label className="block text-sm font-medium mb-2">Order</label>
-
+             <label className="block text-sm font-medium mb-2 text-theme-text">Order</label>
              <input
-
               type="number"
-
               value={formData.order}
-
               onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-
-              className="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:border-accent-primary focus:outline-none"
-
+              className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:border-theme-accent focus:ring-1 focus:ring-theme-accent focus:outline-none text-theme-text"
               min="1"
-
              />
-
-             <p className="text-xs text-text-secondary mt-1">Lower numbers appear first</p>
-
+             <p className="text-xs text-theme-muted mt-1">Lower numbers appear first</p>
             </div>
-
-
 
             <div>
-
-             <label className="block text-sm font-medium mb-2">Status</label>
-
-             <div className="flex items-center gap-4 mt-4">
-
-              <label className="flex items-center gap-2 cursor-pointer">
-
+             <label className="block text-sm font-medium mb-2 text-theme-text">Status</label>
+             <div className="flex items-center gap-4 mt-3">
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-theme-text">
                <input
-
                 type="radio"
-
                 checked={formData.isActive}
-
                 onChange={() => setFormData({ ...formData, isActive: true })}
-
-                className="w-4 h-4"
-
+                className="w-4 h-4 text-theme-accent focus:ring-theme-accent"
                />
-
                <span>Active</span>
-
               </label>
-
-              <label className="flex items-center gap-2 cursor-pointer">
-
+              <label className="flex items-center gap-2 cursor-pointer text-sm text-theme-text">
                <input
-
                 type="radio"
-
                 checked={!formData.isActive}
-
                 onChange={() => setFormData({ ...formData, isActive: false })}
-
-                className="w-4 h-4"
-
+                className="w-4 h-4 text-theme-accent focus:ring-theme-accent"
                />
-
                <span>Inactive</span>
-
               </label>
-
              </div>
-
             </div>
-
            </div>
-
-
 
            <div className="flex gap-3 pt-4">
-
-            <Button type="submit" className="btn-neon flex items-center gap-2 flex-1">
-
-             <Save size={18} />
-
+            <Button type="submit" variant="primary" className="flex items-center gap-2 flex-1">
+             <Save size={16} />
              {editingId ? 'Update' : 'Create'}
-
             </Button>
-
             <Button
-
              type="button"
-
+             variant="secondary"
              onClick={() => setShowModal(false)}
-
-             className="px-6 py-3 bg-dark-700 hover:bg-dark-600 rounded-lg transition-colors"
-
+             className="px-6"
             >
-
              Cancel
-
             </Button>
-
            </div>
-
           </form>
-
          </div>
-
         </motion.div>
-
        </>
-
       )}
-
      </AnimatePresence>
-
-    </motion.div>
-
+    </div>
    </AdminLayout>
-
   </ProtectedRoute>
-
  );
 
 };

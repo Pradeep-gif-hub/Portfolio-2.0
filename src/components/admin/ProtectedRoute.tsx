@@ -21,11 +21,11 @@ export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ childr
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-dark-950">
+      <div className="min-h-screen flex items-center justify-center bg-theme-bg">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-12 h-12 border-4 border-accent-primary border-t-transparent rounded-full"
+          className="w-10 h-10 border-2 border-theme-border border-t-theme-accent rounded-full"
         />
       </div>
     );

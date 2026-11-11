@@ -66,46 +66,37 @@ const ProjectDetailPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
-        <main className="container max-w-7xl mx-auto px-4 py-8">
+        <main className="container max-w-container mx-auto px-4 py-8">
           <div className="animate-pulse">
             {/* Breadcrumb skeleton */}
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-8"></div>
+            <div className="h-4 bg-theme-subtle rounded w-64 mb-8"></div>
             
             {/* Hero image skeleton */}
-            <div className="relative h-[500px] bg-gray-200 dark:bg-gray-700 rounded-2xl mb-12">
+            <div className="relative h-[420px] bg-theme-subtle rounded-[10px] mb-10 border border-theme-border">
               <div className="absolute bottom-8 left-8 right-8">
-                <div className="h-12 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
+                <div className="h-10 bg-theme-border rounded w-3/4"></div>
               </div>
             </div>
             
             {/* Tech stack skeleton */}
-            <div className="flex flex-wrap gap-3 justify-center mb-12">
-              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-24"></div>
-              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-28"></div>
-              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-20"></div>
-              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-32"></div>
-              <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded-xl w-24"></div>
+            <div className="flex flex-wrap gap-3 justify-center mb-10">
+              <div className="h-9 bg-theme-subtle rounded-full w-24"></div>
+              <div className="h-9 bg-theme-subtle rounded-full w-28"></div>
+              <div className="h-9 bg-theme-subtle rounded-full w-20"></div>
+              <div className="h-9 bg-theme-subtle rounded-full w-32"></div>
             </div>
             
             {/* Description skeleton */}
-            <div className="bg-gradient-to-b from-dark-800/90 to-black p-8 rounded-2xl border border-accent-primary/30 mb-12">
+            <div className="bg-theme-surface p-6 rounded-[10px] border border-theme-border mb-10">
               <div className="space-y-4 mb-6">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+                <div className="h-4 bg-theme-subtle rounded"></div>
+                <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
+                <div className="h-4 bg-theme-subtle rounded w-10/12"></div>
               </div>
               <div className="flex gap-4">
-                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-32"></div>
-                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-36"></div>
+                <div className="h-10 bg-theme-subtle rounded-lg w-32"></div>
+                <div className="h-10 bg-theme-subtle rounded-lg w-36"></div>
               </div>
-            </div>
-            
-            {/* Features skeleton */}
-            <div className="space-y-3">
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-40 mb-4"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
             </div>
           </div>
         </main>
@@ -116,7 +107,7 @@ const ProjectDetailPage = () => {
   if (!project) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4">
-        <h1 className="text-4xl font-bold mb-4">Project not found</h1>
+        <h1 className="heading-1 mb-4">Project not found</h1>
         <Button onClick={() => navigate("/")} variant="primary">Back to Home</Button>
       </div>
     );
@@ -124,7 +115,7 @@ const ProjectDetailPage = () => {
 
   return (
     <div className="min-h-screen">
-      <main className="container max-w-7xl mx-auto px-4 py-8">
+      <main className="container max-w-container mx-auto px-4 py-8">
         <Breadcrumb 
           items={[
             { label: "Home", path: "/" },
@@ -135,39 +126,42 @@ const ProjectDetailPage = () => {
 
         {/* 1. Gallery/Image Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-8 mb-12"
+          transition={{ duration: 0.25 }}
+          className="mt-6 mb-10"
         >
-          <div className="relative rounded-2xl overflow-hidden border border-accent-primary/30">
+          <div className="relative rounded-[10px] overflow-hidden border border-theme-border bg-theme-surface shadow-card">
             <img
               src={project.image}
               alt={project.title}
-              className="w-full h-[500px] object-cover"
+              className="w-full h-[380px] md:h-[460px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-2">{project.title}</h1>
+            <div
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.15) 50%, transparent 100%)" }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <h1 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-white mb-1">{project.title}</h1>
             </div>
           </div>
         </motion.div>
 
         {/* 2. Tools Used (No Heading) */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.25 }}
+          className="mb-10"
         >
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-2.5 justify-center">
             {project.tech.map((tech) => (
               <div
                 key={tech}
-                className="flex items-center gap-2 px-4 py-2 bg-dark-800/90 backdrop-blur-sm rounded-xl border border-accent-primary/30 hover:border-accent-primary/60 transition-all group"
+                className="flex items-center gap-2 px-3.5 py-1.5 bg-theme-accent-soft rounded-full border border-theme-border text-sm font-medium text-theme-accent"
               >
-                <img src={getTechLogo(tech)} alt={tech} className="w-6 h-6 object-contain group-hover:scale-110 transition-transform" />
-                <span className="text-sm font-medium text-white">{tech}</span>
+                <img src={getTechLogo(tech)} alt={tech} className="w-4 h-4 object-contain" />
+                <span>{tech}</span>
               </div>
             ))}
           </div>
@@ -175,20 +169,20 @@ const ProjectDetailPage = () => {
 
         {/* 3. Description with Links */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-12 bg-gradient-to-b from-dark-800/90 to-black p-8 rounded-2xl border border-accent-primary/30"
+          transition={{ duration: 0.25 }}
+          className="mb-8 bg-theme-surface p-6 md:p-8 rounded-[10px] border border-theme-border shadow-card"
         >
-          <p className="text-lg text-gray-300 leading-relaxed mb-6">
+          <p className="text-base text-theme-text leading-relaxed mb-4">
             {project.description}
           </p>
-          <p className="text-gray-400 leading-relaxed mb-8">
+          <p className="text-sm text-theme-muted leading-relaxed mb-6">
             This project showcases modern web development practices with a focus on performance, 
             user experience, and maintainable code architecture. Built with the latest technologies 
             and best practices in the industry.
           </p>
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-3 flex-wrap">
             <Button
               as="a"
               href={project.github}
@@ -197,7 +191,7 @@ const ProjectDetailPage = () => {
               variant="primary"
               className="flex items-center gap-2"
             >
-              <Github size={18} />
+              <Github size={17} />
               View on GitHub
             </Button>
             <Button
@@ -206,58 +200,60 @@ const ProjectDetailPage = () => {
               target="_blank"
               rel="noopener noreferrer"
               variant="outline"
-              className="flex items-center gap-2 border-accent-primary/50 hover:bg-accent-primary/10"
+              className="flex items-center gap-2"
             >
-              <ExternalLink size={18} />
+              <ExternalLink size={17} />
               Live Demo
             </Button>
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
           {/* 4. Project Timeline */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="bg-gradient-to-b from-dark-800/90 to-black p-6 rounded-2xl border border-accent-primary/30"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
           >
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Calendar className="text-accent-primary" size={20} />
+            <h3 className="heading-3 mb-4 flex items-center gap-2">
+              <Calendar className="text-theme-accent" size={18} />
               Project Timeline
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3 text-sm">
               <div className="flex justify-between items-center">
-                <span className="text-gray-400">Status</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                  project.status === "completed" ? "bg-green-500/20 text-green-400" :
-                  project.status === "in-progress" ? "bg-yellow-500/20 text-yellow-400" :
-                  "bg-blue-500/20 text-blue-400"
+                <span className="text-theme-muted">Status</span>
+                <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${
+                  project.status === "completed"
+                    ? "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60"
+                    : project.status === "in-progress"
+                    ? "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/60"
+                    : "bg-neutral-100 text-neutral-700 border-neutral-300 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700"
                 }`}>
                   {project.status === "completed" ? "Completed" :
                    project.status === "in-progress" ? "In Progress" : "Planning"}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400">Started</span>
-                <span className="text-white">Jan 2024</span>
+                <span className="text-theme-muted">Started</span>
+                <span className="text-theme-text font-medium">Jan 2024</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400">Duration</span>
-                <span className="text-white">3 months</span>
+                <span className="text-theme-muted">Duration</span>
+                <span className="text-theme-text font-medium">3 months</span>
               </div>
             </div>
           </motion.div>
 
           {/* 5. Contributors */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="bg-gradient-to-b from-dark-800/90 to-black p-6 rounded-2xl border border-accent-primary/30"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card"
           >
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Users className="text-accent-primary" size={20} />
+            <h3 className="heading-3 mb-4 flex items-center gap-2">
+              <Users className="text-theme-accent" size={18} />
               Contributors
             </h3>
             <div className="space-y-3">
@@ -270,24 +266,24 @@ const ProjectDetailPage = () => {
                     .toUpperCase();
                   
                   return (
-                    <div key={index} className="flex items-center justify-between p-3 bg-dark-900/50 rounded-lg">
+                    <div key={index} className="flex items-center justify-between p-3 bg-theme-subtle rounded-lg border border-theme-border">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-accent-primary to-neon-purple flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-9 h-9 rounded-full bg-theme-accent-soft border border-theme-border flex items-center justify-center text-theme-accent font-semibold text-xs">
                           {initials}
                         </div>
                         <div>
-                          <p className="font-medium text-white">{contributor.name}</p>
+                          <p className="font-medium text-theme-text text-sm">{contributor.name}</p>
                         </div>
                       </div>
                       <div className="flex gap-2">
                         {contributor.github && (
-                          <a href={contributor.github} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
-                            <Github size={18} className="text-gray-400 hover:text-white" />
+                          <a href={contributor.github} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-theme-surface rounded-lg transition-colors text-theme-muted hover:text-theme-accent">
+                            <Github size={16} />
                           </a>
                         )}
                         {contributor.linkedin && (
-                          <a href={contributor.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-dark-800 rounded-lg transition-colors">
-                            <svg className="w-[18px] h-[18px] text-gray-400 hover:text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <a href={contributor.linkedin} target="_blank" rel="noopener noreferrer" className="p-2 hover:bg-theme-surface rounded-lg transition-colors text-theme-muted hover:text-theme-accent">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                             </svg>
                           </a>
@@ -297,7 +293,7 @@ const ProjectDetailPage = () => {
                   );
                 })
               ) : (
-                <div className="flex items-center justify-center p-3 bg-dark-900/50 rounded-lg text-gray-400">
+                <div className="flex items-center justify-center p-3 bg-theme-subtle rounded-lg text-theme-muted">
                   <p className="text-sm">No contributors added yet</p>
                 </div>
               )}
@@ -307,19 +303,19 @@ const ProjectDetailPage = () => {
 
         {/* 6. Key Features */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mb-12 bg-gradient-to-b from-dark-800/90 to-black p-8 rounded-2xl border border-accent-primary/30"
+          transition={{ duration: 0.25 }}
+          className="mb-10 bg-theme-surface p-6 md:p-8 rounded-[10px] border border-theme-border shadow-card"
         >
-          <h3 className="text-2xl font-bold mb-6">Key Features</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <h3 className="heading-3 mb-5">Key Features</h3>
+          <div className="grid md:grid-cols-2 gap-3">
             {project.keyFeatures.map((feature, idx) => (
-              <div key={idx} className="flex items-start gap-3 p-4 bg-dark-900/50 rounded-lg hover:bg-dark-900/70 transition-colors">
-                <div className="w-6 h-6 rounded-full bg-accent-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-accent-primary text-sm">✓</span>
+              <div key={idx} className="flex items-start gap-3 p-4 bg-theme-subtle rounded-lg border border-theme-border">
+                <div className="w-5 h-5 rounded-full bg-theme-accent-soft flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-theme-accent text-xs font-semibold">✓</span>
                 </div>
-                <p className="text-gray-300">{feature}</p>
+                <p className="text-theme-muted text-sm">{feature}</p>
               </div>
             ))}
           </div>
@@ -327,27 +323,26 @@ const ProjectDetailPage = () => {
 
         {/* 7. More Projects */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="mb-12"
+          transition={{ duration: 0.25 }}
+          className="mb-10"
         >
-          <h3 className="text-2xl font-bold mb-6">More Projects</h3>
-          <div className="grid md:grid-cols-3 gap-6 md:gap-6 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-thin scrollbar-thumb-accent-primary/50 scrollbar-track-dark-800/30 hover:scrollbar-thumb-accent-primary/80">
+          <h3 className="heading-2 mb-6">More Projects</h3>
+          <div className="grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-thin">
             <style>{`
               .scrollbar-thin::-webkit-scrollbar {
-                height: 8px;
+                height: 6px;
               }
               .scrollbar-thin::-webkit-scrollbar-track {
-                background: rgba(17, 24, 39, 0.3);
-                border-radius: 10px;
+                background: transparent;
               }
               .scrollbar-thin::-webkit-scrollbar-thumb {
-                background: rgba(0, 212, 255, 0.5);
-                border-radius: 10px;
+                background: var(--border);
+                border-radius: 4px;
               }
               .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-                background: rgba(0, 212, 255, 0.8);
+                background: var(--text-muted);
               }
               @media (max-width: 768px) {
                 .grid.md\\:grid-cols-3 {
@@ -362,41 +357,37 @@ const ProjectDetailPage = () => {
             `}</style>
             {moreProjects.map((proj) => (
               <Link key={proj._id} to={`/project/${proj._id}`}>
-                <motion.div
-                  whileHover={{ y: -5 }}
-                  className="bg-gradient-to-b from-dark-800/90 to-black rounded-xl overflow-hidden border border-accent-primary/30 hover:border-accent-primary/60 transition-all group"
-                >
-                  <div className="relative h-48 overflow-hidden">
+                <div className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border shadow-card card-hover group h-full">
+                  <div className="relative h-44 overflow-hidden border-b border-theme-border bg-theme-subtle">
                     <img
                       src={proj.image}
                       alt={proj.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                     <div className="absolute top-3 right-3">
-                      <span className="text-xs px-2 py-1 rounded-full bg-black/60 backdrop-blur-sm text-gray-300 border border-accent-primary/30">
+                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-theme-surface text-theme-text border border-theme-border font-medium">
                         {proj.status === "completed" ? "✓ Done" : proj.status === "in-progress" ? "🔨 Building" : "📋 Planning"}
                       </span>
                     </div>
                   </div>
-                  <div className="p-4">
-                    <h4 className="font-bold text-lg mb-2 group-hover:text-accent-primary transition-colors">{proj.title}</h4>
-                    <p className="text-sm text-gray-400 line-clamp-2 mb-3">{proj.description}</p>
-                    <div className="flex flex-wrap gap-1">
+                  <div className="p-5">
+                    <h4 className="heading-4 mb-2 group-hover:text-theme-accent transition-colors">{proj.title}</h4>
+                    <p className="text-sm text-theme-muted line-clamp-2 mb-3">{proj.description}</p>
+                    <div className="flex flex-wrap gap-1.5">
                       {proj.tech.slice(0, 3).map((tech) => (
-                        <span key={tech} className="inline-flex items-center gap-1 text-xs px-2 py-1 bg-dark-900/80 rounded border border-accent-primary/20">
+                        <span key={tech} className="inline-flex items-center gap-1 text-xs px-2.5 py-0.5 bg-theme-accent-soft text-theme-accent rounded-full font-medium">
                           <img src={getTechLogo(tech)} alt={tech} className="w-3 h-3 object-contain" />
                           {tech}
                         </span>
                       ))}
                       {proj.tech.length > 3 && (
-                        <span className="text-xs px-2 py-1 bg-accent-primary/10 rounded border border-accent-primary/30 text-accent-primary">
+                        <span className="text-xs px-2.5 py-0.5 bg-theme-subtle rounded-full border border-theme-border text-theme-muted">
                           +{proj.tech.length - 3}
                         </span>
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </Link>
             ))}
           </div>

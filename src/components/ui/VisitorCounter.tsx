@@ -38,15 +38,15 @@ export const VisitorCounter: React.FC = () => {
   if (loading || !data) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.25 }}
         className="flex items-center justify-center gap-3"
       >
-        <Eye className="text-accent-primary animate-pulse" size={20} />
+        <Eye className="text-theme-muted" size={18} />
         <div className="text-center">
-          <p className="text-2xl font-bold text-text-primary font-mono">...</p>
-          <p className="text-xs text-text-secondary">Total Visits</p>
+          <p className="text-lg font-semibold text-theme-text font-mono">...</p>
+          <p className="text-xs text-theme-muted">Total Visits</p>
         </div>
       </motion.div>
     );
@@ -54,46 +54,34 @@ export const VisitorCounter: React.FC = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.25 }}
       className="flex flex-wrap items-center justify-center gap-3 md:gap-4"
     >
       {/* Global Total Visits */}
       <div className="flex items-center gap-2">
-        <Eye className="text-accent-primary" size={20} />
-        <div className="text-center">
-          <motion.p
-            className="text-2xl font-bold text-text-primary font-mono"
-            key={displayCount}
-            initial={{ scale: 1.2 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.3 }}
-          >
+        <Eye className="text-theme-accent" size={18} />
+        <div className="text-left">
+          <p className="text-base font-semibold text-theme-text font-mono">
             {displayCount.toLocaleString()}
-          </motion.p>
-          <p className="text-xs text-text-secondary">Total Visits</p>
+          </p>
+          <p className="text-xs text-theme-muted">Total Visits</p>
         </div>
       </div>
 
       {/* Your Session Stats */}
       {sessionStats.uniquePagesVisited > 0 && (
         <>
-          <div className="w-px h-8 bg-bg-tertiary hidden sm:block" />
+          <div className="w-px h-7 bg-theme-border hidden sm:block" />
 
           <div className="flex items-center gap-2">
-            <User className="text-neon-purple" size={20} />
-            <div className="text-center">
-              <motion.p
-                className="text-2xl font-bold text-text-primary font-mono"
-                key={sessionStats.uniquePagesVisited}
-                initial={{ scale: 1.2 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
+            <User className="text-theme-muted" size={18} />
+            <div className="text-left">
+              <p className="text-base font-semibold text-theme-text font-mono">
                 {sessionStats.uniquePagesVisited}
-              </motion.p>
-              <p className="text-xs text-text-secondary">Your Pages</p>
+              </p>
+              <p className="text-xs text-theme-muted">Your Pages</p>
             </div>
           </div>
         </>

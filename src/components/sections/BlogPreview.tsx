@@ -59,7 +59,7 @@ export const BlogPreview: React.FC = () => {
             variants={itemVariants}
           >
             <Link to={`/blog/${post.slug}`} className="block h-full">
-              <article className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 hover:border-accent-primary/50 transition-smooth group cursor-pointer h-full">
+              <article className="bg-theme-surface border border-theme-border rounded-[10px] p-6 card-hover shadow-card group cursor-pointer h-full">
                 <div className="flex items-center justify-between mb-3">
                   <Badge variant="dark">
                     {new Date(post.date).toLocaleDateString("en-US", {
@@ -68,20 +68,20 @@ export const BlogPreview: React.FC = () => {
                       day: "numeric",
                     })}
                   </Badge>
-                  <span className="text-text-secondary text-xs">
+                  <span className="text-theme-muted text-xs">
                     {Math.ceil(post.content.split(/\s+/).length / 200)} min read
                   </span>
                 </div>
 
-                <h3 className="heading-4 mb-2 group-hover:text-accent-primary transition-smooth">
+                <h3 className="heading-4 mb-2 group-hover:text-theme-accent transition-colors">
                   {post.title}
                 </h3>
 
-                <p className="text-text-secondary mb-4 line-clamp-2">
+                <p className="text-theme-muted text-sm mb-4 line-clamp-2">
                   {post.content.substring(0, 150)}...
                 </p>
 
-                <div className="flex items-center text-accent-primary text-sm font-medium group-hover:gap-2 transition-all">
+                <div className="flex items-center text-theme-accent text-sm font-medium group-hover:gap-2 transition-all">
                   Read More
                   <ArrowRight size={16} className="ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>

@@ -142,176 +142,78 @@ export const ExploringPage = () => {
 
 
 
- if (loading) {
+  if (loading) {
+    return (
+      <SectionWrapper>
+        <div className="container px-4 mx-auto">
+          <div className="animate-pulse">
+            <div className="h-8 bg-theme-subtle rounded w-1/3 mb-4"></div>
+            <div className="h-4 bg-theme-subtle rounded w-2/3 mb-8"></div>
+            <div className="space-y-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-20 bg-theme-surface border border-theme-border rounded-[10px]"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+    );
+  }
 
   return (
-
-   <SectionWrapper>
-
-    <div className="container px-6 mx-auto">
-
-     <div className="animate-pulse">
-
-      <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-4"></div>
-
-      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-8"></div>
-
-      <div className="space-y-4">
-
-       {[1, 2, 3].map((i) => (
-
-        <div key={i} className="h-20 bg-gray-200 dark:bg-gray-700 rounded"></div>
-
-       ))}
-
-      </div>
-
-     </div>
-
-    </div>
-
-   </SectionWrapper>
-
-  );
-
- }
-
-
-
- return (
-
-  <SectionWrapper>
-
-   <div className="container px-6 mx-auto">
-
-    <Breadcrumb items={[{ label: 'Home', path: '/' }, { label: 'Currently Exploring', path: '/exploring' }]} />
-
-    
-
-    <motion.div
-
-     initial={{ opacity: 0, y: 20 }}
-
-     animate={{ opacity: 1, y: 0 }}
-
-     transition={{ duration: 0.6 }}
-
-     className="mb-12"
-
-    >
-
-     <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 bg-gradient-to-r">
-
-      Currently Exploring
-
-     </h1>
-
-     <p className="text-text-secondary text-lg max-w-3xl">
-
-      Topics, ideas, and systems I'm actively learning and refining.
-
-     </p>
-
-    </motion.div>
-
-
-
-    {items.length === 0 ? (
-
-     <div className="glass-effect p-12 rounded-xl border-2 border-dark-700 text-center ">
-
-      <p className="text-text-secondary text-lg">
-
-       No areas of exploration at the moment.
-
-      </p>
-
-     </div>
-
-    ) : (
-
-     <motion.div
-
-      initial={{ opacity: 0 }}
-
-      animate={{ opacity: 1 }}
-
-      transition={{ duration: 0.6, delay: 0.2 }}
-
-      className="max-w-4xl mx-auto space-y-6 mb-16"
-
-     >
-
-      {items.map((item, index) => (
-
-       <motion.div
-
-        key={item._id}
-
-        initial={{ opacity: 0, y: 20 }}
-
-        animate={{ opacity: 1, y: 0 }}
-
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-
-        className="glass-effect p-6 rounded-xl border-2 border-dark-700 hover:border-accent-primary/50 transition-all duration-300"
-
-       >
-
-        <h2 className="text-xl font-semibold mb-2 text-white">
-
-         {item.title}
-
-        </h2>
-
-        {item.description && (
-
-         <p className="text-text-secondary leading-relaxed">
-
-          {item.description}
-
-         </p>
-
+    <SectionWrapper>
+      <div className="container px-4 mx-auto">
+        <Breadcrumb items={[{ label: 'Home', path: '/' }, { label: 'Currently Exploring', path: '/exploring' }]} />
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+          className="mb-10"
+        >
+          <h1 className="heading-1 mb-3">
+            Currently Exploring
+          </h1>
+          <p className="text-theme-muted text-base max-w-3xl">
+            Topics, ideas, and systems I'm actively learning and refining.
+          </p>
+        </motion.div>
+
+        {items.length === 0 ? (
+          <div className="bg-theme-surface p-10 rounded-[10px] border border-theme-border shadow-card text-center">
+            <p className="text-theme-muted text-base">
+              No areas of exploration at the moment.
+            </p>
+          </div>
+        ) : (
+          <div className="max-w-4xl space-y-4 mb-12">
+            {items.map((item) => (
+              <div
+                key={item._id}
+                className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
+              >
+                <h2 className="heading-4 mb-2 text-theme-text">
+                  {item.title}
+                </h2>
+                {item.description && (
+                  <p className="text-theme-muted text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
         )}
 
-       </motion.div>
-
-      ))}
-
-     </motion.div>
-
-    )}
-
-
-
-    {lastUpdated && (
-
-     <motion.footer
-
-      initial={{ opacity: 0 }}
-
-      animate={{ opacity: 1 }}
-
-      transition={{ duration: 0.6, delay: 0.4 }}
-
-      className="pt-8 border-t border-dark-700 max-w-4xl mx-auto"
-
-     >
-
-      <p className="text-sm text-text-secondary">
-
-       Last updated: {lastUpdated}
-
-      </p>
-
-     </motion.footer>
-
-    )}
-
-   </div>
-
-  </SectionWrapper>
-
- );
+        {lastUpdated && (
+          <footer className="pt-8 border-t border-theme-border max-w-4xl">
+            <p className="text-sm text-theme-muted">
+              Last updated: {lastUpdated}
+            </p>
+          </footer>
+        )}
+      </div>
+    </SectionWrapper>
+  );
 
 };

@@ -36,19 +36,19 @@ export const TechStack: React.FC = () => {
     return (
       <SectionWrapper id="tech">
         <div className="animate-pulse">
-          <div className="mb-12">
-            <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-4"></div>
-            <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-64"></div>
+          <div className="mb-10">
+            <div className="h-8 bg-theme-subtle rounded w-48 mb-3"></div>
+            <div className="h-5 bg-theme-subtle rounded w-64"></div>
           </div>
           <div className="space-y-4">
             <div className="flex gap-4 overflow-hidden">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
+                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border rounded-[10px] flex-shrink-0"></div>
               ))}
             </div>
             <div className="flex gap-4 overflow-hidden">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="w-24 h-24 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
+                <div key={i} className="w-24 h-12 bg-theme-subtle border border-theme-border rounded-[10px] flex-shrink-0"></div>
               ))}
             </div>
           </div>
@@ -85,34 +85,26 @@ export const TechStack: React.FC = () => {
   return (
     <SectionWrapper id="tech">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
+        transition={{ duration: 0.25 }}
+        className="mb-10"
       >
-        <h2 className="heading-2 mb-4">Tech Stack</h2>
-        <p className="text-text-secondary text-lg">
+        <h2 className="heading-2 mb-3">Tech Stack</h2>
+        <p className="text-theme-muted text-base">
           Tools and technologies I work with
         </p>
       </motion.div>
 
-      <div className="relative" style={{ perspective: "2000px" }}>
-        {/* Gradient overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-dark-950 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-dark-950 to-transparent z-20 pointer-events-none" />
-        
-        {/* Container with 4 lines - 2 desktop (hidden mobile), 4 mobile (hidden desktop) */}
-        <div className="relative overflow-hidden py-8">
+      <div className="relative tech-marquee-mask">
+        {/* Container with 2 desktop / 3 mobile lines */}
+        <div className="relative overflow-hidden py-4">
           {/* DESKTOP VIEW - 2 lines with ALL tools */}
           <div className="hidden md:block">
-            {/* Back line (above, moving right to left) - appears as shadow */}
+            {/* Back line (above, moving right to left) */}
             <motion.div
-              className="flex gap-4 md:gap-6 mb-2 opacity-30 blur-[1px]"
-              style={{ 
-                transform: "rotateX(8deg) translateZ(-30px) scale(0.95)",
-                transformStyle: "preserve-3d",
-              }}
+              className="flex gap-4 mb-3 opacity-55"
               animate={{
                 x: [-10000, 0],
               }}
@@ -128,23 +120,19 @@ export const TechStack: React.FC = () => {
               {duplicatedAllTools.map((tool, index) => (
                 <div
                   key={`desktop-back-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-dark-700/50 backdrop-blur-sm rounded-2xl border border-accent-primary/10 whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-subtle rounded-[10px] border border-theme-border whitespace-nowrap"
                 >
                   <img src={tool.logo} alt={tool.name} className="w-5 h-5 object-contain flex-shrink-0" />
-                  <span className="font-medium text-gray-400 text-xs truncate">
+                  <span className="font-medium text-theme-muted text-xs truncate">
                     {tool.name}
                   </span>
                 </div>
               ))}
             </motion.div>
 
-            {/* Front line (below, moving left to right) - full visibility */}
+            {/* Front line (below, moving left to right) */}
             <motion.div
-              className="flex gap-4 md:gap-6"
-              style={{ 
-                transform: "rotateX(5deg) translateZ(30px)",
-                transformStyle: "preserve-3d",
-              }}
+              className="flex gap-4"
               animate={{
                 x: [0, -10000],
               }}
@@ -160,18 +148,17 @@ export const TechStack: React.FC = () => {
               {duplicatedAllTools.map((tool, index) => (
                 <div
                   key={`desktop-main-${tool.name}-${index}`}
-                  className="flex items-center gap-2.5 px-4 py-2.5 bg-dark-800/90 backdrop-blur-sm rounded-2xl border border-accent-primary/40 hover:border-accent-primary/70 hover:shadow-xl hover:shadow-accent-primary/30 transition-all whitespace-nowrap group cursor-pointer"
+                  className="flex items-center gap-2.5 px-4 py-2.5 bg-theme-surface rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors whitespace-nowrap group cursor-pointer"
                   style={{
-                    transform: "translateZ(20px)",
                     minWidth: "fit-content"
                   }}
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
-                    className="w-6 h-6 object-contain flex-shrink-0 group-hover:scale-110 transition-transform" 
+                    className="w-5 h-5 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-white text-sm truncate max-w-[120px]">
+                  <span className="font-medium text-theme-text text-sm truncate max-w-[140px]">
                     {tool.name}
                   </span>
                 </div>
@@ -180,7 +167,7 @@ export const TechStack: React.FC = () => {
           </div>
 
           {/* MOBILE VIEW - 3 simple horizontal lines with different speeds */}
-          <div className="md:hidden space-y-4">
+          <div className="md:hidden space-y-3">
             {/* Line 1 - Moving left to right (slow) */}
             <motion.div
               className="flex gap-3"
@@ -199,14 +186,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine1.map((tool, index) => (
                 <div
                   key={`mobile-line1-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-dark-800/90 backdrop-blur-sm rounded-xl border border-accent-primary/40 whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
-                    className="w-5 h-5 object-contain flex-shrink-0" 
+                    className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-white text-xs">
+                  <span className="font-medium text-theme-text text-xs">
                     {tool.name}
                   </span>
                 </div>
@@ -231,14 +218,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine2.map((tool, index) => (
                 <div
                   key={`mobile-line2-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-dark-800/90 backdrop-blur-sm rounded-xl border border-accent-primary/40 whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
-                    className="w-5 h-5 object-contain flex-shrink-0" 
+                    className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-white text-xs">
+                  <span className="font-medium text-theme-text text-xs">
                     {tool.name}
                   </span>
                 </div>
@@ -263,14 +250,14 @@ export const TechStack: React.FC = () => {
               {duplicatedLine3.map((tool, index) => (
                 <div
                   key={`mobile-line3-${tool.name}-${index}`}
-                  className="flex items-center gap-2 px-3 py-2 bg-dark-800/90 backdrop-blur-sm rounded-xl border border-accent-primary/40 whitespace-nowrap"
+                  className="flex items-center gap-2 px-3 py-2 bg-theme-surface rounded-[10px] border border-theme-border shadow-card whitespace-nowrap"
                 >
                   <img 
                     src={tool.logo} 
                     alt={tool.name} 
-                    className="w-5 h-5 object-contain flex-shrink-0" 
+                    className="w-4 h-4 object-contain flex-shrink-0" 
                   />
-                  <span className="font-medium text-white text-xs">
+                  <span className="font-medium text-theme-text text-xs">
                     {tool.name}
                   </span>
                 </div>

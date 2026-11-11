@@ -67,14 +67,14 @@ export const Certifications: React.FC = () => {
   return (
     <SectionWrapper id="certifications">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
+        transition={{ duration: 0.25 }}
+        className="mb-10"
       >
-        <h2 className="heading-2 mb-4">Certifications</h2>
-        <p className="text-text-secondary text-lg">
+        <h2 className="heading-2 mb-3">Certifications</h2>
+        <p className="text-theme-muted text-base">
           Professional credentials and achievements
         </p>
       </motion.div>
@@ -82,19 +82,14 @@ export const Certifications: React.FC = () => {
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 animate-pulse">
-              <div className="mb-4 rounded-lg bg-gray-200 dark:bg-gray-700 h-32"></div>
+            <div key={i} className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card animate-pulse">
+              <div className="mb-4 rounded-lg bg-theme-subtle h-28"></div>
               <div className="space-y-3">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                <div className="h-5 bg-theme-subtle rounded w-3/4"></div>
+                <div className="h-4 bg-theme-subtle rounded w-1/2"></div>
                 <div className="flex gap-2">
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                  <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
-                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                  <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                  <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
+                  <div className="h-6 bg-theme-subtle rounded-full w-16"></div>
                 </div>
               </div>
             </div>
@@ -102,7 +97,7 @@ export const Certifications: React.FC = () => {
         </div>
       ) : certifications.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-text-secondary">No featured certifications yet. Mark some certifications as featured in the admin panel.</p>
+          <p className="text-theme-muted">No featured certifications yet. Mark some certifications as featured in the admin panel.</p>
         </div>
       ) : (
         <motion.div
@@ -116,43 +111,44 @@ export const Certifications: React.FC = () => {
             <motion.div
               key={cert._id}
               variants={itemVariants}
-              whileHover={{ scale: 1.05, y: -5 }}
               className="h-full"
             >
               <Link to={`/certification/${cert._id}`} className="block h-full">
-                <div className="bg-dark-800 border border-dark-700 rounded-xl p-6 group cursor-pointer hover:border-accent-primary/60 transition-all h-full flex flex-col justify-between shadow-lg hover:shadow-xl hover:shadow-accent-primary/10">
+                <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 group cursor-pointer card-hover shadow-card h-full flex flex-col justify-between">
                   <div>
-                    <div className="flex items-start justify-between gap-3 mb-4">
-                      <h3 className="heading-4 mb-2 group-hover:text-accent-primary transition-colors line-clamp-2">
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <h3 className="heading-4 mb-1 group-hover:text-theme-accent transition-colors line-clamp-2">
                         {cert.title}
                       </h3>
                       <ExternalLink
-                        size={18}
-                        className="text-accent-primary opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                        size={16}
+                        className="text-theme-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 mt-1"
                       />
                     </div>
-                    <p className="text-text-secondary text-sm mb-3">{cert.issuer}</p>
+                    <p className="text-theme-muted text-sm mb-3">{cert.issuer}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {cert.skills.slice(0, 2).map((skill, idx) => (
-                        <span key={idx} className="text-xs px-2 py-1 bg-accent-primary/10 text-accent-primary rounded-md">
+                        <span key={idx} className="text-xs px-2.5 py-0.5 bg-theme-accent-soft text-theme-accent rounded-full font-medium">
                           {skill}
                         </span>
                       ))}
                       {cert.skills.length > 2 && (
-                        <span className="text-xs px-2 py-1 text-text-secondary">
+                        <span className="text-xs px-2 py-0.5 text-theme-muted">
                           +{cert.skills.length - 2} more
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between pt-2 border-t border-theme-border">
                     <Badge variant="accent" className="text-xs font-medium">
                       {cert.year}
                     </Badge>
-                    <span className={`text-xs px-3 py-1 rounded-full ${
-                      cert.difficulty === 'Beginner' ? 'bg-green-500/10 text-green-400' :
-                      cert.difficulty === 'Intermediate' ? 'bg-yellow-500/10 text-yellow-400' :
-                      'bg-red-500/10 text-red-400'
+                    <span className={`text-xs px-2.5 py-0.5 rounded-full font-medium border ${
+                      cert.difficulty === 'Beginner'
+                        ? 'bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60'
+                        : cert.difficulty === 'Intermediate'
+                        ? 'bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/60'
+                        : 'bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800/60'
                     }`}>
                       {cert.difficulty}
                     </span>

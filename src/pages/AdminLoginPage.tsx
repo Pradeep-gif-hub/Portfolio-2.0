@@ -142,32 +142,27 @@ export const AdminLoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-theme-bg text-theme-text">
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.25 }}
         className="w-full max-w-md"
       >
-        <div className="glass-effect p-8 rounded-2xl border-2 border-accent-primary/30">
+        <div className="bg-theme-surface p-8 rounded-[10px] border border-theme-border shadow-card">
           {/* Header */}
           <div className="text-center mb-8">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring" }}
-              className="inline-flex items-center justify-center w-16 h-16 bg-accent-primary/20 rounded-full mb-4"
-            >
+            <div className="inline-flex items-center justify-center w-14 h-14 bg-theme-accent-soft rounded-full mb-4">
               {step === 'password' ? (
-                <Lock size={32} className="text-accent-primary" />
+                <Lock size={24} className="text-theme-accent" />
               ) : (
-                <Shield size={32} className="text-accent-primary" />
+                <Shield size={24} className="text-theme-accent" />
               )}
-            </motion.div>
-            <h1 className="text-3xl font-bold text-text-primary mb-2">
+            </div>
+            <h1 className="heading-2 mb-2">
               {step === 'password' ? 'THE SYSTEM CORE' : 'Verify OTP'}
             </h1>
-            <p className="text-text-secondary text-xs whitespace-pre-line">
+            <p className="text-theme-muted text-xs whitespace-pre-line">
               {step === 'password' 
                 ? 'A protected environment where configuration, content, and control converge. Access is limited to verified identities.'
                 : `OTP sent to ${maskedEmail}`
@@ -177,12 +172,12 @@ export const AdminLoginPage: React.FC = () => {
 
           {/* Login Form */}
           {step === 'password' ? (
-            <form onSubmit={handlePasswordSubmit} className="space-y-6">
+            <form onSubmit={handlePasswordSubmit} className="space-y-5">
               {error && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-red-400 text-sm text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 rounded-lg p-3 text-rose-700 dark:text-rose-300 text-sm text-center"
                 >
                   {error}
                 </motion.div>
@@ -190,7 +185,7 @@ export const AdminLoginPage: React.FC = () => {
 
               {/* Password Field */}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-2">
+                <label htmlFor="password" className="block text-sm font-medium text-theme-muted mb-2">
                   Secret Key
                 </label>
                 <div className="relative">
@@ -202,7 +197,7 @@ export const AdminLoginPage: React.FC = () => {
                       setPassword(e.target.value);
                       setError("");
                     }}
-                    className="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-accent-primary transition-colors text-white placeholder-text-tertiary pr-12"
+                    className="w-full px-4 py-2.5 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent transition-colors text-theme-text placeholder:text-theme-muted pr-12"
                     placeholder="Enter secret key"
                     required
                     disabled={loading || otpSending}
@@ -210,10 +205,10 @@ export const AdminLoginPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-accent-primary transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-theme-muted hover:text-theme-accent transition-colors"
                     disabled={loading || otpSending}
                   >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
@@ -223,19 +218,19 @@ export const AdminLoginPage: React.FC = () => {
                 type="submit"
                 variant="primary"
                 size="lg"
-                className="w-full btn-neon"
+                className="w-full"
                 disabled={loading || otpSending}
               >
                 {otpSending ? 'Sending OTP...' : loading ? 'Verifying...' : 'Continue'}
               </Button>
             </form>
           ) : (
-            <form onSubmit={handleOTPSubmit} className="space-y-6">
+            <form onSubmit={handleOTPSubmit} className="space-y-5">
               {error && (
                 <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`${error.includes('success') ? 'bg-green-500/10 border-green-500/30 text-green-400' : 'bg-red-500/10 border-red-500/30 text-red-400'} border rounded-lg p-3 text-sm text-center`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className={`${error.includes('success') ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300' : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'} border rounded-lg p-3 text-sm text-center`}
                 >
                   {error}
                 </motion.div>
@@ -243,11 +238,11 @@ export const AdminLoginPage: React.FC = () => {
 
               {/* OTP Field */}
               <div>
-                <label htmlFor="otp" className="block text-sm font-medium text-text-secondary mb-2">
+                <label htmlFor="otp" className="block text-sm font-medium text-theme-muted mb-2">
                   Enter 6-Digit OTP
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" size={20} />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-muted" size={18} />
                   <input
                     id="otp"
                     type="text"
@@ -259,14 +254,14 @@ export const AdminLoginPage: React.FC = () => {
                         setError("");
                       }
                     }}
-                    className="w-full px-4 py-3 pl-12 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-accent-primary transition-colors text-white placeholder-text-tertiary tracking-widest font-mono text-center text-lg"
+                    className="w-full px-4 py-2.5 pl-12 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent transition-colors text-theme-text placeholder:text-theme-muted tracking-widest font-mono text-center text-lg"
                     placeholder="XXXXXX"
                     required
                     disabled={loading}
                     maxLength={6}
                   />
                 </div>
-                <p className="text-xs text-text-tertiary mt-2 text-center">
+                <p className="text-xs text-theme-muted mt-2 text-center">
                   Check your email for the OTP code
                 </p>
               </div>
@@ -276,7 +271,7 @@ export const AdminLoginPage: React.FC = () => {
                 type="submit"
                 variant="primary"
                 size="lg"
-                className="w-full btn-neon"
+                className="w-full"
                 disabled={loading || otp.length !== 6}
               >
                 {loading ? 'Verifying...' : 'Verify & Login'}
@@ -288,11 +283,11 @@ export const AdminLoginPage: React.FC = () => {
                   type="button"
                   onClick={handleResendOTP}
                   disabled={otpSending}
-                  className="text-sm text-accent-primary hover:text-accent-light transition-colors disabled:opacity-50"
+                  className="text-sm text-theme-accent hover:text-theme-accent-hover transition-colors disabled:opacity-50"
                 >
                   {otpSending ? 'Sending...' : 'Resend OTP'}
                 </button>
-                <span className="text-text-tertiary text-sm mx-2">|</span>
+                <span className="text-theme-muted text-sm mx-2">|</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -300,7 +295,7 @@ export const AdminLoginPage: React.FC = () => {
                     setOtp('');
                     setError('');
                   }}
-                  className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                  className="text-sm text-theme-muted hover:text-theme-text transition-colors"
                 >
                   Back to Password
                 </button>
@@ -309,7 +304,7 @@ export const AdminLoginPage: React.FC = () => {
           )}
 
           {/* Footer Note */}
-          <p className="text-text-tertiary text-xs text-center mt-6">
+          <p className="text-theme-muted text-xs text-center mt-6">
             Unauthorized access is prohibited and will be logged.
           </p>
         </div>

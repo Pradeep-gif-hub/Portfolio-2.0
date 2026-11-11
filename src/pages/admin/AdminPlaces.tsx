@@ -184,7 +184,7 @@ export const AdminPlaces = () => {
         attributionControl: false,
       });
 
-      const marker = new maplibregl.Marker({ color: '#10b981', draggable: true })
+      const marker = new maplibregl.Marker({ color: '#1F3A34', draggable: true })
         .setLngLat([lng, lat])
         .addTo(map);
 
@@ -470,8 +470,8 @@ export const AdminPlaces = () => {
       <ProtectedRoute>
         <AdminLayout>
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Loading places...</p>
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+            <p className="mt-4 text-theme-muted text-sm">Loading places...</p>
           </div>
         </AdminLayout>
       </ProtectedRoute>
@@ -485,11 +485,11 @@ export const AdminPlaces = () => {
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2 flex items-center gap-2">
-                <MapPin className="text-accent-primary" size={28} />
+              <h1 className="heading-2 mb-1 flex items-center gap-2">
+                <MapPin className="text-theme-accent" size={24} />
                 Places Management
               </h1>
-              <p className="text-text-secondary">
+              <p className="text-theme-muted text-sm">
                 Manage travel destinations, GPS coordinates, and map images
               </p>
             </div>
@@ -498,26 +498,27 @@ export const AdminPlaces = () => {
                 resetForm();
                 setShowModal(true);
               }}
-              className="btn-neon flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
+              variant="primary"
+              className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
             >
-              <Plus size={20} />
+              <Plus size={18} />
               Add New Place
             </Button>
           </div>
 
           {/* Search & Filter Controls */}
-          <div className="glass-effect p-4 rounded-xl mb-6 flex flex-col md:flex-row items-center gap-4 justify-between">
+          <div className="bg-theme-surface border border-theme-border p-4 rounded-[10px] shadow-card mb-6 flex flex-col md:flex-row items-center gap-4 justify-between">
             <div className="relative w-full md:w-80">
               <Search
-                size={18}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary"
+                size={17}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-theme-muted"
               />
               <input
                 type="text"
                 placeholder="Search place, city, or country..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                className="w-full pl-10 pr-4 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
               />
             </div>
 
@@ -527,8 +528,8 @@ export const AdminPlaces = () => {
                 onClick={() => setSelectedCategory('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
                   selectedCategory === 'all'
-                    ? 'bg-accent-primary text-white'
-                    : 'bg-dark-800 text-text-secondary hover:text-white'
+                    ? 'bg-theme-accent text-theme-accent-contrast'
+                    : 'bg-theme-subtle border border-theme-border text-theme-muted hover:text-theme-text'
                 }`}
               >
                 All ({places.length})
@@ -543,8 +544,8 @@ export const AdminPlaces = () => {
                     onClick={() => setSelectedCategory(cat)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
                       selectedCategory.toLowerCase() === cat.toLowerCase()
-                        ? 'bg-accent-primary text-white'
-                        : 'bg-dark-800 text-text-secondary hover:text-white'
+                        ? 'bg-theme-accent text-theme-accent-contrast'
+                        : 'bg-theme-subtle border border-theme-border text-theme-muted hover:text-theme-text'
                     }`}
                   >
                     {cat} ({count})
@@ -556,10 +557,10 @@ export const AdminPlaces = () => {
 
           {/* Places List / Grid */}
           {filteredPlaces.length === 0 ? (
-            <div className="glass-effect p-12 rounded-xl text-center">
-              <Compass size={64} className="mx-auto mb-4 text-text-secondary" />
-              <h3 className="text-xl font-bold mb-2">No Places Found</h3>
-              <p className="text-text-secondary mb-6">
+            <div className="bg-theme-surface border border-theme-border p-12 rounded-[10px] shadow-card text-center">
+              <Compass size={56} className="mx-auto mb-4 text-theme-muted" />
+              <h3 className="heading-3 mb-2">No Places Found</h3>
+              <p className="text-theme-muted text-sm mb-6">
                 {searchQuery || selectedCategory !== 'all'
                   ? 'Try clearing your search or filter'
                   : 'Get started by adding your first visited destination with GPS coordinates'}
@@ -569,7 +570,7 @@ export const AdminPlaces = () => {
                   resetForm();
                   setShowModal(true);
                 }}
-                className="btn-neon"
+                variant="primary"
               >
                 Add First Place
               </Button>
@@ -579,33 +580,31 @@ export const AdminPlaces = () => {
               {filteredPlaces.map((item) => {
                 const placeImg = item.image || item.imageUrl;
                 return (
-                  <motion.div
+                  <div
                     key={item._id || item.name}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="glass-effect rounded-xl overflow-hidden border border-dark-700 hover:border-accent-primary/50 transition-all flex flex-col justify-between"
+                    className="bg-theme-surface rounded-[10px] overflow-hidden border border-theme-border hover:border-theme-muted shadow-card transition-colors flex flex-col justify-between"
                   >
                     <div>
                       {/* Image / Fallback */}
-                      <div className="relative h-44 bg-dark-800 overflow-hidden">
+                      <div className="relative h-44 bg-theme-subtle border-b border-theme-border overflow-hidden">
                         {placeImg ? (
                           <img
                             src={placeImg}
                             alt={item.name}
-                            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                            className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center text-text-tertiary bg-gradient-to-br from-dark-800 to-dark-900 p-4 text-center">
-                            <MapPin size={32} className="text-accent-primary/60 mb-1" />
-                            <span className="font-bold text-white text-sm">{item.name}</span>
-                            <span className="text-xs text-text-secondary">
+                          <div className="w-full h-full flex flex-col items-center justify-center text-theme-muted bg-theme-subtle p-4 text-center">
+                            <MapPin size={28} className="text-theme-accent mb-1" />
+                            <span className="font-semibold text-theme-text text-sm">{item.name}</span>
+                            <span className="text-xs text-theme-muted">
                               Auto Wikipedia Image on Public Map
                             </span>
                           </div>
                         )}
 
                         {item.category && (
-                          <span className="absolute top-2 right-2 px-3 py-1 bg-dark-900/80 backdrop-blur-md border border-dark-700 text-accent-primary text-xs font-semibold rounded-full">
+                          <span className="absolute top-2 right-2 px-2.5 py-0.5 bg-theme-surface border border-theme-border text-theme-accent text-xs font-medium rounded-full">
                             {item.category}
                           </span>
                         )}
@@ -614,28 +613,28 @@ export const AdminPlaces = () => {
                       {/* Content */}
                       <div className="p-4">
                         <div className="flex items-start justify-between gap-2 mb-1">
-                          <h3 className="font-bold text-lg text-white">{item.name}</h3>
+                          <h3 className="heading-4">{item.name}</h3>
                           {item.visitedDate && (
-                            <span className="text-xs text-text-secondary flex items-center gap-1 shrink-0">
+                            <span className="text-xs text-theme-muted flex items-center gap-1 shrink-0">
                               <Calendar size={12} />
                               {item.visitedDate}
                             </span>
                           )}
                         </div>
 
-                        <p className="text-sm text-accent-primary font-medium flex items-center gap-1 mb-2">
+                        <p className="text-sm text-theme-accent font-medium flex items-center gap-1 mb-2">
                           <Globe size={13} />
                           {item.city}, {item.country}
                         </p>
 
                         {item.description && (
-                          <p className="text-text-secondary text-xs line-clamp-2 mb-3">
+                          <p className="text-theme-muted text-xs line-clamp-2 mb-3">
                             {item.description}
                           </p>
                         )}
 
-                        <div className="flex items-center gap-2 text-[11px] text-text-tertiary bg-dark-800/60 p-2 rounded-lg font-mono">
-                          <Navigation size={12} className="text-accent-primary shrink-0" />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-muted bg-theme-subtle border border-theme-border p-2 rounded-lg font-mono">
+                          <Navigation size={12} className="text-theme-accent shrink-0" />
                           <span>
                             Lng: {item.coordinates ? item.coordinates[0] : 'N/A'}, Lat:{' '}
                             {item.coordinates ? item.coordinates[1] : 'N/A'}
@@ -645,23 +644,23 @@ export const AdminPlaces = () => {
                     </div>
 
                     {/* Actions */}
-                    <div className="p-4 pt-0 border-t border-dark-800/60 flex items-center justify-end gap-2 mt-2">
+                    <div className="p-4 pt-3 border-t border-theme-border flex items-center justify-end gap-2">
                       <button
                         onClick={() => handleEdit(item)}
-                        className="p-2 bg-dark-800 hover:bg-accent-primary hover:text-white text-text-secondary rounded-lg transition-colors"
+                        className="p-2 bg-theme-subtle hover:bg-theme-accent hover:text-theme-accent-contrast text-theme-muted rounded-lg transition-colors"
                         title="Edit Place"
                       >
-                        <Edit2 size={16} />
+                        <Edit2 size={15} />
                       </button>
                       <button
                         onClick={() => handleDelete(item)}
-                        className="p-2 bg-dark-800 hover:bg-red-500 hover:text-white text-text-secondary rounded-lg transition-colors"
+                        className="p-2 bg-theme-subtle hover:bg-rose-600 hover:text-white text-theme-muted rounded-lg transition-colors"
                         title="Delete Place"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={15} />
                       </button>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
@@ -675,30 +674,30 @@ export const AdminPlaces = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+                  className="fixed inset-0 bg-black/60 z-50"
                   onClick={handleCloseModal}
                 />
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
                   className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none"
                 >
-                  <div className="glass-effect p-6 rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto pointer-events-auto border border-dark-700 shadow-2xl">
+                  <div className="bg-theme-surface p-6 rounded-[10px] max-w-3xl w-full max-h-[92vh] overflow-y-auto pointer-events-auto border border-theme-border shadow-card">
                     {/* Modal Header */}
-                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-dark-700">
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-theme-border">
                       <div>
-                        <h2 className="text-2xl font-bold flex items-center gap-2">
-                          <MapPin className="text-accent-primary" size={24} />
+                        <h2 className="heading-3 flex items-center gap-2">
+                          <MapPin className="text-theme-accent" size={20} />
                           {editingItem ? 'Edit Place' : 'Add New Place'}
                         </h2>
-                        <p className="text-xs text-text-secondary mt-0.5">
+                        <p className="text-xs text-theme-muted mt-0.5">
                           Set location details, GPS coordinates, and place imagery
                         </p>
                       </div>
                       <button
                         onClick={handleCloseModal}
-                        className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-text-secondary hover:text-white"
+                        className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
                       >
                         <X size={20} />
                       </button>
@@ -706,9 +705,9 @@ export const AdminPlaces = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                       {/* GPS Quick Action Bar */}
-                      <div className="p-4 bg-dark-800/80 border border-dark-700 rounded-xl space-y-3">
+                      <div className="p-4 bg-theme-subtle border border-theme-border rounded-[10px] space-y-3">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                          <span className="text-xs font-semibold uppercase tracking-wider text-accent-primary flex items-center gap-1.5">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-theme-accent flex items-center gap-1.5">
                             <Navigation size={14} />
                             Automatic GPS Location Detection
                           </span>
@@ -717,7 +716,7 @@ export const AdminPlaces = () => {
                               type="button"
                               onClick={handleAutoFetchGPS}
                               disabled={gpsFetching}
-                              className="px-3 py-1.5 bg-accent-primary hover:bg-accent-primary/80 text-white text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 shadow-sm"
+                              className="px-3 py-1.5 bg-theme-accent hover:bg-theme-accent-hover text-theme-accent-contrast text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5"
                             >
                               {gpsFetching ? (
                                 <Loader2 size={13} className="animate-spin" />
@@ -730,7 +729,7 @@ export const AdminPlaces = () => {
                               type="button"
                               onClick={handleSearchLocation}
                               disabled={geoSearching}
-                              className="px-3 py-1.5 bg-dark-700 hover:bg-dark-600 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
+                              className="px-3 py-1.5 bg-theme-surface border border-theme-border hover:border-theme-muted text-theme-text text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5"
                             >
                               {geoSearching ? (
                                 <Loader2 size={13} className="animate-spin" />
@@ -743,8 +742,8 @@ export const AdminPlaces = () => {
                         </div>
 
                         {gpsStatus && (
-                          <div className="flex items-center gap-2 text-xs text-text-secondary bg-dark-900/90 p-2.5 rounded-lg border border-dark-700 font-mono">
-                            <AlertCircle size={14} className="text-accent-primary shrink-0" />
+                          <div className="flex items-center gap-2 text-xs text-theme-muted bg-theme-surface p-2.5 rounded-lg border border-theme-border font-mono">
+                            <AlertCircle size={14} className="text-theme-accent shrink-0" />
                             <span>{gpsStatus}</span>
                           </div>
                         )}
@@ -752,47 +751,47 @@ export const AdminPlaces = () => {
 
                       {/* Interactive Mini Map in Modal */}
                       <div>
-                        <label className="block text-xs font-medium text-text-secondary mb-1.5">
+                        <label className="block text-xs font-medium text-theme-muted mb-1.5">
                           Interactive Map Location Preview (Click map or drag marker to adjust)
                         </label>
                         <div
                           ref={modalMapContainerRef}
-                          className="w-full h-48 rounded-xl overflow-hidden border border-dark-700 bg-dark-900 relative"
+                          className="w-full h-48 rounded-[10px] overflow-hidden border border-theme-border bg-theme-subtle relative"
                         />
                       </div>
 
                       {/* Basic Details: Name, City, Country */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                          <label className="block text-sm font-medium mb-1">Place / Landmark Name *</label>
+                          <label className="block text-sm font-medium mb-1 text-theme-text">Place / Landmark Name *</label>
                           <input
                             type="text"
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="e.g., Eiffel Tower or Manali"
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">City *</label>
+                          <label className="block text-sm font-medium mb-1 text-theme-text">City *</label>
                           <input
                             type="text"
                             value={formData.city}
                             onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                             placeholder="e.g., Paris or Kullu"
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Country *</label>
+                          <label className="block text-sm font-medium mb-1 text-theme-text">Country *</label>
                           <input
                             type="text"
                             value={formData.country}
                             onChange={(e) => setFormData({ ...formData, country: e.target.value })}
                             placeholder="e.g., France or India"
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                             required
                           />
                         </div>
@@ -801,7 +800,7 @@ export const AdminPlaces = () => {
                       {/* Coordinates (Longitude, Latitude) */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium mb-1">
+                          <label className="block text-sm font-medium mb-1 text-theme-text">
                             Latitude (e.g. 28.6139) *
                           </label>
                           <input
@@ -817,12 +816,12 @@ export const AdminPlaces = () => {
                                 updateMapPosition(numLng, numLat);
                               }
                             }}
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">
+                          <label className="block text-sm font-medium mb-1 text-theme-text">
                             Longitude (e.g. 77.2090) *
                           </label>
                           <input
@@ -838,7 +837,7 @@ export const AdminPlaces = () => {
                                 updateMapPosition(numLng, numLat);
                               }
                             }}
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                             required
                           />
                         </div>
@@ -847,11 +846,11 @@ export const AdminPlaces = () => {
                       {/* Category & Visited Date */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium mb-1">Category</label>
+                          <label className="block text-sm font-medium mb-1 text-theme-text">Category</label>
                           <select
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           >
                             {CATEGORIES.map((cat) => (
                               <option key={cat} value={cat}>
@@ -861,7 +860,7 @@ export const AdminPlaces = () => {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-1">Visited Date / Year</label>
+                          <label className="block text-sm font-medium mb-1 text-theme-text">Visited Date / Year</label>
                           <input
                             type="text"
                             value={formData.visitedDate}
@@ -869,7 +868,7 @@ export const AdminPlaces = () => {
                               setFormData({ ...formData, visitedDate: e.target.value })
                             }
                             placeholder="e.g. October 2023 or 2024"
-                            className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                            className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           />
                         </div>
                       </div>
@@ -877,12 +876,12 @@ export const AdminPlaces = () => {
                       {/* Image URL & Live Preview */}
                       <div>
                         <div className="flex items-center justify-between mb-1">
-                          <label className="block text-sm font-medium">Place Image URL</label>
+                          <label className="block text-sm font-medium text-theme-text">Place Image URL</label>
                           <a
                             href="https://imgbb.com"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-xs text-accent-primary hover:underline flex items-center gap-1"
+                            className="text-xs text-theme-accent hover:underline flex items-center gap-1"
                           >
                             Upload to ImgBB <ExternalLink size={12} />
                           </a>
@@ -892,20 +891,20 @@ export const AdminPlaces = () => {
                           value={formData.image}
                           onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                           placeholder="https://example.com/place.jpg (Optional - falls back to Wikipedia automatically)"
-                          className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         />
                         {formData.image && (
-                          <div className="mt-3 relative rounded-xl overflow-hidden h-40 border border-dark-700 bg-dark-900">
+                          <div className="mt-3 relative rounded-[10px] overflow-hidden h-40 border border-theme-border bg-theme-subtle">
                             <img
                               src={formData.image}
                               alt="Place Preview"
                               className="w-full h-full object-cover"
                               onError={(e) => {
                                 (e.currentTarget as HTMLImageElement).src =
-                                  'https://placehold.co/600x400/1e293b/white?text=Invalid+Image+URL';
+                                  'https://placehold.co/600x400/161918/white?text=Invalid+Image+URL';
                               }}
                             />
-                            <span className="absolute bottom-2 right-2 text-xs bg-dark-950/80 px-2 py-1 rounded text-white backdrop-blur-sm">
+                            <span className="absolute bottom-2 right-2 text-xs bg-theme-surface border border-theme-border px-2 py-1 rounded text-theme-text">
                               Image Preview
                             </span>
                           </div>
@@ -914,7 +913,7 @@ export const AdminPlaces = () => {
 
                       {/* Description */}
                       <div>
-                        <label className="block text-sm font-medium mb-1">Description</label>
+                        <label className="block text-sm font-medium mb-1 text-theme-text">Description</label>
                         <textarea
                           value={formData.description}
                           onChange={(e) =>
@@ -922,23 +921,25 @@ export const AdminPlaces = () => {
                           }
                           rows={2}
                           placeholder="Brief memory or note about this destination..."
-                          className="w-full px-3.5 py-2 bg-dark-800 border border-dark-700 rounded-lg text-sm focus:outline-none focus:border-accent-primary"
+                          className="w-full px-3.5 py-2 bg-theme-subtle border border-theme-border rounded-lg text-sm focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         />
                       </div>
 
                       {/* Submit Actions */}
-                      <div className="flex gap-4 pt-4 border-t border-dark-700">
+                      <div className="flex gap-3 pt-4 border-t border-theme-border">
                         <Button
                           type="submit"
-                          className="btn-neon flex-1 flex items-center justify-center gap-2"
+                          variant="primary"
+                          className="flex-1 flex items-center justify-center gap-2"
                         >
                           <Save size={18} />
                           {editingItem ? 'Update Place' : 'Save Place'}
                         </Button>
                         <Button
                           type="button"
+                          variant="secondary"
                           onClick={handleCloseModal}
-                          className="flex-1 bg-dark-700 hover:bg-dark-600"
+                          className="flex-1"
                         >
                           Cancel
                         </Button>

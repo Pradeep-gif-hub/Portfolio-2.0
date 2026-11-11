@@ -66,7 +66,7 @@ export const getTechLogo = (techName: string): string => {
   }
 
   // Fallback: return a default tech icon from ui-avatars
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(techName)}&background=6366f1&color=fff&size=32`;
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(techName)}&background=1F3A34&color=fff&size=32`;
 };
 
 /**

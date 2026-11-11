@@ -93,18 +93,14 @@ export const GalleryPage: React.FC = () => {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="relative aspect-video rounded-lg overflow-hidden animate-pulse">
-                <div className="w-full h-full bg-gray-200 dark:bg-gray-700"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-dark-950/80 to-transparent">
-                  <div className="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-300 dark:bg-gray-600 rounded w-1/2"></div>
-                </div>
+              <div key={i} className="relative aspect-video rounded-[10px] border border-theme-border bg-theme-surface overflow-hidden animate-pulse">
+                <div className="w-full h-full bg-theme-subtle"></div>
               </div>
             ))}
           </div>
         ) : gallery.length === 0 ? (
-          <div className="text-center py-12 glass-effect rounded-xl">
-            <p className="text-text-secondary text-lg">No gallery items yet</p>
+          <div className="text-center py-12 bg-theme-surface border border-theme-border rounded-[10px] shadow-card">
+            <p className="text-theme-muted text-base">No gallery items yet</p>
           </div>
         ) : (
           <motion.div
@@ -117,8 +113,7 @@ export const GalleryPage: React.FC = () => {
               <motion.div
                 key={item._id}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="relative aspect-video rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer group"
+                className="relative aspect-video rounded-[10px] border border-theme-border overflow-hidden shadow-card card-hover cursor-pointer group"
                 onClick={() => setSelectedIndex(index)}
               >
                 <img
@@ -126,14 +121,17 @@ export const GalleryPage: React.FC = () => {
                   alt={item.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-950/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4"
+                  style={{ background: "linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent)" }}
+                >
                   <div>
-                    <p className="text-white font-medium">{item.title}</p>
+                    <p className="text-white font-medium text-sm">{item.title}</p>
                     {item.description && (
-                      <p className="text-dark-300 text-sm">{item.description}</p>
+                      <p className="text-neutral-300 text-xs">{item.description}</p>
                     )}
                     {item.category && (
-                      <p className="text-dark-300 text-sm capitalize mt-1">{item.category}</p>
+                      <p className="text-neutral-300 text-xs capitalize mt-1">{item.category}</p>
                     )}
                   </div>
                 </div>
@@ -151,21 +149,21 @@ export const GalleryPage: React.FC = () => {
             className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           >
             <motion.div
-              initial={{ scale: 0.9 }}
+              initial={{ scale: 0.96 }}
               animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
+              exit={{ scale: 0.96 }}
               className="max-w-4xl w-full max-h-[85vh] relative flex items-center justify-center"
               onClick={(event) => event.stopPropagation()}
             >
               <img
                 src={gallery[selectedIndex].image}
                 alt={gallery[selectedIndex].title}
-                className="max-w-full max-h-[85vh] object-contain rounded-lg"
+                className="max-w-full max-h-[85vh] object-contain rounded-[10px]"
               />
               <button
                 aria-label="Close image viewer"
                 onClick={() => setSelectedIndex(null)}
-                className="absolute top-4 right-4 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                className="absolute top-4 right-4 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
               >
                 <X size={20} />
               </button>
@@ -174,14 +172,14 @@ export const GalleryPage: React.FC = () => {
                   <button
                     aria-label="Previous image"
                     onClick={() => setSelectedIndex((selectedIndex - 1 + gallery.length) % gallery.length)}
-                    className="absolute left-2 md:-left-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                    className="absolute left-2 md:-left-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
                   >
                     <ChevronLeft size={24} />
                   </button>
                   <button
                     aria-label="Next image"
                     onClick={() => setSelectedIndex((selectedIndex + 1) % gallery.length)}
-                    className="absolute right-2 md:-right-14 bg-bg-primary/80 backdrop-blur-sm p-2 rounded-lg hover:bg-bg-primary transition-smooth text-white"
+                    className="absolute right-2 md:-right-14 bg-theme-surface border border-theme-border p-2 rounded-lg hover:border-theme-muted transition-colors text-theme-text"
                   >
                     <ChevronRight size={24} />
                   </button>

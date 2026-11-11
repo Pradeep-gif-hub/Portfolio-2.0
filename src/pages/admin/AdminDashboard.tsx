@@ -16,20 +16,21 @@ interface Stats {
   lastUpdated: string;
 }
 
-const StatCard = ({ icon: Icon, label, value, color, link }: any) => (
+const StatCard = ({ icon: Icon, label, value, link }: any) => (
   <Link to={link}>
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="glass-effect p-6 rounded-xl border-2 border-dark-700 hover:border-accent-primary/50 transition-colors"
+      whileHover={{ y: -2 }}
+      transition={{ duration: 0.15 }}
+      className="bg-theme-surface p-6 rounded-[10px] border border-theme-border hover:border-theme-muted shadow-card transition-colors"
     >
       <div className="flex items-center justify-between mb-4">
-        <div className={`p-3 rounded-lg bg-${color}/20`}>
-          <Icon size={24} className={`text-${color}`} />
+        <div className="p-2.5 rounded-lg bg-theme-accent-soft">
+          <Icon size={22} className="text-theme-accent" />
         </div>
-        <TrendingUp size={20} className="text-green-400" />
+        <TrendingUp size={18} className="text-theme-muted" />
       </div>
-      <h3 className="text-3xl font-bold mb-1">{value}</h3>
-      <p className="text-text-secondary text-sm">{label}</p>
+      <h3 className="text-3xl font-semibold text-theme-text mb-1">{value}</h3>
+      <p className="text-theme-muted text-sm">{label}</p>
     </motion.div>
   </Link>
 );
@@ -88,157 +89,139 @@ export const AdminDashboard = () => {
     <ProtectedRoute>
       <AdminLayout>
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
-          >
-            <div className="flex items-center justify-between">
+          <div className="mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-                <p className="text-text-secondary">
+                <h1 className="heading-2 mb-1">Dashboard</h1>
+                <p className="text-theme-muted text-sm">
                   Welcome back! Here's an overview of your portfolio.
                 </p>
               </div>
-              <Link to="/admin/settings" className="btn-neon flex items-center gap-2 px-6 py-3">
-                <Settings size={20} />
+              <Link
+                to="/admin/settings"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-theme-accent text-theme-accent-contrast hover:bg-theme-accent-hover transition-colors text-sm font-medium"
+              >
+                <Settings size={18} />
                 Portfolio Settings
               </Link>
             </div>
-          </motion.div>
+          </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-              <p className="mt-4 text-text-secondary">Loading dashboard...</p>
+              <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+              <p className="mt-4 text-theme-muted text-sm">Loading dashboard...</p>
             </div>
           ) : (
             <>
               {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
                 <StatCard
                   icon={FolderKanban}
                   label="Total Projects"
                   value={stats.projects}
-                  color="accent-primary"
                   link="/admin/projects"
                 />
                 <StatCard
                   icon={FileText}
                   label="Blog Posts"
                   value={stats.blogs}
-                  color="blue-500"
                   link="/admin/blogs"
                 />
                 <StatCard
                   icon={Briefcase}
                   label="Work Experience"
                   value={stats.experience}
-                  color="purple-500"
                   link="/admin/experience"
                 />
                 <StatCard
                   icon={Award}
                   label="Certifications"
                   value={stats.certifications}
-                  color="green-500"
                   link="/admin/certifications"
                 />
                 <StatCard
                   icon={MapPin}
                   label="Visited Places"
                   value={stats.places}
-                  color="emerald-500"
                   link="/admin/places"
                 />
                 <StatCard
                   icon={Wrench}
                   label="Tech Stack Tools"
                   value={stats.tools}
-                  color="orange-500"
                   link="/admin/tools"
                 />
                 <StatCard
                   icon={Image}
                   label="Gallery Images"
                   value={stats.gallery}
-                  color="pink-500"
                   link="/admin/gallery"
                 />
               </div>
 
               {/* Quick Actions */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="glass-effect p-6 rounded-xl"
-              >
-                <h2 className="text-xl font-bold mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+              <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card">
+                <h2 className="heading-3 mb-4">Quick Actions</h2>
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
                   <Link
                     to="/admin/projects"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <FolderKanban className="mx-auto mb-2 text-accent-primary" size={24} />
-                    <span className="text-sm">Manage Projects</span>
+                    <FolderKanban className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Manage Projects</span>
                   </Link>
                   <Link
                     to="/admin/blogs"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <FileText className="mx-auto mb-2 text-blue-500" size={24} />
-                    <span className="text-sm">Write Blog</span>
+                    <FileText className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Write Blog</span>
                   </Link>
                   <Link
                     to="/admin/experience"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <Briefcase className="mx-auto mb-2 text-purple-500" size={24} />
-                    <span className="text-sm">Add Experience</span>
+                    <Briefcase className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Add Experience</span>
                   </Link>
                   <Link
                     to="/admin/places"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <MapPin className="mx-auto mb-2 text-emerald-500" size={24} />
-                    <span className="text-sm">Manage Places</span>
+                    <MapPin className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Manage Places</span>
                   </Link>
                   <Link
                     to="/admin/certifications"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <Award className="mx-auto mb-2 text-green-500" size={24} />
-                    <span className="text-sm">Add Certificate</span>
+                    <Award className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Add Certificate</span>
                   </Link>
                   <Link
                     to="/admin/tools"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <Wrench className="mx-auto mb-2 text-orange-500" size={24} />
-                    <span className="text-sm">Manage Tools</span>
+                    <Wrench className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Manage Tools</span>
                   </Link>
                   <Link
                     to="/admin/settings"
-                    className="p-4 bg-dark-800 rounded-lg hover:bg-dark-700 transition-colors text-center"
+                    className="p-4 bg-theme-subtle border border-theme-border rounded-lg hover:border-theme-muted transition-colors text-center"
                   >
-                    <Settings className="mx-auto mb-2 text-yellow-500" size={24} />
-                    <span className="text-sm">Settings</span>
+                    <Settings className="mx-auto mb-2 text-theme-accent" size={22} />
+                    <span className="text-xs font-medium text-theme-text">Settings</span>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             </>
           )}
 
           {/* Last Updated */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-6 text-center text-text-tertiary text-sm"
-          >
+          <div className="mt-6 text-center text-theme-muted text-xs">
             Last updated: {stats.lastUpdated}
-          </motion.div>
+          </div>
         </div>
       </AdminLayout>
     </ProtectedRoute>

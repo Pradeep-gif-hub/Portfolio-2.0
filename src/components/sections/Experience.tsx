@@ -61,34 +61,33 @@ export const Experience: React.FC = () => {
   return (
     <SectionWrapper id="experience">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="mb-12"
+        transition={{ duration: 0.25 }}
+        className="mb-10"
       >
-        <h2 className="heading-2 mb-4">Experience</h2>
-        <p className="text-text-secondary text-lg">
+        <h2 className="heading-2 mb-3">Experience</h2>
+        <p className="text-theme-muted text-base">
           My professional journey
         </p>
       </motion.div>
 
       {loading ? (
-        <div className="space-y-8 relative">
-          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary to-transparent" />
+        <div className="space-y-6 relative">
+          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-theme-border" />
           {[1, 2, 3].map((i) => (
-            <div key={i} className="relative pl-0 md:pl-24 animate-pulse">
-              <div className="glass-effect p-6 rounded-xl border-2 border-dark-700">
+            <div key={i} className="relative pl-0 md:pl-20 animate-pulse">
+              <div className="bg-theme-surface p-6 rounded-[10px] border border-theme-border shadow-card">
                 <div className="flex flex-col md:flex-row gap-6">
-                  <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-xl flex-shrink-0"></div>
-                  <div className="flex-1 space-y-4">
-                    <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-2/3"></div>
-                    <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-                    <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-40"></div>
-                    <div className="space-y-2">
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-11/12"></div>
-                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10/12"></div>
+                  <div className="w-14 h-14 bg-theme-subtle rounded-lg flex-shrink-0"></div>
+                  <div className="flex-1 space-y-3">
+                    <div className="h-6 bg-theme-subtle rounded w-2/3"></div>
+                    <div className="h-5 bg-theme-subtle rounded w-1/2"></div>
+                    <div className="h-4 bg-theme-subtle rounded w-36"></div>
+                    <div className="space-y-2 pt-1">
+                      <div className="h-4 bg-theme-subtle rounded"></div>
+                      <div className="h-4 bg-theme-subtle rounded w-11/12"></div>
                     </div>
                   </div>
                 </div>
@@ -98,7 +97,7 @@ export const Experience: React.FC = () => {
         </div>
       ) : experiences.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-text-secondary">No featured experiences yet. Mark some experiences as featured in the admin panel.</p>
+          <p className="text-theme-muted">No featured experiences yet. Mark some experiences as featured in the admin panel.</p>
         </div>
       ) : (
         <motion.div
@@ -106,56 +105,56 @@ export const Experience: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="space-y-8 relative"
+          className="space-y-6 relative"
         >
           {/* Timeline line */}
-          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-accent-primary to-transparent" />
+          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-px bg-theme-border" />
 
           {experiences.map((exp) => (
           <motion.div
             key={exp._id}
             variants={itemVariants}
-            className="relative pl-0 md:pl-24"
+            className="relative pl-0 md:pl-20"
           >
             {/* Timeline dot */}
             <div className="hidden md:flex absolute left-0 top-2 w-16 h-16 items-center justify-center">
-              <div className="w-4 h-4 bg-accent-primary rounded-full border-4 border-bg-primary" />
+              <div className="w-3.5 h-3.5 bg-theme-accent rounded-full border-4 border-theme-bg" />
             </div>
 
             <Link to={`/experience/${exp._id}`} className="block">
-              <div className="bg-bg-secondary border border-bg-tertiary rounded-lg p-6 hover:border-accent-primary transition-smooth cursor-pointer group">
-                <div className="flex items-start gap-4 mb-3">
+              <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card card-hover cursor-pointer group">
+                <div className="flex items-start gap-4 mb-4">
                   {/* Company Logo */}
                   <img 
                     src={exp.logo} 
                     alt={exp.company}
                     onError={(e) => {
-                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&size=64&background=0891b2&color=fff&bold=true`;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(exp.company)}&size=64&background=1F3A34&color=fff&bold=true`;
                     }}
-                    className="w-16 h-16 rounded-lg object-cover border-2 border-bg-tertiary group-hover:border-accent-primary transition-smooth flex-shrink-0"
+                    className="w-14 h-14 rounded-lg object-cover border border-theme-border flex-shrink-0"
                   />
                   
                   <div className="flex-1">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                       <div>
-                        <h3 className="heading-4 group-hover:text-accent-primary transition-smooth">
+                        <h3 className="heading-4 group-hover:text-theme-accent transition-colors">
                           {exp.role}
                         </h3>
-                        <p className="text-accent-primary font-medium">
+                        <p className="text-theme-accent text-sm font-medium">
                           {exp.company}
                         </p>
                       </div>
-                      <Badge variant="dark" className="w-fit">
+                      <Badge variant="dark" className="w-fit text-xs">
                         {exp.duration}
                       </Badge>
                     </div>
                   </div>
                 </div>
 
-                <ul className="space-y-2 ml-20">
+                <ul className="space-y-2 md:ml-[4.5rem]">
                   {exp.points.map((point, i) => (
-                    <li key={i} className="text-text-secondary flex items-start gap-3">
-                      <span className="text-accent-primary mt-1">→</span>
+                    <li key={i} className="text-theme-muted text-sm flex items-start gap-3">
+                      <span className="text-theme-accent mt-0.5">→</span>
                       <span>{point}</span>
                     </li>
                   ))}

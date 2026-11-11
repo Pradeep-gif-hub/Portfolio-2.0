@@ -26,7 +26,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     ) {
       return "dark";
     }
-    return "dark"; // Default to dark
+    return "light"; // Default to light
   });
 
   useEffect(() => {
@@ -39,6 +39,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
       root.classList.remove("dark");
       root.classList.add("light");
     }
+    root.setAttribute("data-theme", theme);
+
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute("content", theme === "dark" ? "#0F1110" : "#FAFAF8");
+    }
+
     // Save to localStorage
     localStorage.setItem("theme", theme);
   }, [theme]);

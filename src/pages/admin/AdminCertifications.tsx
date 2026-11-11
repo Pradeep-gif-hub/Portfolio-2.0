@@ -137,41 +137,39 @@ export const AdminCertifications = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">Certifications</h1>
-              <p className="text-text-secondary">Manage your certifications</p>
+              <h1 className="heading-2 mb-1">Certifications</h1>
+              <p className="text-theme-muted text-sm">Manage your certifications</p>
             </div>
-            <Button onClick={handleCreate} className="btn-neon flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
-              <Plus size={20} />
+            <Button onClick={handleCreate} variant="primary" className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+              <Plus size={18} />
               Add Certification
             </Button>
           </div>
 
           <div className="mb-6 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-theme-muted" size={18} />
             <input
               type="text"
               placeholder="Search certifications..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary text-white"
+              className="w-full pl-11 pr-4 py-2.5 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
             />
           </div>
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-              <p className="mt-4 text-text-secondary">Loading certifications...</p>
+              <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+              <p className="mt-4 text-theme-muted text-sm">Loading certifications...</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredCerts.map((cert) => (
-                <motion.div
+                <div
                   key={cert._id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="glass-effect p-6 rounded-xl hover:border-accent-primary/30 border-2 border-transparent transition-all"
+                  className="bg-theme-surface p-6 rounded-[10px] hover:border-theme-muted border border-theme-border shadow-card transition-colors"
                 >
-                  <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-2">
                         {cert.image && (
@@ -179,17 +177,17 @@ export const AdminCertifications = () => {
                             src={cert.image} 
                             alt={cert.issuer}
                             onError={(e) => {
-                              e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.issuer)}&size=48&background=0891b2&color=fff&bold=true`;
+                              e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(cert.issuer)}&size=48&background=1F3A34&color=fff&bold=true`;
                             }}
-                            className="w-12 h-12 rounded-lg object-cover border border-accent-primary/30 flex-shrink-0"
+                            className="w-12 h-12 rounded-lg object-cover border border-theme-border flex-shrink-0"
                           />
                         )}
                         <div className="min-w-0">
-                          <h3 className="text-lg sm:text-xl font-bold break-words">{cert.title}</h3>
-                          <p className="text-accent-primary text-sm">{cert.issuer}</p>
+                          <h3 className="heading-4 break-words">{cert.title}</h3>
+                          <p className="text-theme-accent text-sm">{cert.issuer}</p>
                         </div>
                       </div>
-                      <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-text-tertiary mb-3">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-theme-muted mb-3">
                         <span>{cert.month ? `${cert.month} ${cert.year}` : cert.year}</span>
                         {cert.duration && (
                           <>
@@ -198,47 +196,47 @@ export const AdminCertifications = () => {
                           </>
                         )}
                         <span>•</span>
-                        <span className="px-2 py-0.5 bg-accent-primary/20 rounded text-accent-primary text-xs">
+                        <span className="px-2 py-0.5 bg-theme-accent-soft rounded-full text-theme-accent text-xs font-medium">
                           {cert.difficulty}
                         </span>
                         {cert.projectBased && (
                           <>
                             <span>•</span>
-                            <span className="px-2 py-0.5 bg-green-500/20 rounded text-green-400 text-xs">
+                            <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/50 rounded-full text-emerald-700 dark:text-emerald-300 text-xs font-medium">
                               Project-Based
                             </span>
                           </>
                         )}
                       </div>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-1.5">
                         {cert.skills.slice(0, 4).map((skill, idx) => (
-                          <span key={idx} className="px-2 py-1 bg-dark-800 rounded text-xs whitespace-nowrap">
+                          <span key={idx} className="px-2.5 py-0.5 bg-theme-subtle border border-theme-border rounded-full text-xs text-theme-muted whitespace-nowrap">
                             {skill}
                           </span>
                         ))}
                         {cert.skills.length > 4 && (
-                          <span className="px-2 py-1 text-text-secondary text-xs">
+                          <span className="px-2 py-0.5 text-theme-muted text-xs">
                             +{cert.skills.length - 4} more
                           </span>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-1 flex-shrink-0">
                       <button
                         onClick={() => handleEdit(cert)}
-                        className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-accent-primary"
+                        className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-accent"
                       >
                         <Edit2 size={16} />
                       </button>
                       <button
                         onClick={() => handleDelete(cert._id!)}
-                        className="p-2 hover:bg-dark-700 rounded-lg transition-colors text-red-400"
+                        className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-rose-600 dark:text-rose-400"
                       >
                         <Trash2 size={16} />
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
@@ -251,21 +249,21 @@ export const AdminCertifications = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50 overflow-y-auto"
+              className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 overflow-y-auto"
             >
               <motion.div
-                initial={{ scale: 0.9, y: 20 }}
+                initial={{ scale: 0.96, y: 12 }}
                 animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="bg-dark-900 rounded-xl p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+                exit={{ scale: 0.96, y: 12 }}
+                className="bg-theme-surface border border-theme-border rounded-[10px] p-6 max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-card"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold">
+                  <h2 className="heading-3">
                     {editingCert ? 'Edit Certification' : 'Create New Certification'}
                   </h2>
                   <button
                     onClick={() => setShowModal(false)}
-                    className="p-2 hover:bg-dark-800 rounded-lg transition-colors text-gray-400 hover:text-white"
+                    className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
                   >
                     <X size={20} />
                   </button>
@@ -273,34 +271,34 @@ export const AdminCertifications = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Title *</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Title *</label>
                     <input
                       type="text"
                       value={formData.title}
                       onChange={(e) => handleInputChange('title', e.target.value)}
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       required
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Issuer *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Issuer *</label>
                       <input
                         type="text"
                         value={formData.issuer}
                         onChange={(e) => handleInputChange('issuer', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Year *</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Year *</label>
                       <input
                         type="number"
                         value={formData.year}
                         onChange={(e) => handleInputChange('year', parseInt(e.target.value))}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         min="1990"
                         max={new Date().getFullYear() + 1}
                         required
@@ -310,68 +308,68 @@ export const AdminCertifications = () => {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Month</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Month</label>
                       <input
                         type="text"
                         value={formData.month || ''}
                         onChange={(e) => handleInputChange('month', e.target.value)}
                         placeholder="e.g., January"
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Duration</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Duration</label>
                       <input
                         type="text"
                         value={formData.duration || ''}
                         onChange={(e) => handleInputChange('duration', e.target.value)}
                         placeholder="e.g., 3 months"
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Certificate Link</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Certificate Link</label>
                     <input
                       type="url"
                       value={formData.link || ''}
                       onChange={(e) => handleInputChange('link', e.target.value)}
                       placeholder="https://..."
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Certificate Image URL</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Certificate Image URL</label>
                     <input
                       type="url"
                       value={formData.image || ''}
                       onChange={(e) => handleInputChange('image', e.target.value)}
                       placeholder="https://i.ibb.co/..."
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                     />
-                    <p className="text-xs text-text-tertiary mt-1">Upload to ImgBB and paste direct link</p>
+                    <p className="text-xs text-theme-muted mt-1">Upload to ImgBB and paste direct link</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2">Skills (comma-separated)</label>
+                    <label className="block text-sm font-medium mb-2 text-theme-text">Skills (comma-separated)</label>
                     <input
                       type="text"
                       value={skillsInput}
                       onChange={(e) => setSkillsInput(e.target.value)}
                       placeholder="React, Node.js, MongoDB"
-                      className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                      className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Difficulty</label>
+                      <label className="block text-sm font-medium mb-2 text-theme-text">Difficulty</label>
                       <select
                         value={formData.difficulty}
                         onChange={(e) => handleInputChange('difficulty', e.target.value)}
-                        className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                        className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                       >
                         <option value="Beginner">Beginner</option>
                         <option value="Intermediate">Intermediate</option>
@@ -384,9 +382,9 @@ export const AdminCertifications = () => {
                           type="checkbox"
                           checked={formData.projectBased}
                           onChange={(e) => handleInputChange('projectBased', e.target.checked)}
-                          className="w-4 h-4 rounded border-dark-700 bg-dark-800 text-accent-primary focus:ring-accent-primary"
+                          className="w-4 h-4 rounded border-theme-border bg-theme-subtle text-theme-accent focus:ring-theme-accent"
                         />
-                        <span className="text-sm">Project-Based</span>
+                        <span className="text-sm text-theme-text">Project-Based</span>
                       </label>
                     </div>
                     <div className="flex items-center pt-8">
@@ -395,14 +393,14 @@ export const AdminCertifications = () => {
                           type="checkbox"
                           checked={formData.featured || false}
                           onChange={(e) => handleInputChange('featured', e.target.checked)}
-                          className="w-4 h-4 rounded border-dark-700 bg-dark-800 text-accent-primary focus:ring-accent-primary"
+                          className="w-4 h-4 rounded border-theme-border bg-theme-subtle text-theme-accent focus:ring-theme-accent"
                         />
-                        <span className="text-sm">Featured</span>
+                        <span className="text-sm text-theme-text">Featured</span>
                       </label>
                     </div>
                   </div>
 
-                  <div className="flex justify-end gap-4 pt-4">
+                  <div className="flex justify-end gap-3 pt-4">
                     <Button
                       type="button"
                       variant="secondary"
@@ -410,7 +408,7 @@ export const AdminCertifications = () => {
                     >
                       Cancel
                     </Button>
-                    <Button type="submit" variant="primary" className="btn-neon flex items-center gap-2">
+                    <Button type="submit" variant="primary" className="flex items-center gap-2">
                       <Save size={16} />
                       {editingCert ? 'Update' : 'Create'} Certification
                     </Button>

@@ -24,16 +24,16 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
           className="flex items-center"
         >
           {index > 0 && (
-            <ChevronRight size={16} className="mx-2 text-text-secondary dark:text-dark-500" />
+            <ChevronRight size={16} className="mx-2 text-theme-muted" />
           )}
           {index === items.length - 1 ? (
-            <span className="text-text-primary dark:text-dark-100 font-medium">
+            <span className="text-theme-text font-medium">
               {item.label}
             </span>
           ) : (
             <Link
               to={item.path}
-              className="text-text-secondary dark:text-dark-400 hover:text-accent-primary dark:hover:text-accent-primary transition-colors"
+              className="text-theme-muted hover:text-theme-accent transition-colors"
             >
               {item.label}
             </Link>

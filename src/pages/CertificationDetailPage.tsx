@@ -47,38 +47,37 @@ const CertificationDetailPage = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
-        <main className="container max-w-5xl mx-auto px-4 py-8">
+        <main className="container max-w-container mx-auto px-4 py-8">
           <div className="animate-pulse">
             {/* Breadcrumb skeleton */}
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-8"></div>
+            <div className="h-4 bg-theme-subtle rounded w-64 mb-8"></div>
             
             {/* Header skeleton */}
             <div className="flex items-start gap-4 mb-6">
-              <div className="w-12 h-12 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="w-12 h-12 bg-theme-subtle rounded"></div>
               <div className="flex-1 space-y-3">
-                <div className="h-10 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                <div className="h-10 bg-theme-subtle rounded w-3/4"></div>
+                <div className="h-6 bg-theme-subtle rounded w-1/2"></div>
               </div>
             </div>
             
             {/* Meta badges skeleton */}
-            <div className="flex gap-4 mb-12">
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded-full w-24"></div>
+            <div className="flex gap-4 mb-10">
+              <div className="h-6 bg-theme-subtle rounded-full w-24"></div>
+              <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
+              <div className="h-6 bg-theme-subtle rounded-full w-24"></div>
             </div>
             
             {/* Certificate image skeleton */}
-            <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-2xl mb-12"></div>
+            <div className="aspect-video bg-theme-subtle border border-theme-border rounded-[10px] mb-10"></div>
             
             {/* Skills skeleton */}
             <div className="space-y-4">
-              <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-32 mb-4"></div>
+              <div className="h-6 bg-theme-subtle rounded w-32 mb-4"></div>
               <div className="flex gap-2">
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
-                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-28"></div>
+                <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
+                <div className="h-7 bg-theme-subtle rounded-full w-24"></div>
+                <div className="h-7 bg-theme-subtle rounded-full w-20"></div>
               </div>
             </div>
           </div>
@@ -90,7 +89,7 @@ const CertificationDetailPage = () => {
   if (!cert) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4">
-        <h1 className="text-4xl font-bold mb-4">Certification not found</h1>
+        <h1 className="heading-1 mb-4">Certification not found</h1>
         <Button onClick={() => navigate("/")} variant="primary">
           Back to Home
         </Button>
@@ -99,14 +98,17 @@ const CertificationDetailPage = () => {
   }
 
   const difficultyColor = {
-    Beginner: "bg-green-500/20 text-green-400 border-green-500/30",
-    Intermediate: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    Advanced: "bg-red-500/20 text-red-400 border-red-500/30",
+    Beginner:
+      "bg-emerald-50 text-emerald-800 border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800/60",
+    Intermediate:
+      "bg-amber-50 text-amber-800 border-amber-200 dark:bg-amber-950/50 dark:text-amber-300 dark:border-amber-800/60",
+    Advanced:
+      "bg-rose-50 text-rose-800 border-rose-200 dark:bg-rose-950/50 dark:text-rose-300 dark:border-rose-800/60",
   };
 
   return (
     <div className="min-h-screen">
-      <main className="container max-w-5xl mx-auto px-4 py-8">
+      <main className="container max-w-container mx-auto px-4 py-8">
         <Breadcrumb 
           items={[
             { label: "Home", path: "/" },
@@ -117,35 +119,35 @@ const CertificationDetailPage = () => {
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mt-8 mb-12"
+          transition={{ duration: 0.25 }}
+          className="mt-6 mb-10"
         >
-          <div className="flex items-start gap-4 mb-6">
-            <Award size={48} className="text-accent-primary flex-shrink-0" />
+          <div className="flex items-start gap-4 mb-5">
+            <Award size={40} className="text-theme-accent flex-shrink-0 mt-1" />
             <div>
               <h1 className="heading-1 mb-2">{cert.title}</h1>
-              <h2 className="text-2xl text-accent-primary font-semibold">{cert.issuer}</h2>
+              <h2 className="text-xl text-theme-accent font-medium">{cert.issuer}</h2>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 items-center text-gray-400">
+          <div className="flex flex-wrap gap-3 items-center text-theme-muted text-sm">
             <div className="flex items-center gap-2">
-              <Calendar size={18} />
+              <Calendar size={16} />
               <span>{cert.month} {cert.year}</span>
             </div>
             {cert.duration && (
               <div className="flex items-center gap-2">
-                <Clock size={18} />
+                <Clock size={16} />
                 <span>{cert.duration}</span>
               </div>
             )}
-            <span className={`px-3 py-1 rounded-full text-xs font-medium border ${difficultyColor[cert.difficulty]}`}>
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium border ${difficultyColor[cert.difficulty]}`}>
               {cert.difficulty}
             </span>
             {cert.projectBased && (
-              <span className="px-3 py-1 rounded-full text-xs font-medium border bg-blue-500/20 text-blue-400 border-blue-500/30">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-medium border bg-neutral-100 text-neutral-700 border-neutral-300 dark:bg-neutral-800 dark:text-neutral-300 dark:border-neutral-700">
                 Project-Based
               </span>
             )}
@@ -154,10 +156,10 @@ const CertificationDetailPage = () => {
 
         {/* Certificate Image */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-12 rounded-2xl overflow-hidden bg-gradient-to-br from-dark-800/90 via-dark-800/60 to-black border border-accent-primary/30"
+          transition={{ duration: 0.25 }}
+          className="mb-10 rounded-[10px] overflow-hidden bg-theme-surface border border-theme-border shadow-card"
         >
           {cert.image ? (
             <div className="relative">
@@ -173,43 +175,43 @@ const CertificationDetailPage = () => {
                 className="w-full h-auto object-contain"
               />
               {/* Fallback placeholder (hidden by default) */}
-              <div className="hidden aspect-video bg-gradient-to-br from-accent-primary/20 via-accent-primary/10 to-transparent items-center justify-center p-12">
+              <div className="hidden aspect-video bg-theme-subtle items-center justify-center p-12">
                 <div className="text-center">
-                  <Award size={80} className="mx-auto text-accent-primary/70 mb-6" />
-                  <h3 className="text-2xl font-bold text-white mb-2">{cert.title}</h3>
-                  <p className="text-gray-400">{cert.issuer}</p>
+                  <Award size={64} className="mx-auto text-theme-accent mb-4" />
+                  <h3 className="heading-3 mb-2">{cert.title}</h3>
+                  <p className="text-theme-muted text-sm">{cert.issuer}</p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="aspect-video bg-gradient-to-br from-accent-primary/20 via-accent-primary/10 to-transparent flex items-center justify-center p-12">
+            <div className="aspect-video bg-theme-subtle flex items-center justify-center p-12">
               <div className="text-center">
-                <Award size={80} className="mx-auto text-accent-primary/70 mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-2">{cert.title}</h3>
-                <p className="text-gray-400">{cert.issuer}</p>
+                <Award size={64} className="mx-auto text-theme-accent mb-4" />
+                <h3 className="heading-3 mb-2">{cert.title}</h3>
+                <p className="text-theme-muted text-sm">{cert.issuer}</p>
               </div>
             </div>
           )}
         </motion.div>
 
         {/* Details Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
           {/* Skills Gained */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="glass-effect p-6 rounded-xl"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card"
           >
             <h3 className="heading-3 mb-4 flex items-center gap-2">
-              <Target size={24} className="text-accent-primary" />
+              <Target size={20} className="text-theme-accent" />
               Skills Gained
             </h3>
             <div className="flex flex-wrap gap-2">
               {cert.skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 bg-dark-900/80 backdrop-blur-sm rounded-lg border border-accent-primary/20 text-sm text-gray-300"
+                  className="px-3 py-1 bg-theme-accent-soft rounded-full text-xs font-medium text-theme-accent"
                 >
                   {skill}
                 </span>
@@ -219,29 +221,29 @@ const CertificationDetailPage = () => {
 
           {/* Key Info */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="glass-effect p-6 rounded-xl space-y-4"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="bg-theme-surface border border-theme-border p-6 rounded-[10px] shadow-card space-y-4"
           >
             <h3 className="heading-3 mb-4">Details</h3>
-            <div className="space-y-3 text-gray-300">
+            <div className="space-y-3 text-sm text-theme-text">
               <div className="flex justify-between">
-                <span className="text-gray-400">Difficulty:</span>
+                <span className="text-theme-muted">Difficulty:</span>
                 <span className="font-semibold">{cert.difficulty}</span>
               </div>
               {cert.duration && (
                 <div className="flex justify-between">
-                  <span className="text-gray-400">Duration:</span>
+                  <span className="text-theme-muted">Duration:</span>
                   <span className="font-semibold">{cert.duration}</span>
                 </div>
               )}
               <div className="flex justify-between">
-                <span className="text-gray-400">Year:</span>
+                <span className="text-theme-muted">Year:</span>
                 <span className="font-semibold">{cert.month} {cert.year}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400">Project-Based:</span>
+                <span className="text-theme-muted">Project-Based:</span>
                 <span className="font-semibold">{cert.projectBased ? "Yes" : "No"}</span>
               </div>
             </div>
@@ -250,25 +252,20 @@ const CertificationDetailPage = () => {
 
         {/* Verification Link */}
         {cert.link && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex justify-center"
-          >
+          <div className="flex justify-center">
             <Button
               as="a"
               href={cert.link}
               target="_blank"
               rel="noopener noreferrer"
               variant="primary"
-              className="group"
+              className="group gap-2"
             >
-              <CheckCircle2 size={18} />
+              <CheckCircle2 size={17} />
               View Credential / Verification
-              <ExternalLink size={16} className="group-hover:translate-x-1 transition-transform" />
+              <ExternalLink size={15} />
             </Button>
-          </motion.div>
+          </div>
         )}
       </main>
     </div>

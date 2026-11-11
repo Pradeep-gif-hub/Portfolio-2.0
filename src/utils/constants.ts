@@ -21,10 +21,10 @@ export const BREAKPOINTS = {
 } as const;
 
 export const COLORS = {
-  primary: "#0a0a0a",
-  secondary: "#1a1a1a",
-  tertiary: "#2a2a2a",
-  accent: "#3b82f6",
-  accentDark: "#1e40af",
-  accentLight: "#60a5fa",
+  primary: "#FAFAF8",
+  secondary: "#FFFFFF",
+  tertiary: "#E6E4DF",
+  accent: "#1F3A34",
+  accentDark: "#2E5249",
+  accentLight: "#8FB5A5",
 } as const;

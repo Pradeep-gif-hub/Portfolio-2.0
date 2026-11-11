@@ -155,8 +155,8 @@ export const AdminGallery = () => {
       <ProtectedRoute>
         <AdminLayout>
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent-primary mx-auto"></div>
-            <p className="mt-4 text-text-secondary">Loading gallery...</p>
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-theme-border border-t-theme-accent mx-auto"></div>
+            <p className="mt-4 text-theme-muted text-sm">Loading gallery...</p>
           </div>
         </AdminLayout>
       </ProtectedRoute>
@@ -169,76 +169,75 @@ export const AdminGallery = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold mb-2">Gallery Management</h1>
-              <p className="text-text-secondary">Manage your portfolio gallery images</p>
+              <h1 className="heading-2 mb-1">Gallery Management</h1>
+              <p className="text-theme-muted text-sm">Manage your portfolio gallery images</p>
             </div>
             <Button
               onClick={() => setShowModal(true)}
-              className="btn-neon flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
+              variant="primary"
+              className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start"
             >
-              <Plus size={20} />
+              <Plus size={18} />
               Add Gallery Item
             </Button>
           </div>
 
           {gallery.length === 0 ? (
-            <div className="glass-effect p-12 rounded-xl text-center">
-              <ImageIcon size={64} className="mx-auto mb-4 text-text-secondary" />
-              <h3 className="text-xl font-bold mb-2">No Gallery Items</h3>
-              <p className="text-text-secondary mb-6">Get started by adding your first gallery image</p>
-              <Button onClick={() => setShowModal(true)} className="btn-neon">
+            <div className="bg-theme-surface border border-theme-border p-12 rounded-[10px] shadow-card text-center">
+              <ImageIcon size={56} className="mx-auto mb-4 text-theme-muted" />
+              <h3 className="heading-3 mb-2">No Gallery Items</h3>
+              <p className="text-theme-muted text-sm mb-6">Get started by adding your first gallery image</p>
+              <Button onClick={() => setShowModal(true)} variant="primary">
                 Add Gallery Item
               </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {gallery.map((item) => (
-                <motion.div
+                <div
                   key={item._id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="glass-effect rounded-xl overflow-hidden"
+                  className="bg-theme-surface border border-theme-border rounded-[10px] shadow-card overflow-hidden"
                 >
-                  <div className="relative aspect-square">
+                  <div className="relative aspect-square bg-theme-subtle">
                     <img
                       src={item.image}
                       alt={item.title}
                       className="w-full h-full object-cover"
                     />
                     {item.category && (
-                      <span className="absolute top-2 right-2 px-3 py-1 bg-accent-primary/90 text-white text-xs rounded-full">
+                      <span className="absolute top-2 right-2 px-2.5 py-0.5 bg-theme-surface border border-theme-border text-theme-accent text-xs font-medium rounded-full">
                         {item.category}
                       </span>
                     )}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+                    <h3 className="heading-4 mb-1.5">{item.title}</h3>
                     {item.description && (
-                      <p className="text-text-secondary text-sm mb-4 line-clamp-2">
+                      <p className="text-theme-muted text-sm mb-4 line-clamp-2">
                         {item.description}
                       </p>
                     )}
-                    <div className="flex items-center justify-between">
-                      <div className="text-xs text-text-secondary">
+                    <div className="flex items-center justify-between pt-2 border-t border-theme-border">
+                      <div className="text-xs text-theme-muted">
                         {item.date && <span>{new Date(item.date).toLocaleDateString()}</span>}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-1">
                         <button
                           onClick={() => handleEdit(item)}
-                          className="p-2 bg-dark-800 hover:bg-accent-primary rounded-lg transition-colors"
+                          className="p-2 hover:bg-theme-subtle text-theme-accent rounded-lg transition-colors"
                         >
                           <Edit2 size={16} />
                         </button>
                         <button
                           onClick={() => handleDelete(item._id!)}
-                          className="p-2 bg-dark-800 hover:bg-red-500 rounded-lg transition-colors"
+                          className="p-2 hover:bg-theme-subtle text-rose-600 dark:text-rose-400 rounded-lg transition-colors"
                         >
                           <Trash2 size={16} />
                         </button>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           )}
@@ -251,23 +250,23 @@ export const AdminGallery = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
+                  className="fixed inset-0 bg-black/60 z-40"
                   onClick={handleCloseModal}
                 />
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  initial={{ opacity: 0, scale: 0.96, y: 12 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
                   className="fixed inset-0 flex items-center justify-center z-50 p-4"
                 >
-                  <div className="glass-effect p-6 rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                  <div className="bg-theme-surface border border-theme-border p-6 rounded-[10px] max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-card">
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold">
+                      <h2 className="heading-3">
                         {editingItem ? 'Edit Gallery Item' : 'Add Gallery Item'}
                       </h2>
                       <button
                         onClick={handleCloseModal}
-                        className="p-2 hover:bg-dark-700 rounded-lg transition-colors"
+                        className="p-2 hover:bg-theme-subtle rounded-lg transition-colors text-theme-muted hover:text-theme-text"
                       >
                         <X size={20} />
                       </button>
@@ -275,81 +274,82 @@ export const AdminGallery = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div>
-                        <label className="block text-sm font-medium mb-2">Title *</label>
+                        <label className="block text-sm font-medium mb-2 text-theme-text">Title *</label>
                         <input
                           type="text"
                           value={formData.title}
                           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                          className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           required
                         />
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">Image URL *</label>
+                        <label className="block text-sm font-medium mb-2 text-theme-text">Image URL *</label>
                         <input
                           type="url"
                           value={formData.image}
                           onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                           placeholder="https://example.com/image.jpg"
-                          className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           required
                         />
-                        <p className="text-xs text-text-secondary mt-1">
-                          Use <a href="https://imgbb.com" target="_blank" rel="noopener noreferrer" className="text-accent-primary hover:underline">ImgBB</a> for free image hosting
+                        <p className="text-xs text-theme-muted mt-1">
+                          Use <a href="https://imgbb.com" target="_blank" rel="noopener noreferrer" className="text-theme-accent hover:underline">ImgBB</a> for free image hosting
                         </p>
                         {formData.image && (
                           <img
                             src={formData.image}
                             alt="Preview"
-                            className="mt-2 w-full h-48 object-cover rounded-lg"
+                            className="mt-2 w-full h-48 object-cover rounded-lg border border-theme-border"
                           />
                         )}
                       </div>
 
                       <div>
-                        <label className="block text-sm font-medium mb-2">Description</label>
+                        <label className="block text-sm font-medium mb-2 text-theme-text">Description</label>
                         <textarea
                           value={formData.description}
                           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                           rows={3}
                           placeholder="Brief description of the image..."
-                          className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                          className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                         />
                       </div>
 
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium mb-2">Category</label>
+                          <label className="block text-sm font-medium mb-2 text-theme-text">Category</label>
                           <input
                             type="text"
                             value={formData.category}
                             onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                             placeholder="e.g., Personal, Professional"
-                            className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium mb-2">Date</label>
+                          <label className="block text-sm font-medium mb-2 text-theme-text">Date</label>
                           <input
                             type="date"
                             value={formData.date}
                             onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                            className="w-full px-4 py-2 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-accent-primary"
+                            className="w-full px-4 py-2 bg-theme-subtle border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text"
                           />
                         </div>
                       </div>
 
-                      <div className="flex gap-4 pt-4">
-                        <Button type="submit" className="btn-neon flex-1 flex items-center justify-center gap-2">
-                          <Save size={20} />
+                      <div className="flex gap-3 pt-4">
+                        <Button type="submit" variant="primary" className="flex-1 flex items-center justify-center gap-2">
+                          <Save size={18} />
                           {editingItem ? 'Update' : 'Create'}
                         </Button>
                         <Button
                           type="button"
+                          variant="secondary"
                           onClick={handleCloseModal}
-                          className="flex-1 bg-dark-700 hover:bg-dark-600"
+                          className="flex-1"
                         >
                           Cancel
                         </Button>
