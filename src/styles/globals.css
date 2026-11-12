@@ -407,6 +407,17 @@
     box-shadow: 0 8px 24px var(--outline-glow);
   }
 
+  .project-plane {
+    transform: rotateX(5deg) rotateY(-8deg);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .project-plane:hover {
+    transform: rotateX(5deg) rotateY(-8deg) translateZ(22px);
+    border-color: rgb(var(--accent-rgb) / 0.7);
+    box-shadow: 0 14px 30px var(--outline-glow);
+  }
+
   .card-accent-hover,
   .card-accent-featured {
     position: relative;

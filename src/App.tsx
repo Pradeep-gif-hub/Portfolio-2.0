@@ -6,7 +6,6 @@ import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { CursorWeb } from "./components/effects/CursorWeb";
 import { SpiderWalker } from "./components/effects/SpiderWalker";
 import { GreetingIntro } from "./components/effects/GreetingIntro";
-import { ScrollIdentity } from "./components/effects/ScrollIdentity";
 import { useAnalytics } from "./hooks/useAnalytics";
 import "./styles/globals.css";
 
@@ -32,7 +31,6 @@ function App() {
       <CursorWeb />
       <SpiderWalker />
       <GreetingIntro />
-      <ScrollIdentity />
     </div>
   );
 }

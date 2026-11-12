@@ -1,11 +1,20 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
 import { ExternalLink, Github, Calendar, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "../components/ui/Button";
 import { fetchProjects } from "../utils/api";
 import { fetchToolsForIcons, getTechLogo } from "../utils/techIcons";
+import {
+  PROJECT_ROTATE_X,
+  PROJECT_ROTATE_Y,
+  captureProjectImage,
+  clearProjectOpen,
+  peekProjectOpen,
+  projectPlaneClass,
+  type ProjectOpenOrigin,
+} from "../components/effects/projectOpen";
 
 interface Contributor {
   name: string;
@@ -33,11 +42,28 @@ const ProjectDetailPage = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [flight, setFlight] = useState<{
+    origin: ProjectOpenOrigin;
+    to: { centerX: number; centerY: number; width: number; height: number };
+  } | null>(null);
   
-  // Scroll to top when component mounts or id changes
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id]);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    if (!project || !heroRef.current) return;
+    const origin = peekProjectOpen(project._id);
+    if (!origin) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setFlight({
+      origin,
+      to: {
+        centerX: rect.left + rect.width / 2,
+        centerY: rect.top + rect.height / 2,
+        width: heroRef.current.offsetWidth,
+        height: heroRef.current.offsetHeight,
+      },
+    });
+  }, [project]);
 
   useEffect(() => {
     const loadProjects = async () => {
@@ -115,7 +141,7 @@ const ProjectDetailPage = () => {
 
   return (
     <div className="min-h-screen">
-      <main className="container max-w-container mx-auto px-4 py-8">
+      <main className="container max-w-container mx-auto px-4 py-8 [perspective:1400px]">
         <Breadcrumb 
           items={[
             { label: "Home", path: "/" },
@@ -125,27 +151,70 @@ const ProjectDetailPage = () => {
         />
 
         {/* 1. Gallery/Image Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25 }}
-          className="mt-6 mb-10"
-        >
-          <div className="surface-card relative overflow-hidden">
+        <div className="mt-6 mb-10">
+          <div
+            ref={heroRef}
+            className="surface-card relative overflow-hidden [transform-style:preserve-3d]"
+            style={{
+              transform: `rotateX(${PROJECT_ROTATE_X}deg) rotateY(${PROJECT_ROTATE_Y}deg)`,
+              opacity: flight ? 0 : 1,
+            }}
+          >
             <img
               src={project.image}
               alt={project.title}
               className="w-full h-[380px] md:h-[460px] object-cover"
+              style={{ opacity: flight ? 0 : 1 }}
             />
             <div
               className="absolute inset-0"
               style={{ background: "linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.15) 50%, transparent 100%)" }}
             />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <motion.div
+              className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
+              initial={flight ? { opacity: 0 } : false}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
               <h1 className="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-white mb-1">{project.title}</h1>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+        </div>
+
+        {flight && (
+          <div className="pointer-events-none fixed inset-0 z-[80] [perspective:1400px]">
+            <motion.img
+              src={flight.origin.src}
+              alt=""
+              className="absolute object-cover"
+              initial={{
+                left: flight.origin.centerX,
+                top: flight.origin.centerY,
+                width: flight.origin.width,
+                height: flight.origin.height,
+                x: "-50%",
+                y: "-50%",
+                rotateX: PROJECT_ROTATE_X,
+                rotateY: PROJECT_ROTATE_Y,
+              }}
+              animate={{
+                left: flight.to.centerX,
+                top: flight.to.centerY,
+                width: flight.to.width,
+                height: flight.to.height,
+                x: "-50%",
+                y: "-50%",
+                rotateX: PROJECT_ROTATE_X,
+                rotateY: PROJECT_ROTATE_Y,
+              }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              onAnimationComplete={() => {
+                clearProjectOpen();
+                setFlight(null);
+              }}
+            />
+          </div>
+        )}
 
         {/* 2. Tools Used (No Heading) */}
         <motion.div
@@ -329,7 +398,7 @@ const ProjectDetailPage = () => {
           className="mb-10"
         >
           <h3 className="heading-2 mb-6">More Projects</h3>
-          <div className="grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-thin">
+          <div className="grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-thin [perspective:1400px]">
             <style>{`
               .scrollbar-thin::-webkit-scrollbar {
                 height: 6px;
@@ -356,8 +425,15 @@ const ProjectDetailPage = () => {
               }
             `}</style>
             {moreProjects.map((proj) => (
-              <Link key={proj._id} to={`/project/${proj._id}`}>
-                <div className="surface-card card-hover card-accent-hover group h-full">
+              <Link
+                key={proj._id}
+                to={`/project/${proj._id}`}
+                onClick={(event) => {
+                  const image = event.currentTarget.querySelector("img");
+                  if (image instanceof HTMLImageElement) captureProjectImage(proj._id, image);
+                }}
+              >
+                <div className={`surface-card card-accent-hover group h-full ${projectPlaneClass}`}>
                   <div className="relative h-44 overflow-hidden border-b border-theme-border bg-theme-subtle">
                     <img
                       src={proj.image}

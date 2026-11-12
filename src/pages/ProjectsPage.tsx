@@ -6,6 +6,7 @@ import { Breadcrumb } from "../components/ui/Breadcrumb";
 import { SectionWrapper } from "../components/layout/SectionWrapper";
 import { fetchProjects } from "../utils/api";
 import { fetchToolsForIcons, getTechLogo } from "../utils/techIcons";
+import { captureProjectImage, projectPlaneClass } from "../components/effects/projectOpen";
 
 interface Project {
   _id: string;
@@ -101,7 +102,7 @@ export const ProjectsPage: React.FC = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-6 md:space-y-8"
+          className="space-y-6 md:space-y-8 [perspective:1400px]"
         >
           {loading ? (
             <div className="space-y-6 md:space-y-8">
@@ -142,8 +143,14 @@ export const ProjectsPage: React.FC = () => {
 
                 return (
                   <motion.div key={project._id} variants={itemVariants}>
-                    <Link to={`/project/${project._id}`}>
-                  <div className={`group surface-card card-hover relative ${project.featured ? "card-accent-featured" : "card-accent-hover"}`}>
+                    <Link
+                      to={`/project/${project._id}`}
+                      onClick={(event) => {
+                        const image = event.currentTarget.querySelector("img");
+                        if (image instanceof HTMLImageElement) captureProjectImage(project._id, image);
+                      }}
+                    >
+                  <div className={`group surface-card relative ${projectPlaneClass} ${project.featured ? "card-accent-featured" : "card-accent-hover"}`}>
                     <div className="flex flex-col md:flex-row gap-5 md:gap-10 p-5 md:p-8">
                       {/* Image Section */}
                       <div className="md:w-2/5 relative overflow-hidden h-60 md:h-auto md:min-h-[340px] flex-shrink-0 rounded-lg border border-theme-border-strong bg-theme-subtle">
