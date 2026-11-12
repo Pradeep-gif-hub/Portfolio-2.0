@@ -440,7 +440,7 @@ const DetailPanel: React.FC<{ milestone: Milestone | null; onClose: () => void }
                         }}
                     >
                         {/* Hero image */}
-                        <div className="relative overflow-hidden bg-theme-subtle border-b border-theme-border" style={{ height: 480 }}>
+                        <div className="relative overflow-hidden bg-theme-subtle border-b border-theme-border h-60 sm:h-80 md:h-[480px]">
                             <motion.img
                                 key={currentImage}
                                 src={milestone.image[currentImage]}
@@ -458,13 +458,13 @@ const DetailPanel: React.FC<{ milestone: Milestone | null; onClose: () => void }
                             />
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 left-6 z-30 flex items-center gap-2 px-4 py-2 rounded-lg bg-theme-surface border border-theme-border text-theme-text hover:border-theme-muted transition-colors shadow-card"
+                                className="absolute top-4 left-4 z-30 flex items-center gap-2 px-3 py-2 rounded-lg bg-theme-surface border border-theme-border text-theme-text hover:border-theme-muted transition-colors shadow-card"
                             >
                                 <ChevronLeft size={18} />
                                 Back
                             </button>
                             <div
-                                className="absolute top-6 right-6 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide uppercase z-40"
+                                className="absolute top-4 right-4 hidden sm:block max-w-[42%] px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wide uppercase z-40 text-right"
                                 style={{
                                     background: "var(--surface)",
                                     border: "1px solid var(--border)",
@@ -518,7 +518,10 @@ const DetailPanel: React.FC<{ milestone: Milestone | null; onClose: () => void }
                                 >
                                     {milestone.year}
                                 </div>
-                                <h2 className="heading-2 mb-2">{milestone.title}</h2>
+                                <p className="sm:hidden text-xs font-medium uppercase tracking-wide mb-2 break-words" style={{ color: "var(--accent)" }}>
+                                    {milestone.chapter}
+                                </p>
+                                <h2 className="heading-2 mb-2 break-words">{milestone.title}</h2>
                                 <p className="text-sm mb-5" style={{ color: "var(--accent)" }}>{milestone.tagline}</p>
                             </div>
                             <div className="h-px w-full mb-6" style={{ background: "var(--border)" }} />

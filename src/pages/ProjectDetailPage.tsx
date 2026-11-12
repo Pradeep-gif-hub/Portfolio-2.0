@@ -319,32 +319,7 @@ const ProjectDetailPage = () => {
           className="mb-10"
         >
           <h3 className="heading-2 mb-6">More Projects</h3>
-          <div className="grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-thin">
-            <style>{`
-              .scrollbar-thin::-webkit-scrollbar {
-                height: 6px;
-              }
-              .scrollbar-thin::-webkit-scrollbar-track {
-                background: transparent;
-              }
-              .scrollbar-thin::-webkit-scrollbar-thumb {
-                background: var(--border);
-                border-radius: 4px;
-              }
-              .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-                background: var(--text-muted);
-              }
-              @media (max-width: 768px) {
-                .grid.md\\:grid-cols-3 {
-                  display: flex;
-                  flex-wrap: nowrap;
-                }
-                .grid.md\\:grid-cols-3 > * {
-                  flex: 0 0 80%;
-                  scroll-snap-align: start;
-                }
-              }
-            `}</style>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {moreProjects.map((proj) => (
               <Link
                 key={proj._id}

@@ -137,10 +137,10 @@ export const Experience: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                       <div>
-                        <h3 className="heading-4 group-hover:text-theme-accent transition-colors">
+                        <h3 className="heading-4 break-words group-hover:text-theme-accent transition-colors">
                           {exp.role}
                         </h3>
-                        <p className="text-theme-accent text-sm font-medium">
+                        <p className="text-theme-accent text-sm font-medium break-words">
                           {exp.company}
                         </p>
                       </div>

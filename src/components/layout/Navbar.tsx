@@ -50,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
     >
       <nav className="container py-4 flex items-center justify-between gap-4">
         <Link to="/" className="shrink-0">
-          <div className="font-semibold text-lg tracking-[-0.02em] text-theme-text hover:text-theme-accent transition-colors cursor-pointer whitespace-nowrap">
+          <div className="font-semibold text-base sm:text-lg tracking-[-0.02em] text-theme-text hover:text-theme-accent transition-colors cursor-pointer whitespace-nowrap">
             {`< awasthi.tech />`}
           </div>
         </Link>
@@ -101,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "tween", duration: 0.25 }}
-            className="fixed top-0 left-0 bottom-0 w-[280px] bg-theme-bg border-r border-theme-border md:hidden z-[70] shadow-card pointer-events-auto"
+            className="fixed top-0 left-0 bottom-0 w-[min(280px,86vw)] bg-theme-bg border-r border-theme-border md:hidden z-[70] shadow-card pointer-events-auto"
           >
             <div className="flex flex-col h-full">
               {/* Header */}

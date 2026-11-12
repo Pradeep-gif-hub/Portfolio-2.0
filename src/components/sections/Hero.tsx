@@ -145,11 +145,12 @@ export const Hero: React.FC = () => {
 
               <motion.div
                 variants={item}
-                className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center"
+                className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-stretch sm:items-center w-full max-w-xs mx-auto lg:mx-0 lg:max-w-none"
               >
                 <Button
                   variant="primary"
                   size="lg"
+                  className="w-full sm:w-auto"
                   onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   View My Work
@@ -158,6 +159,7 @@ export const Hero: React.FC = () => {
                 <Button
                   variant="outline"
                   size="lg"
+                  className="w-full sm:w-auto"
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 >
                   Get In Touch
@@ -166,6 +168,7 @@ export const Hero: React.FC = () => {
                   <Button
                     variant="outline"
                     size="lg"
+                    className="w-full sm:w-auto"
                     onClick={() => window.open(settings.resumeUrl, '_blank')}
                   >
                     Download Resume
@@ -176,7 +179,7 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Scroll Indicator */}
-          <div className="mt-16 flex justify-center">
+          <div className="mt-8 md:mt-16 flex justify-center">
             <div className="w-5 h-9 border border-theme-border rounded-full flex items-start justify-center p-1.5">
               <div className="w-1 h-2 bg-theme-muted rounded-full" />
             </div>

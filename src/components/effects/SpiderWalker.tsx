@@ -134,11 +134,12 @@ export const SpiderWalker = () => {
     };
     resize();
 
+    const narrow = () => width < 768;
     const cornerPoint = (index: number) => {
-      const left = 48;
-      const right = Math.max(left + 120, width - 48);
-      const top = 148;
-      const bottom = Math.max(top + 160, height - 72);
+      const left = narrow() ? 28 : 48;
+      const right = Math.max(left + 120, width - (narrow() ? 28 : 48));
+      const top = narrow() ? 86 : 148;
+      const bottom = Math.max(top + 140, height - (narrow() ? 36 : 72));
       if (index === 0) return { x: left, y: top };
       if (index === 1) return { x: right, y: top };
       if (index === 2) return { x: right, y: bottom };
@@ -155,7 +156,7 @@ export const SpiderWalker = () => {
     let crawlEnd = { ...pos };
 
     const placeSpider = () => {
-      const size = width < 768 ? 104 : 142;
+      const size = narrow() ? 64 : 142;
       spiderCanvas.style.width = `${size}px`;
       spiderCanvas.style.transform = `translate(-50%, -50%) rotate(${rotation}rad)`;
       spiderCanvas.style.left = `${pos.x}px`;
@@ -232,7 +233,9 @@ export const SpiderWalker = () => {
       hub = cornerPoint(corner);
       pos = { ...hub };
       arrivedAt = performance.now();
-      const radius = Math.min(108, width * 0.16, height * 0.18);
+      const radius = narrow()
+        ? Math.min(44, width * 0.1, height * 0.08)
+        : Math.min(108, width * 0.16, height * 0.18);
       webs = webs.filter((web) => web.alpha > 0.05).slice(-1);
       webs.push({ segments: buildWeb(hub, radius), alpha: 1 });
       shown = 0;

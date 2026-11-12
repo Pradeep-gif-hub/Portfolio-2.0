@@ -92,13 +92,13 @@ export const ProjectDeck: React.FC<{ projects: DeckProject[] }> = ({ projects })
 
           const slide = (
             <div className={`surface-card ${accent} h-full`}>
-              <div className="flex items-center justify-between gap-3 px-5 py-2.5 border-b border-theme-border bg-theme-subtle">
-                <p className="text-sm font-medium text-theme-text truncate">{project.title}</p>
-                <span className={`px-2.5 py-0.5 rounded-[999px] text-xs font-medium border ${status.color} whitespace-nowrap`}>
+              <div className="flex items-start justify-between gap-3 px-4 py-2.5 md:px-5 border-b border-theme-border bg-theme-subtle">
+                <p className="text-sm font-medium text-theme-text min-w-0 leading-snug">{project.title}</p>
+                <span className={`shrink-0 px-2.5 py-0.5 rounded-[999px] text-xs font-medium border ${status.color} whitespace-nowrap`}>
                   {status.label}
                 </span>
               </div>
-              <div className="flex flex-col md:flex-row gap-5 md:gap-8 p-5 md:p-7">
+              <div className="flex flex-col md:flex-row gap-4 md:gap-8 p-4 md:p-7">
                 <div className="md:w-2/5 relative overflow-hidden h-52 md:h-64 flex-shrink-0 rounded-lg border border-theme-border-strong bg-theme-subtle">
                   <img src={project.image} alt="" className="w-full h-full object-cover" />
                 </div>
@@ -110,7 +110,7 @@ export const ProjectDeck: React.FC<{ projects: DeckProject[] }> = ({ projects })
                       {features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2 text-sm text-theme-muted">
                           <CheckCircle2 size={15} className="text-theme-accent mt-0.5 flex-shrink-0" />
-                          <span>{feature}</span>
+                          <span className="min-w-0 break-words">{feature}</span>
                         </li>
                       ))}
                       {extraFeatures > 0 && (

@@ -120,11 +120,12 @@ export const Contact: React.FC = () => {
 
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-3"
+            className="flex flex-col sm:flex-row gap-3 w-full max-w-sm sm:max-w-none"
           >
             <Button
               variant="primary"
               size="lg"
+              className="w-full sm:w-auto"
               onClick={() => {
                 // Detect if user is on mobile device
                 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -144,6 +145,7 @@ export const Contact: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg"
+              className="w-full sm:w-auto"
               onClick={() => window.open(`https://wa.me/${settings.phone ? settings.phone.replace(/\D/g, '') : ''}`, '_blank')}
             >
               <MessageCircle size={18} className="mr-2" />

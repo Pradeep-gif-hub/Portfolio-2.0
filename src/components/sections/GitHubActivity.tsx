@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { GitBranch } from "lucide-react";
 import { SectionWrapper } from "../layout/SectionWrapper";
@@ -80,6 +80,9 @@ export const GitHubActivity: React.FC = () => {
   );
   const [contributionCount, setContributionCount] = useState<number | null>(null);
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
+  const heatmapFrame = useRef<HTMLDivElement>(null);
+  const heatmapGrid = useRef<HTMLDivElement>(null);
+  const [heatmapFit, setHeatmapFit] = useState({ scale: 1, height: 0 });
 
   useEffect(() => {
     // Fetch contribution count and daily grid data
@@ -110,6 +113,32 @@ export const GitHubActivity: React.FC = () => {
     [contributions]
   );
 
+  useEffect(() => {
+    const frame = heatmapFrame.current;
+    const grid = heatmapGrid.current;
+    if (!frame || !grid || cells.length === 0) return;
+
+    const measure = () => {
+      const styles = getComputedStyle(frame);
+      const padX = parseFloat(styles.paddingLeft) + parseFloat(styles.paddingRight);
+      const padY = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
+      const available = frame.clientWidth - padX;
+      const needed = grid.scrollWidth;
+      const narrow = window.innerWidth < 768;
+      const scale = narrow && needed > available && available > 0 ? available / needed : 1;
+      setHeatmapFit({ scale, height: grid.offsetHeight * scale + padY });
+    };
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(frame);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [cells.length, weekCount]);
+
   return (
     <SectionWrapper id="github-activity">
       {loading ? (
@@ -139,9 +168,9 @@ export const GitHubActivity: React.FC = () => {
         transition={{ duration: 0.25 }}
         className="mb-12"
       >
-        <div className="flex items-center gap-3 mb-3">
-          <GitBranch className="text-theme-accent" size={24} />
-          <h2 className="heading-2">Recent GitHub Activity</h2>
+        <div className="flex items-start gap-3 mb-3">
+          <GitBranch className="text-theme-accent shrink-0" size={24} />
+          <h2 className="heading-2 min-w-0">Recent GitHub Activity</h2>
         </div>
         <p className="text-theme-muted text-base">
           My latest contributions and commits
@@ -149,7 +178,7 @@ export const GitHubActivity: React.FC = () => {
 
         {/* Contributions calendar */}
         {showCalendar && (
-          <Card className="mt-8 p-6">
+          <Card className="mt-8 p-4 sm:p-6 overflow-hidden">
             <a 
               href={`https://github.com/${username}`} 
               target="_blank" 
@@ -158,7 +187,11 @@ export const GitHubActivity: React.FC = () => {
             >
               <div className="flex flex-col">
                 {/* Calendar Image - Scrollable on mobile */}
-                <div className="bg-theme-subtle border border-theme-border-strong/65 p-4 rounded-lg overflow-x-auto scrollbar-thin">
+                <div
+                  ref={heatmapFrame}
+                  className={`bg-theme-subtle border border-theme-border-strong/65 p-3 sm:p-4 rounded-lg scrollbar-thin ${heatmapFit.scale < 1 ? "overflow-hidden" : "overflow-x-auto"}`}
+                  style={heatmapFit.scale < 1 ? { height: heatmapFit.height } : undefined}
+                >
                   <style>{`
                     .scrollbar-thin::-webkit-scrollbar {
                       height: 6px;
@@ -175,7 +208,13 @@ export const GitHubActivity: React.FC = () => {
                     }
                   `}</style>
                   {cells.length > 0 ? (
-                    <div className="gh-heatmap-grid" role="img" aria-label={`${username} GitHub contributions heatmap`}>
+                    <div
+                      ref={heatmapGrid}
+                      className="gh-heatmap-grid"
+                      role="img"
+                      aria-label={`${username} GitHub contributions heatmap`}
+                      style={heatmapFit.scale < 1 ? { transform: `scale(${heatmapFit.scale})`, transformOrigin: "top left", width: "max-content" } : undefined}
+                    >
                       <div className="gh-weekdays" aria-hidden="true">
                         <span></span>
                         <span>Mon</span>
