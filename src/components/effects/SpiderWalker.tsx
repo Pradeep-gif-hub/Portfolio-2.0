@@ -134,13 +134,19 @@ export const SpiderWalker = () => {
     };
     resize();
 
-    const edgeX = () => width - 48;
-    const topY = () => 148;
-    const bottomY = () => Math.max(topY() + 160, height - 72);
-    let corner: "top" | "bottom" = "top";
-    const cornerPoint = () => ({ x: edgeX(), y: corner === "top" ? topY() : bottomY() });
+    const cornerPoint = (index: number) => {
+      const left = 48;
+      const right = Math.max(left + 120, width - 48);
+      const top = 148;
+      const bottom = Math.max(top + 160, height - 72);
+      if (index === 0) return { x: left, y: top };
+      if (index === 1) return { x: right, y: top };
+      if (index === 2) return { x: right, y: bottom };
+      return { x: left, y: bottom };
+    };
+    let corner = 1;
 
-    let pos = cornerPoint();
+    let pos = cornerPoint(corner);
     let rotation = Math.PI;
     let gait = 0;
     let stride = 0;
@@ -219,11 +225,13 @@ export const SpiderWalker = () => {
     let modeUntil = 0;
     let crawlFrom = 0;
     let crawlDuration = 1000;
-    let hub = cornerPoint();
+    let hub = cornerPoint(corner);
+    let arrivedAt = 0;
 
     const spawnWeb = () => {
-      hub = cornerPoint();
+      hub = cornerPoint(corner);
       pos = { ...hub };
+      arrivedAt = performance.now();
       const radius = Math.min(108, width * 0.16, height * 0.18);
       webs = webs.filter((web) => web.alpha > 0.05).slice(-1);
       webs.push({ segments: buildWeb(hub, radius), alpha: 1 });
@@ -261,13 +269,17 @@ export const SpiderWalker = () => {
     };
 
     const startCrawl = (now: number) => {
-      crawlStart = { x: edgeX(), y: corner === "top" ? topY() : bottomY() };
-      corner = corner === "top" ? "bottom" : "top";
-      crawlEnd = { x: edgeX(), y: corner === "top" ? topY() : bottomY() };
+      crawlStart = cornerPoint(corner);
+      const step = Math.random() < 0.5 ? 1 : 3;
+      corner = (corner + step) % 4;
+      crawlEnd = cornerPoint(corner);
       pos = { ...crawlStart };
       mode = "crawl";
       crawlFrom = now;
-      crawlDuration = Math.min(4200, Math.max(1600, Math.abs(crawlEnd.y - crawlStart.y) * 4.2));
+      crawlDuration = 3000;
+      const dx = crawlEnd.x - crawlStart.x;
+      const dy = crawlEnd.y - crawlStart.y;
+      rotation = Math.atan2(dy, dx) - Math.PI / 2;
       webs.forEach((web) => {
         web.alpha = Math.min(web.alpha, 0.35);
       });
@@ -283,10 +295,10 @@ export const SpiderWalker = () => {
 
       if (mode === "build") {
         shown += 0.018;
-        pos = cornerPoint();
+        pos = cornerPoint(corner);
         if (shown >= 1 && now >= modeUntil) {
           mode = "sit";
-          modeUntil = now + (corner === "top" ? 9000 : 4200);
+          modeUntil = arrivedAt + 3000;
         }
       }
 
@@ -294,15 +306,14 @@ export const SpiderWalker = () => {
         const t = Math.min(1, (now - crawlFrom) / crawlDuration);
         const eased = t * t * (3 - 2 * t);
         pos = {
-          x: edgeX(),
+          x: crawlStart.x + (crawlEnd.x - crawlStart.x) * eased,
           y: crawlStart.y + (crawlEnd.y - crawlStart.y) * eased,
         };
-        rotation = (crawlEnd.y > crawlStart.y ? 0 : Math.PI);
         if (t >= 1) spawnWeb();
       }
 
       if (mode === "sit") {
-        pos = cornerPoint();
+        pos = cornerPoint(corner);
         if (now >= modeUntil) startCrawl(now);
       }
 
@@ -338,7 +349,7 @@ export const SpiderWalker = () => {
     const onResize = () => {
       resize();
       if (mode !== "crawl") {
-        pos = cornerPoint();
+        pos = cornerPoint(corner);
         hub = { ...pos };
       }
     };
