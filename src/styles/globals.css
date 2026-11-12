@@ -407,62 +407,53 @@
     box-shadow: 0 8px 24px var(--outline-glow);
   }
 
-  .project-stack {
-    perspective: 1800px;
-    perspective-origin: 50% 18%;
+  .project-deck-stage {
+    display: grid;
+    perspective: 1600px;
+    perspective-origin: 50% 0%;
+    padding-top: 6rem;
+  }
+
+  .project-deck-card {
+    grid-area: 1 / 1;
+    align-self: start;
+    transform-origin: center top;
     transform-style: preserve-3d;
-    padding-bottom: 1.5rem;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.38);
+    border-radius: 12px;
   }
 
-  .project-stack-slot {
-    position: relative;
-    z-index: var(--stack-index);
-    transform-style: preserve-3d;
+  .project-deck-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    background: transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
 
-  .project-stack-slot + .project-stack-slot {
-    margin-top: -3.5rem;
-  }
-
-  .project-stack-card {
-    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(var(--depth));
-    transform-origin: center center;
-    transform-style: preserve-3d;
-    transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease, box-shadow 0.55s ease;
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.32);
-  }
-
-  .project-stack-slot:hover,
-  .project-stack-slot:focus-within {
-    z-index: 40;
-  }
-
-  .project-stack-slot:hover .project-stack-card,
-  .project-stack-slot:focus-within .project-stack-card {
-    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(calc(var(--depth) + 32px));
+  .project-deck-nav:hover {
     border-color: rgb(var(--accent-rgb) / 0.7);
-    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.4);
-  }
-
-  @media (max-width: 768px) {
-    .project-stack-slot + .project-stack-slot {
-      margin-top: -1.25rem;
-    }
+    background: var(--surface-soft);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .project-stack {
+    .project-deck-stage {
       perspective: none;
+      padding-top: 0;
     }
 
-    .project-stack-slot + .project-stack-slot {
-      margin-top: 1.5rem;
+    .project-deck-card {
+      transform: none !important;
+      box-shadow: none;
     }
 
-    .project-stack-card,
-    .project-stack-slot:hover .project-stack-card,
-    .project-stack-slot:focus-within .project-stack-card {
-      transform: none;
+    .project-deck-card[aria-hidden="true"] {
+      display: none;
     }
   }
 
