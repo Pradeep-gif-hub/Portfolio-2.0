@@ -105,14 +105,14 @@ export const Contact: React.FC = () => {
         >
           <motion.div variants={itemVariants} className="mb-6">
             <h2 className="heading-2 mb-3">Let&apos;s Work Together</h2>
-            <p className="text-theme-muted text-base">
+            <p className="text-theme-text text-base">
               Have a project in mind? Let&apos;s talk about it.
             </p>
           </motion.div>
 
           <motion.p
             variants={itemVariants}
-            className="text-theme-muted mb-8 leading-relaxed"
+            className="text-theme-text mb-8 leading-relaxed"
           >
             I&apos;m always interested in hearing about new projects and opportunities.
             Feel free to reach out if you want to collaborate or just say hi!
@@ -153,7 +153,7 @@ export const Contact: React.FC = () => {
 
           <motion.p
             variants={itemVariants}
-            className="text-theme-muted text-sm mt-6"
+            className="text-theme-text text-sm mt-6"
           >
             Usually respond within 24 hours
           </motion.p>

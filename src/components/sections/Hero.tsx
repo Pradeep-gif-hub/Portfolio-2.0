@@ -139,7 +139,7 @@ export const Hero: React.FC = () => {
                 </span>
               </motion.h1>
 
-              <motion.p variants={item} className="text-lg md:text-xl text-theme-muted mb-8 leading-relaxed">
+              <motion.p variants={item} className="text-lg md:text-xl text-theme-text mb-8 leading-relaxed">
                 {settings.tagline}
               </motion.p>
 

@@ -101,8 +101,6 @@ const ICONS: readonly IconDef[] = [
   ["meta", "#0668E1"],
 ];
 
-const PER_COLUMN = 9;
-
 const iconSrc = (slug: string) =>
   `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${slug}.svg`;
 
@@ -114,17 +112,20 @@ const glyphIsDark = (hex: string) => {
   return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255 > 0.72;
 };
 
-const columnsForWidth = (width: number) => {
-  const cell = 96;
-  return Math.max(16, Math.min(28, Math.ceil((width * 1.5) / cell)));
+const layoutForViewport = (width: number, height: number) => {
+  const cell = 88;
+  return {
+    columns: Math.max(16, Math.min(28, Math.ceil((width * 1.65) / cell))),
+    rows: Math.max(14, Math.min(26, Math.ceil((height * 1.55) / cell))),
+  };
 };
 
 export const IconWall = () => {
   const wallRef = useRef<HTMLDivElement>(null);
-  const [columns, setColumns] = useState(18);
+  const [layout, setLayout] = useState({ columns: 18, rows: 16 });
 
   useEffect(() => {
-    const fit = () => setColumns(columnsForWidth(window.innerWidth));
+    const fit = () => setLayout(layoutForViewport(window.innerWidth, window.innerHeight));
     fit();
     window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
@@ -158,14 +159,14 @@ export const IconWall = () => {
   }, []);
 
   const grid = useMemo(() => {
-    return Array.from({ length: columns }, (_, column) => {
+    return Array.from({ length: layout.columns }, (_, column) => {
       const start = (column * 5) % ICONS.length;
-      const icons = Array.from({ length: PER_COLUMN }, (_, index) => {
+      const icons = Array.from({ length: layout.rows }, (_, index) => {
         return ICONS[(start + index * 3) % ICONS.length];
       });
       return [...icons, ...icons];
     });
-  }, [columns]);
+  }, [layout]);
 
   return (
     <div ref={wallRef} className="icon-wall" aria-hidden="true">

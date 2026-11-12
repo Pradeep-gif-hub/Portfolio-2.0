@@ -6,7 +6,7 @@ export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-theme-bg border-t border-theme-border">
+    <footer className="border-t border-theme-border bg-transparent">
       <div className="container py-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Visitor Counter - Left Side */}
@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-theme-muted text-sm text-center md:text-right order-1 md:order-2"
+            className="text-theme-text text-sm text-center md:text-right order-1 md:order-2"
           >
             © {currentYear} Pradeep Awasthi. All rights reserved.
           </motion.p>
