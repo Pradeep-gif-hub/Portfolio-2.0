@@ -6,14 +6,6 @@ type Point = { x: number; y: number };
 type Segment = { a: Point; b: Point; c: Point };
 type Web = { segments: Segment[]; alpha: number };
 
-const quad = (a: Point, b: Point, c: Point, t: number): Point => {
-  const u = 1 - t;
-  return {
-    x: u * u * a.x + 2 * u * t * b.x + t * t * c.x,
-    y: u * u * a.y + 2 * u * t * b.y + t * t * c.y,
-  };
-};
-
 const silkIsLight = () => {
   const root = document.documentElement;
   return (
@@ -141,12 +133,19 @@ export const SpiderWalker = () => {
     };
     resize();
 
-    const margin = 86;
-    let pos = { x: width - margin, y: Math.min(110, height * 0.18) };
-    let rotation = 0.6;
+    const edgeX = () => width - 48;
+    const topY = () => 148;
+    const bottomY = () => Math.max(topY() + 160, height - 72);
+    let corner: "top" | "bottom" = "top";
+    const cornerPoint = () => ({ x: edgeX(), y: corner === "top" ? topY() : bottomY() });
+
+    let pos = cornerPoint();
+    let rotation = Math.PI;
     let gait = 0;
     let stride = 0;
     const previous = { x: pos.x, y: pos.y };
+    let crawlStart = { ...pos };
+    let crawlEnd = { ...pos };
 
     const placeSpider = () => {
       const size = width < 768 ? 104 : 142;
@@ -215,26 +214,21 @@ export const SpiderWalker = () => {
 
     let webs: Web[] = [];
     let shown = 0;
-    let line: { start: Point; control: Point; end: Point } | null = null;
-    let lineUntil = 0;
-    let mode: "build" | "throw" | "crawl" | "sit" = "build";
+    let mode: "build" | "crawl" | "sit" = "build";
     let modeUntil = 0;
     let crawlFrom = 0;
     let crawlDuration = 1000;
-    let hub = { x: width * 0.55, y: height * 0.42 };
+    let hub = cornerPoint();
 
     const spawnWeb = () => {
-      hub = {
-        x: margin + Math.random() * (width - margin * 2),
-        y: margin + Math.random() * (height - margin * 2),
-      };
-      const radius = Math.min(width, height) * (0.16 + Math.random() * 0.08);
+      hub = cornerPoint();
+      pos = { ...hub };
+      const radius = Math.min(108, width * 0.16, height * 0.18);
       webs = webs.filter((web) => web.alpha > 0.05).slice(-1);
       webs.push({ segments: buildWeb(hub, radius), alpha: 1 });
       shown = 0;
-      line = null;
       mode = "build";
-      modeUntil = performance.now() + 900;
+      modeUntil = performance.now() + 700;
     };
 
     const strokeSegment = (piece: Segment) => {
@@ -263,34 +257,19 @@ export const SpiderWalker = () => {
         for (let index = 0; index < count; index += 1) strokeSegment(web.segments[index]);
       });
 
-      if (line && lineUntil > 0) {
-        const end = quad(line.start, line.control, line.end, lineUntil);
-        const control = {
-          x: line.start.x + (line.control.x - line.start.x) * lineUntil,
-          y: line.start.y + (line.control.y - line.start.y) * lineUntil,
-        };
-        webCtx.strokeStyle = light ? "rgba(255,252,246,0.9)" : "rgba(62,56,48,0.85)";
-        webCtx.lineWidth = 0.45;
-        webCtx.beginPath();
-        webCtx.moveTo(line.start.x, line.start.y);
-        webCtx.quadraticCurveTo(control.x, control.y, end.x, end.y);
-        webCtx.stroke();
-      }
     };
 
-    const castLine = () => {
-      const from = {
-        x: pos.x + Math.cos(rotation + Math.PI / 2) * 18,
-        y: pos.y + Math.sin(rotation + Math.PI / 2) * 18,
-      };
-      line = {
-        start: from,
-        end: hub,
-        control: sagPoint(from, hub, 4),
-      };
-      lineUntil = 0;
-      mode = "throw";
-      modeUntil = performance.now() + 380;
+    const startCrawl = (now: number) => {
+      crawlStart = { x: edgeX(), y: corner === "top" ? topY() : bottomY() };
+      corner = corner === "top" ? "bottom" : "top";
+      crawlEnd = { x: edgeX(), y: corner === "top" ? topY() : bottomY() };
+      pos = { ...crawlStart };
+      mode = "crawl";
+      crawlFrom = now;
+      crawlDuration = Math.min(4200, Math.max(1600, Math.abs(crawlEnd.y - crawlStart.y) * 4.2));
+      webs.forEach((web) => {
+        web.alpha = Math.min(web.alpha, 0.35);
+      });
     };
 
     if (!reduced) spawnWeb();
@@ -301,43 +280,30 @@ export const SpiderWalker = () => {
       frame = requestAnimationFrame(tick);
       if (document.hidden || document.querySelector("[data-greeting-intro]")) return;
 
-      const current = webs[webs.length - 1];
       if (mode === "build") {
         shown += 0.018;
-        if (shown >= 1 && now >= modeUntil && current) castLine();
-      }
-
-      if (mode === "throw" && line) {
-        lineUntil = 1 - Math.max(0, modeUntil - now) / 380;
-        rotation = Math.atan2(hub.y - pos.y, hub.x - pos.x) - Math.PI / 2;
-        if (now >= modeUntil) {
-          mode = "crawl";
-          crawlFrom = now;
-          const distance = Math.hypot(hub.x - pos.x, hub.y - pos.y);
-          crawlDuration = Math.min(2600, Math.max(900, distance * 2.8));
-        }
-      }
-
-      if (mode === "crawl" && line) {
-        const t = Math.min(1, (now - crawlFrom) / crawlDuration);
-        const eased = 1 - Math.pow(1 - t, 3);
-        const here = quad(line.start, line.control, line.end, eased);
-        const ahead = quad(line.start, line.control, line.end, Math.min(1, eased + 0.05));
-        rotation = Math.atan2(ahead.y - here.y, ahead.x - here.x) - Math.PI / 2;
-        const reach = 16;
-        pos = {
-          x: here.x - Math.cos(rotation + Math.PI / 2) * reach,
-          y: here.y - Math.sin(rotation + Math.PI / 2) * reach,
-        };
-        lineUntil = 1;
-        if (t >= 1) {
+        pos = cornerPoint();
+        if (shown >= 1 && now >= modeUntil) {
           mode = "sit";
-          modeUntil = now + 1100;
-          line = null;
+          modeUntil = now + (corner === "top" ? 9000 : 4200);
         }
       }
 
-      if (mode === "sit" && now >= modeUntil) spawnWeb();
+      if (mode === "crawl") {
+        const t = Math.min(1, (now - crawlFrom) / crawlDuration);
+        const eased = t * t * (3 - 2 * t);
+        pos = {
+          x: edgeX(),
+          y: crawlStart.y + (crawlEnd.y - crawlStart.y) * eased,
+        };
+        rotation = (crawlEnd.y > crawlStart.y ? 0 : Math.PI);
+        if (t >= 1) spawnWeb();
+      }
+
+      if (mode === "sit") {
+        pos = cornerPoint();
+        if (now >= modeUntil) startCrawl(now);
+      }
 
       const moved = Math.hypot(pos.x - previous.x, pos.y - previous.y);
       if (moved > 0.4) gait += moved * 0.085;
@@ -358,11 +324,18 @@ export const SpiderWalker = () => {
     };
 
     if (!reduced) frame = requestAnimationFrame(tick);
-    window.addEventListener("resize", resize);
+    const onResize = () => {
+      resize();
+      if (mode !== "crawl") {
+        pos = cornerPoint();
+        hub = { ...pos };
+      }
+    };
+    window.addEventListener("resize", onResize);
     return () => {
       running = false;
       cancelAnimationFrame(frame);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
