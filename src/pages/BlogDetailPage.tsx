@@ -133,7 +133,7 @@ const BlogDetailPage = () => {
                   )}
                 </button>
               </div>
-              <div className="bg-theme-subtle border border-theme-border-strong rounded-[12px] p-5 overflow-x-auto">
+              <div className="bg-theme-surface border border-theme-border-strong rounded-[12px] p-5 overflow-x-auto">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-xs text-theme-muted font-mono">
                     {language}

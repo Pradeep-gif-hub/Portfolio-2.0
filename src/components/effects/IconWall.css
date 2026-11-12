@@ -3,7 +3,7 @@
   --my: -999px;
   --px: 0;
   --py: 0;
-  --lit-floor: 0.1;
+  --lit-floor: 0.06;
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -16,12 +16,12 @@
   inset: 0;
   -webkit-mask-image: radial-gradient(
     circle 220px at var(--mx) var(--my),
-    rgb(0 0 0 / 0.55) 0%,
+    rgb(0 0 0 / 0.38) 0%,
     rgb(0 0 0 / var(--lit-floor)) 100%
   );
   mask-image: radial-gradient(
     circle 220px at var(--mx) var(--my),
-    rgb(0 0 0 / 0.55) 0%,
+    rgb(0 0 0 / 0.38) 0%,
     rgb(0 0 0 / var(--lit-floor)) 100%
   );
 }
@@ -78,7 +78,7 @@
 
 @media (hover: none) {
   .icon-wall {
-    --lit-floor: 0.16;
+    --lit-floor: 0.1;
   }
 }
 

@@ -407,6 +407,37 @@
     box-shadow: 0 8px 24px var(--outline-glow);
   }
 
+  main .surface-card,
+  main article,
+  main pre {
+    transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease, border-color 0.2s ease;
+  }
+
+  main .surface-card:hover,
+  main .surface-card:focus-within,
+  main .surface-card:active,
+  main article:hover,
+  main article:focus-within,
+  main pre:hover,
+  main pre:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
+    position: relative;
+    z-index: 3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    main .surface-card:hover,
+    main .surface-card:focus-within,
+    main .surface-card:active,
+    main article:hover,
+    main article:focus-within,
+    main pre:hover,
+    main pre:focus-within {
+      transform: none;
+    }
+  }
+
   .project-deck-stage {
     display: grid;
     perspective: 1600px;
