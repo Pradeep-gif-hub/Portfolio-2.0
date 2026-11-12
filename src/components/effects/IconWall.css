@@ -1,0 +1,93 @@
+.icon-wall {
+  --mx: -999px;
+  --my: -999px;
+  --px: 0;
+  --py: 0;
+  --lit-floor: 0.22;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.icon-wall__lit {
+  position: absolute;
+  inset: 0;
+  -webkit-mask-image: radial-gradient(
+    circle 260px at var(--mx) var(--my),
+    #000 0%,
+    rgb(0 0 0 / var(--lit-floor)) 100%
+  );
+  mask-image: radial-gradient(
+    circle 260px at var(--mx) var(--my),
+    #000 0%,
+    rgb(0 0 0 / var(--lit-floor)) 100%
+  );
+}
+
+.icon-wall__grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  transform: translate(-50%, -50%) translate(calc(var(--px) * -28px), calc(var(--py) * -28px)) rotate(-8deg);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.icon-wall__col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: icon-wall-drift var(--drift) linear infinite;
+}
+
+.icon-wall__col:nth-child(2n) {
+  margin-top: -60px;
+  animation-direction: reverse;
+}
+
+.icon-wall__tile {
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 4.8vw, 72px);
+  aspect-ratio: 1;
+  border-radius: 22%;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+}
+
+.icon-wall__glyph {
+  display: block;
+  width: 54%;
+  height: 54%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.icon-wall__glyph--dark {
+  filter: brightness(0);
+}
+
+@keyframes icon-wall-drift {
+  100% {
+    transform: translateY(calc(-50% - 12px));
+  }
+}
+
+@media (hover: none) {
+  .icon-wall {
+    --lit-floor: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-wall__col {
+    animation: none;
+  }
+
+  .icon-wall__grid {
+    transition: none;
+  }
+}

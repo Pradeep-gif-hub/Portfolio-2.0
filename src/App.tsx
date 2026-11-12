@@ -4,6 +4,7 @@ import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { CursorWeb } from "./components/effects/CursorWeb";
+import { IconWall } from "./components/effects/IconWall";
 import { SpiderWalker } from "./components/effects/SpiderWalker";
 import { GreetingIntro } from "./components/effects/GreetingIntro";
 import { useAnalytics } from "./hooks/useAnalytics";
@@ -21,7 +22,8 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-theme-bg text-theme-text overflow-x-hidden">
+    <div className="isolate min-h-screen bg-theme-bg text-theme-text overflow-x-hidden">
+      <IconWall />
       <ScrollProgress />
       <Navbar />
       <main className="pt-16">
