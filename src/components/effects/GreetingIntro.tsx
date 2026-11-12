@@ -2,14 +2,20 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 const GREETINGS = [
-  "Hello",
-  "Bonjour",
-  "स्वागत है",
-  "नमस्कार",
-  "Ciao",
-  "Olá",
-  "おい",
-  "Hallå",
+  "प्रदीप",
+  "பிரதீப்",
+  "普拉迪普",
+  "ప్రదీప్",
+  "プラディープ",
+  "ਪ੍ਰਦੀਪ",
+  "ಪ್ರದೀಪ್",
+  "프라딥",
+  "പ്രദീപ്",
+  "પ્રદીપ",
+  "প্রদীপ",
+  "ପ୍ରଦୀପ",
+  "प्रदीपः",
+  "प्रदीप",
 ];
 
 const STEP_MS = 180;
