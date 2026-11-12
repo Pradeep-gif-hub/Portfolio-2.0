@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTheme } from "../../contexts/ThemeContext";
+import { eraseShields, pointOnShield, shieldRects } from "./webShield";
 import "./CursorWeb.css";
 
 type Rgb = readonly [number, number, number];
@@ -314,6 +315,7 @@ export const CursorWeb: React.FC = () => {
       for (let i = 0; i < webs.length; i++) {
         drawWeb(webs[i], now, palette);
       }
+      eraseShields(ctx, shieldRects());
       return true;
     };
 
@@ -322,9 +324,11 @@ export const CursorWeb: React.FC = () => {
       if (pendingPointer && pointerInside) {
         const { x, y } = pendingPointer;
         pendingPointer = null;
+        const overReading = pointOnShield(x, y);
         if (
-          !lastSpawnCenter ||
-          Math.hypot(x - lastSpawnCenter.x, y - lastSpawnCenter.y) > SPAWN_DISTANCE_PX
+          !overReading &&
+          (!lastSpawnCenter ||
+            Math.hypot(x - lastSpawnCenter.x, y - lastSpawnCenter.y) > SPAWN_DISTANCE_PX)
         ) {
           spawnWeb(x, y, now);
         }

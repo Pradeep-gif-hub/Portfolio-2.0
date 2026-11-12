@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { eraseShields, shieldRects } from "./webShield";
 
 const SPIDER_SRC = "/spider.png";
 
@@ -86,13 +87,11 @@ const buildWeb = (hub: Point, radius: number): Segment[] => {
 export const SpiderWalker = () => {
     const webRef = useRef<HTMLCanvasElement>(null);
     const spiderRef = useRef<HTMLCanvasElement>(null);
-    const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const webCanvas = webRef.current;
     const spiderCanvas = spiderRef.current;
-    const root = rootRef.current;
-    if (!webCanvas || !spiderCanvas || !root) return;
+    if (!webCanvas || !spiderCanvas) return;
     const webCtx = webCanvas.getContext("2d");
     const spiderCtx = spiderCanvas.getContext("2d");
     if (!webCtx || !spiderCtx) return;
@@ -102,18 +101,6 @@ export const SpiderWalker = () => {
     let height = window.innerHeight;
     let frame = 0;
     let running = true;
-    let pointerOnReading = false;
-    const readingSelector = "p, li, h1, h2, h3, h4, article, .surface-card, pre, code, blockquote";
-
-    const coversReading = (x: number, y: number) => {
-      const stack = document.elementsFromPoint(x, y);
-      return stack.some((node) => node instanceof Element && !!node.closest(readingSelector));
-    };
-
-    const onPointer = (event: PointerEvent) => {
-      pointerOnReading = coversReading(event.clientX, event.clientY);
-    };
-    window.addEventListener("pointermove", onPointer, { passive: true });
 
     const source = document.createElement("canvas");
     const sourceCtx = source.getContext("2d", { willReadFrequently: true });
@@ -294,9 +281,6 @@ export const SpiderWalker = () => {
       frame = requestAnimationFrame(tick);
       if (document.hidden || document.querySelector("[data-greeting-intro]")) return;
 
-      const hideForReading = pointerOnReading || coversReading(pos.x, pos.y) || coversReading(hub.x, hub.y);
-      root.style.opacity = hideForReading ? "0" : "1";
-
       if (mode === "build") {
         shown += 0.018;
         pos = cornerPoint();
@@ -333,11 +317,21 @@ export const SpiderWalker = () => {
       });
 
       placeSpider();
+      const blocked = shieldRects();
+      const onReading = blocked.some(
+        (rect) =>
+          pos.x >= rect.left - 16 &&
+          pos.x <= rect.right + 16 &&
+          pos.y >= rect.top - 16 &&
+          pos.y <= rect.bottom + 16,
+      );
+      spiderCanvas.style.opacity = onReading ? "0" : "1";
       if (pixels) {
         if (stride > 0.04) paintSpider(gait, stride);
         else spiderCtx.putImageData(pixels, 0, 0);
       }
       drawWebs();
+      eraseShields(webCtx, blocked);
     };
 
     if (!reduced) frame = requestAnimationFrame(tick);
@@ -353,12 +347,11 @@ export const SpiderWalker = () => {
       running = false;
       cancelAnimationFrame(frame);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("pointermove", onPointer);
     };
   }, []);
 
   return (
-    <div ref={rootRef} className="pointer-events-none fixed inset-0 z-[60] transition-opacity duration-200" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 z-[60]" aria-hidden="true">
       <canvas ref={webRef} className="absolute inset-0" />
       <canvas
         ref={spiderRef}
