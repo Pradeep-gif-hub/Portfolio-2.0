@@ -4,6 +4,7 @@ import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { CursorWeb } from "./components/effects/CursorWeb";
+import { GreetingIntro } from "./components/effects/GreetingIntro";
 import { useAnalytics } from "./hooks/useAnalytics";
 import "./styles/globals.css";
 
@@ -27,6 +28,7 @@ function App() {
       </main>
       <Footer />
       <CursorWeb />
+      <GreetingIntro />
     </div>
   );
 }
