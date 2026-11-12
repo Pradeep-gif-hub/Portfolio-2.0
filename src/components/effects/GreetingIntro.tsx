@@ -54,6 +54,7 @@ export const GreetingIntro = () => {
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
+          data-greeting-intro=""
           aria-hidden="true"
           className="fixed inset-0 z-[120] flex items-center justify-center bg-theme-bg text-theme-text"
           exit={{ y: "-100%" }}

@@ -5,6 +5,7 @@ import { Footer } from "./components/layout/Footer";
 import { ScrollProgress } from "./components/ui/ScrollProgress";
 import { CursorWeb } from "./components/effects/CursorWeb";
 import { GreetingIntro } from "./components/effects/GreetingIntro";
+import { ScrollIdentity } from "./components/effects/ScrollIdentity";
 import { useAnalytics } from "./hooks/useAnalytics";
 import "./styles/globals.css";
 
@@ -29,6 +30,7 @@ function App() {
       <Footer />
       <CursorWeb />
       <GreetingIntro />
+      <ScrollIdentity />
     </div>
   );
 }
