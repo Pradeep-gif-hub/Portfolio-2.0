@@ -261,11 +261,10 @@ export const AdminSettings = () => {
               <button
                 key={id}
                 onClick={() => setActiveTab(id as any)}
-                className={`flex items-center gap-2 px-4 sm:px-6 py-3 border-b-2 transition-colors whitespace-nowrap text-sm font-medium ${
-                  activeTab === id
-                    ? 'border-theme-accent text-theme-accent'
-                    : 'border-transparent text-theme-muted hover:text-theme-text'
-                }`}
+                className={`flex items-center gap-2 px-4 sm:px-6 py-3 border-b-2 transition-colors whitespace-nowrap text-sm font-medium ${activeTab === id
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-muted hover:text-theme-text'
+                  }`}
               >
                 <Icon size={17} />
                 {label}
@@ -492,11 +491,10 @@ export const AdminSettings = () => {
                         <span className="break-words text-sm font-medium text-theme-text">{project.title}</span>
                         <button
                           onClick={() => toggleFeaturedProject(project._id)}
-                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                            project.featured || false
-                              ? 'bg-theme-accent text-theme-accent-contrast'
-                              : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
-                          }`}
+                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${project.featured || false
+                            ? 'bg-theme-accent text-theme-accent-contrast'
+                            : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
+                            }`}
                         >
                           {project.featured || false ? '★ Featured' : 'Add'}
                         </button>
@@ -527,11 +525,10 @@ export const AdminSettings = () => {
                         </div>
                         <button
                           onClick={() => toggleFeaturedExperience(exp._id)}
-                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                            exp.featured || false
-                              ? 'bg-theme-accent text-theme-accent-contrast'
-                              : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
-                          }`}
+                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${exp.featured || false
+                            ? 'bg-theme-accent text-theme-accent-contrast'
+                            : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
+                            }`}
                         >
                           {exp.featured || false ? '★ Featured' : 'Add'}
                         </button>
@@ -562,11 +559,10 @@ export const AdminSettings = () => {
                         </div>
                         <button
                           onClick={() => toggleFeaturedCertification(cert._id)}
-                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors flex-shrink-0 ${
-                            cert.featured || false
-                              ? 'bg-theme-accent text-theme-accent-contrast'
-                              : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
-                          }`}
+                          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors flex-shrink-0 ${cert.featured || false
+                            ? 'bg-theme-accent text-theme-accent-contrast'
+                            : 'bg-theme-surface border border-theme-border text-theme-muted hover:text-theme-text'
+                            }`}
                         >
                           {cert.featured || false ? '★ Featured' : 'Add'}
                         </button>

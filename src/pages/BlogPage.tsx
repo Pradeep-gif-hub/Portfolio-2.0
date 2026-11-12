@@ -69,7 +69,7 @@ export const BlogPage: React.FC = () => {
     <div className="min-h-screen">
       <SectionWrapper>
         <Breadcrumb items={[{ label: "Home", path: "/" }, { label: "Blog", path: "/blog" }]} />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -89,7 +89,7 @@ export const BlogPage: React.FC = () => {
             placeholder="Search blogs by title, content, or tags..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-3 pl-12 bg-theme-surface border border-theme-border-strong rounded-lg focus:outline-none focus:ring-2 focus:ring-theme-accent/60 focus:ring-offset-2 focus:ring-offset-theme-bg focus:border-theme-accent text-theme-text placeholder:text-theme-muted"
+            className="w-full px-4 py-3 pl-12 bg-theme-surface border border-theme-border rounded-lg focus:outline-none focus:border-theme-accent focus:ring-1 focus:ring-theme-accent text-theme-text placeholder:text-theme-muted"
           />
           <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-theme-muted" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -99,7 +99,7 @@ export const BlogPage: React.FC = () => {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="surface-card p-6 animate-pulse">
+              <div key={i} className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card animate-pulse">
                 <div className="h-5 bg-theme-subtle rounded w-3/4 mb-3"></div>
                 <div className="space-y-2 mb-4">
                   <div className="h-4 bg-theme-subtle rounded"></div>
@@ -120,29 +120,29 @@ export const BlogPage: React.FC = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {filteredBlogs.map((blog) => (
-            <motion.div key={blog._id} variants={itemVariants}>
-              <Link to={`/blog/${blog.slug}`}>
-                <Card hoverable className="h-full card-accent-hover">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="heading-4 flex-1">{blog.title}</h3>
-                  </div>
-                  
-                  <p className="text-text-secondary mb-4">{blog.summary}</p>
-                  
-                  <div className="flex items-center gap-4 text-sm text-text-secondary">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      <span>{new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+              <motion.div key={blog._id} variants={itemVariants}>
+                <Link to={`/blog/${blog.slug}`}>
+                  <Card hoverable className="h-full">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="heading-4 flex-1">{blog.title}</h3>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{blog.readTime} min read</span>
+
+                    <p className="text-text-secondary mb-4">{blog.summary}</p>
+
+                    <div className="flex items-center gap-4 text-sm text-text-secondary">
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        <span>{new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock size={14} />
+                        <span>{blog.readTime} min read</span>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
         )}
       </SectionWrapper>

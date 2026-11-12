@@ -62,8 +62,8 @@ export const CertificationsPage: React.FC = () => {
     loadCertifications();
   }, []);
 
-  const filteredCertifications = filter === "all" 
-    ? certifications 
+  const filteredCertifications = filter === "all"
+    ? certifications
     : certifications.filter(cert => cert.difficulty === filter);
 
   const difficultyLevels = ["all", ...Array.from(new Set(certifications.map(c => c.difficulty)))];
@@ -71,13 +71,13 @@ export const CertificationsPage: React.FC = () => {
   return (
     <div className="min-h-screen">
       <SectionWrapper>
-        <Breadcrumb 
+        <Breadcrumb
           items={[
-            { label: "Home", path: "/" }, 
+            { label: "Home", path: "/" },
             { label: "Certifications", path: "/certifications" }
-          ]} 
+          ]}
         />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -103,11 +103,10 @@ export const CertificationsPage: React.FC = () => {
             <button
               key={level}
               onClick={() => setFilter(level)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                filter === level
-                  ? "bg-theme-accent text-theme-accent-contrast border-theme-accent"
-                  : "bg-theme-surface border-theme-border-strong text-theme-muted hover:border-theme-accent/70 hover:text-theme-text"
-              }`}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === level
+                  ? "bg-theme-accent text-theme-accent-contrast"
+                  : "bg-theme-surface border border-theme-border text-theme-muted hover:border-theme-muted hover:text-theme-text"
+                }`}
             >
               {level.charAt(0).toUpperCase() + level.slice(1)}
             </button>
@@ -117,14 +116,14 @@ export const CertificationsPage: React.FC = () => {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="surface-card p-6 animate-pulse">
+              <div key={i} className="bg-theme-surface border border-theme-border rounded-[10px] p-6 shadow-card animate-pulse">
                 <div className="mb-4 rounded-lg bg-theme-subtle h-28"></div>
                 <div className="space-y-3">
                   <div className="h-5 bg-theme-subtle rounded w-3/4"></div>
                   <div className="h-4 bg-theme-subtle rounded w-1/2"></div>
                   <div className="flex gap-2">
-                    <div className="h-6 bg-theme-subtle rounded-[999px] w-20"></div>
-                    <div className="h-6 bg-theme-subtle rounded-[999px] w-16"></div>
+                    <div className="h-6 bg-theme-subtle rounded-full w-20"></div>
+                    <div className="h-6 bg-theme-subtle rounded-full w-16"></div>
                   </div>
                 </div>
               </div>
@@ -147,17 +146,17 @@ export const CertificationsPage: React.FC = () => {
                 variants={itemVariants}
               >
                 <Link to={`/certification/${cert._id}`} className="block h-full">
-                  <div className="surface-card p-6 h-full group card-hover card-accent-hover flex flex-col">
+                  <div className="bg-theme-surface border border-theme-border rounded-[10px] p-6 h-full group cursor-pointer card-hover shadow-card flex flex-col">
                     {cert.image && (
-                      <div className="mb-4 rounded-lg overflow-hidden bg-white border border-theme-border-strong p-2">
-                        <img 
-                          src={cert.image} 
+                      <div className="mb-4 rounded-lg overflow-hidden bg-white border border-theme-border p-2">
+                        <img
+                          src={cert.image}
                           alt={cert.title}
                           className="w-full h-32 object-contain"
                         />
                       </div>
                     )}
-                    
+
                     <div className="flex-1">
                       <div className="flex items-start justify-between gap-3 mb-2">
                         <h3 className="heading-4 group-hover:text-theme-accent transition-colors">
@@ -169,7 +168,7 @@ export const CertificationsPage: React.FC = () => {
                         />
                       </div>
                       <p className="text-theme-muted text-sm mb-3">{cert.issuer}</p>
-                      
+
                       <div className="flex flex-wrap gap-2 mb-4">
                         <Badge variant="accent">
                           {cert.month ? `${cert.month} ${cert.year}` : cert.year}
@@ -185,7 +184,7 @@ export const CertificationsPage: React.FC = () => {
                           </Badge>
                         )}
                       </div>
-                      
+
                       {cert.skills && cert.skills.length > 0 && (
                         <div className="flex flex-wrap gap-1.5">
                           {cert.skills.slice(0, 3).map((skill, idx) => (

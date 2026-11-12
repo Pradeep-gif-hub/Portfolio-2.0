@@ -77,7 +77,7 @@ export const GalleryPage: React.FC = () => {
     <div className="min-h-screen">
       <SectionWrapper>
         <Breadcrumb items={[{ label: "Home", path: "/" }, { label: "Gallery", path: "/gallery" }]} />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

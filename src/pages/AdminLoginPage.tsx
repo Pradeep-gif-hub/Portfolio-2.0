@@ -21,7 +21,7 @@ export const AdminLoginPage: React.FC = () => {
     const adminAccess = sessionStorage.getItem('admin_access_granted');
     const token = sessionStorage.getItem('admin_token');
     const expiry = sessionStorage.getItem('admin_expiry');
-    
+
     if (adminAccess === 'true' && token && expiry) {
       const expiryTime = parseInt(expiry);
       if (Date.now() < expiryTime) {
@@ -100,7 +100,7 @@ export const AdminLoginPage: React.FC = () => {
         sessionStorage.setItem('admin_token', data.token);
         sessionStorage.setItem('admin_expiry', expiry.toString());
         sessionStorage.setItem('admin_access_granted', 'true');
-        
+
         // Force auth context update by reloading
         window.location.href = '/admin/dashboard';
       } else {
@@ -163,7 +163,7 @@ export const AdminLoginPage: React.FC = () => {
               {step === 'password' ? 'THE SYSTEM CORE' : 'Verify OTP'}
             </h1>
             <p className="text-theme-muted text-xs whitespace-pre-line">
-              {step === 'password' 
+              {step === 'password'
                 ? 'A protected environment where configuration, content, and control converge. Access is limited to verified identities.'
                 : `OTP sent to ${maskedEmail}`
               }

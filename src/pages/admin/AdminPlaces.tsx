@@ -526,11 +526,10 @@ export const AdminPlaces = () => {
             <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
-                  selectedCategory === 'all'
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${selectedCategory === 'all'
                     ? 'bg-theme-accent text-theme-accent-contrast'
                     : 'bg-theme-subtle border border-theme-border text-theme-muted hover:text-theme-text'
-                }`}
+                  }`}
               >
                 All ({places.length})
               </button>
@@ -542,11 +541,10 @@ export const AdminPlaces = () => {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
-                      selectedCategory.toLowerCase() === cat.toLowerCase()
+                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${selectedCategory.toLowerCase() === cat.toLowerCase()
                         ? 'bg-theme-accent text-theme-accent-contrast'
                         : 'bg-theme-subtle border border-theme-border text-theme-muted hover:text-theme-text'
-                    }`}
+                      }`}
                   >
                     {cat} ({count})
                   </button>

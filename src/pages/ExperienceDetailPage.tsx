@@ -50,7 +50,7 @@ const ExperienceDetailPage = () => {
           <div className="animate-pulse">
             {/* Breadcrumb skeleton */}
             <div className="h-4 bg-theme-subtle rounded w-56 mb-8"></div>
-            
+
             {/* Header skeleton */}
             <div className="flex items-start gap-6 mb-10">
               <div className="w-16 h-16 bg-theme-subtle rounded-lg"></div>
@@ -60,7 +60,7 @@ const ExperienceDetailPage = () => {
                 <div className="h-4 bg-theme-subtle rounded w-40"></div>
               </div>
             </div>
-            
+
             {/* Content grid skeleton */}
             <div className="grid lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 surface-card p-6 space-y-3">
@@ -94,12 +94,12 @@ const ExperienceDetailPage = () => {
   return (
     <div className="min-h-screen">
       <main className="container max-w-container mx-auto px-4 py-8">
-        <Breadcrumb 
+        <Breadcrumb
           items={[
             { label: "Home", path: "/" },
             { label: "Experience", path: "/" },
             { label: job.role, path: `/experience/${job._id}` }
-          ]} 
+          ]}
         />
 
         {/* Header */}
@@ -111,8 +111,8 @@ const ExperienceDetailPage = () => {
         >
           <div className="flex items-start gap-5 mb-4">
             {/* Company Logo */}
-            <img 
-              src={job.logo} 
+            <img
+              src={job.logo}
               alt={job.company}
               onError={(e) => {
                 e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.company)}&size=80&background=1F3A34&color=fff&bold=true`;
