@@ -2,8 +2,13 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
-const LINES = ["Web Developer", "Working on AI", "ML Enthusiast"];
-const LINE_MS = 1600;
+const LINES = [
+  "Building web interfaces",
+  "Writing systems software",
+  "Running models on device",
+  "Shipping products",
+];
+const LINE_MS = 560;
 
 export const ScrollIdentity = () => {
   const location = useLocation();
@@ -67,7 +72,7 @@ export const ScrollIdentity = () => {
           aria-hidden="true"
           className="fixed inset-0 z-[120] flex items-center justify-center bg-theme-bg text-theme-text"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+          transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
         >
           <p className="flex items-center gap-2 px-6 text-center text-2xl font-semibold tracking-tight sm:text-3xl">
             <span className="size-1.5 shrink-0 rounded-full bg-current" />
