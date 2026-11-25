@@ -1,25 +1,31 @@
 import type { StyleSpecification } from "maplibre-gl";
 
-// OpenFreeMap's liberty style requests vector tiles from
-// tiles.openfreemap.org/planet. EasyPrivacy blocks that path, MapLibre
-// reports "Failed to fetch", and the page covers the map. CARTO's raster
-// tiles are a full labeled basemap and are not on that blocklist.
+// CARTO's raster endpoint now returns an "API key required" watermark.
+// OpenFreeMap vector tiles are requested from /planet, which privacy
+// filters block. These Esri canvas tiles are a labeled light basemap
+// served as plain images, so they draw without a key or that filter.
 export const MAP_STYLE: StyleSpecification = {
   version: 8,
-  name: "Positron",
+  name: "Light gray",
   sources: {
-    carto: {
+    "esri-gray": {
       type: "raster",
-      tiles: ["https://basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png"],
+      tiles: [
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      ],
       tileSize: 256,
-      attribution: "© OpenStreetMap contributors © CARTO",
+      attribution: "© Esri, © OpenStreetMap contributors",
+    },
+    "esri-labels": {
+      type: "raster",
+      tiles: [
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      ],
+      tileSize: 256,
     },
   },
   layers: [
-    {
-      id: "carto",
-      type: "raster",
-      source: "carto",
-    },
+    { id: "esri-gray", type: "raster", source: "esri-gray" },
+    { id: "esri-labels", type: "raster", source: "esri-labels" },
   ],
 };
