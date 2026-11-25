@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
-import { Badge } from "../components/ui/Badge";
 import { SectionWrapper } from "../components/layout/SectionWrapper";
-import { Code2,Code, Target, User, Gamepad2, Cpu, Github, Camera, Music, Award, ExternalLink, Link2 } from "lucide-react";
-import { fetchCertifications } from "../utils/api";
+import { Code2,Code, Target, User, Gamepad2, Cpu, Github, Camera, Music, Award, ExternalLink, Link2, Globe } from "lucide-react";
 
 interface Settings {
   fullName: string;
@@ -15,19 +13,16 @@ interface Settings {
   achievements?: string[];
 }
 
-interface Certification {
-  _id: string;
-  title: string;
-  issuer: string;
-  year: number;
-  month?: string;
-  link?: string;
-  image?: string;
-  skills: string[];
-  difficulty: string;
-  duration?: string;
-  projectBased: boolean;
-}
+const contributions = [
+  { name: "R-Tist", host: "rtistnitj.vercel.app", href: "https://rtistnitj.vercel.app/" },
+  { name: "Dr. Afzal Sikander", host: "afzalsikander.in", href: "https://www.afzalsikander.in/" },
+  { name: "Instrument-AI", host: "instrumentation.awasthi.tech", href: "https://instrumentation.awasthi.tech" },
+  { name: "Agastya", host: "agastya-website.vercel.app", href: "https://agastya-website.vercel.app/" },
+  { name: "Aarogya Club", host: "aarogyanitj.in", href: "https://aarogyanitj.in" },
+  { name: "awasthi.tech", host: "awasthi.tech", href: "https://awasthi.tech" },
+  { name: "MedTech", host: "medtech.awasthi.tech", href: "https://medtech.awasthi.tech" },
+  { name: "Cretogee", host: "cretogee.vercel.app", href: "https://cretogee.vercel.app" },
+];
 
 export const AboutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -39,12 +34,10 @@ export const AboutPage: React.FC = () => {
     achievements: [],
   });
   
-  const [certifications, setCertifications] = useState<Certification[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchSettings();
-    loadCertifications();
   }, []);
 
   const fetchSettings = async () => {
@@ -68,15 +61,6 @@ export const AboutPage: React.FC = () => {
       // Error occurred while fetching settings
     } finally {
       setLoading(false);
-    }
-  };
-
-  const loadCertifications = async () => {
-    try {
-      const data = await fetchCertifications();
-      setCertifications(Array.isArray(data) ? data.slice(0, 4) : []);
-    } catch (error) {
-      // Error occurred while fetching certifications
     }
   };
 
@@ -244,54 +228,43 @@ export const AboutPage: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Certifications Section */}
-          {certifications.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="surface-card p-6 md:p-8 mb-6"
-            >
-              <div className="flex items-center gap-3 mb-5">
-                <Award size={24} className="text-theme-accent" />
-                <h2 className="heading-3">Certifications</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {certifications.map((cert) => (
-                  <Link
-                    key={cert._id}
-                    to={`/certification/${cert._id}`}
-                    className="block group"
-                  >
-                    <div className="bg-theme-subtle border border-theme-border-strong/80 rounded-[12px] p-4 hover:border-theme-accent/70 transition-colors">
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <h3 className="font-semibold text-theme-text group-hover:text-theme-accent transition-colors text-sm">
-                          {cert.title}
-                        </h3>
-                        <ExternalLink
-                          size={15}
-                          className="text-theme-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
-                        />
-                      </div>
-                      <p className="text-theme-muted text-xs mb-2">{cert.issuer}</p>
-                      <Badge variant="accent" className="text-xs">
-                        {cert.month ? `${cert.month} ${cert.year}` : cert.year}
-                      </Badge>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <div className="mt-6 text-center">
-                <Link
-                  to="/certifications"
-                  className="text-theme-accent hover:underline inline-flex items-center gap-2 text-sm font-medium"
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="surface-card p-6 md:p-8 mb-6"
+          >
+            <div className="flex items-center gap-3 mb-5">
+              <Globe size={24} className="text-theme-accent" />
+              <h2 className="heading-3">Sites I've Contributed To</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {contributions.map((site) => (
+                <a
+                  key={site.href}
+                  href={site.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block group"
                 >
-                  View All Certifications
-                  <ExternalLink size={15} />
-                </Link>
-              </div>
-            </motion.div>
-          )}
+                  <div className="bg-theme-subtle border border-theme-border-strong/80 rounded-[12px] p-4 hover:border-theme-accent/70 transition-colors">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="font-semibold text-theme-text group-hover:text-theme-accent transition-colors text-sm">
+                          {site.name}
+                        </h3>
+                        <p className="text-theme-muted text-xs mt-1">{site.host}</p>
+                      </div>
+                      <ExternalLink
+                        size={15}
+                        className="text-theme-accent opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"
+                      />
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </motion.div>
 
           {/* Beyond Code - Hobbies & Interests */}
           <motion.div
