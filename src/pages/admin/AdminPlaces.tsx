@@ -20,11 +20,10 @@ import * as maplibregl from 'maplibre-gl';
 import { type Map as MapLibreMap, type Marker as MapLibreMarker } from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { places as defaultPlaces, mergePlaces } from '../../data/place/places';
+import { MAP_STYLE } from '../../utils/mapStyle';
 import { AdminLayout } from '../../components/admin/AdminLayout';
 import { ProtectedRoute } from '../../components/admin/ProtectedRoute';
 import { Button } from '../../components/ui/Button';
-
-const MAP_STYLE = 'https://tiles.openfreemap.org/styles/liberty';
 
 const CATEGORIES = [
   'City',

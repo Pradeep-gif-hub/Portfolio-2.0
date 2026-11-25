@@ -5,8 +5,7 @@ import { LocateFixed, Minus, Navigation, Plus, X } from "lucide-react";
 import { motion } from "framer-motion";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { places as defaultPlaces, mergePlaces, type Place } from "../data/place/places";
-
-const MAP_STYLE = "https://tiles.openfreemap.org/styles/liberty";
+import { MAP_STYLE } from "../utils/mapStyle";
 
 const getPlaceId = (place: Place): string => {
   return place._id || place.id || `${place.name}-${place.city}-${place.country}`;
@@ -226,14 +225,18 @@ export const PlacesPage = () => {
     });
     mapRef.current = map;
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+    map.addControl(new maplibregl.AttributionControl({ compact: true }), "bottom-left");
 
     const onMapReady = () => {
+      setMapError(null);
       renderMarkers();
       fitAllPlaces(placeListRef.current);
     };
 
     const handleError = (event: maplibregl.ErrorEvent) => {
-      if (event.error?.message) setMapError(event.error.message);
+      const message = event.error?.message;
+      if (!message || map.isStyleLoaded() || map.loaded()) return;
+      setMapError(message);
     };
 
     map.on("load", onMapReady);
