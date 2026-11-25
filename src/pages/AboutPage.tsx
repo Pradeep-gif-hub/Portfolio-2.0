@@ -21,6 +21,7 @@ const contributions = [
   { name: "Aarogya Club", host: "aarogyanitj.in", href: "https://aarogyanitj.in" },
   { name: "awasthi.tech", host: "awasthi.tech", href: "https://awasthi.tech" },
   { name: "MedTech", host: "medtech.awasthi.tech", href: "https://medtech.awasthi.tech" },
+  { name: "Thermal Conductivity", host: "thermalconductivity.awasthi.tech", href: "https://thermalconductivity.awasthi.tech/" },
   { name: "Cretogee", host: "cretogee.vercel.app", href: "https://cretogee.vercel.app" },
 ];
 
